@@ -7,10 +7,10 @@ var __extends = this.__extends || function (d, b) {
 var objects;
 (function (objects) {
     // PLANE CLASS
-    var Plane = (function (_super) {
-        __extends(Plane, _super);
+    var Allien = (function (_super) {
+        __extends(Allien, _super);
         // CONSTRUCTOR
-        function Plane() {
+        function Allien() {
             _super.call(this, assetLoader.getResult("plane"));
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;
@@ -20,11 +20,11 @@ var objects;
             createjs.Sound.play("engine", { loop: -1 });
         }
         // PUBLIC METHODS
-        Plane.prototype.update = function () {
+        Allien.prototype.update = function () {
             this.x = stage.mouseX;
         };
-        return Plane;
+        return Allien;
     })(createjs.Bitmap);
-    objects.Plane = Plane;
+    objects.Allien = Allien;
 })(objects || (objects = {}));
 //# sourceMappingURL=plane.js.map

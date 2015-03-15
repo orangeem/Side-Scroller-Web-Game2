@@ -5,10 +5,10 @@
 /// <reference path="typings/preloadjs/preloadjs.d.ts" />
 
 /// <reference path="objects/gameobject.ts" />
-/// <reference path="objects/plane.ts" />
-/// <reference path="objects/island.ts" />
-/// <reference path="objects/cloud.ts" />
-/// <reference path="objects/ocean.ts" />
+/// <reference path="objects/allien.ts" />
+/// <reference path="objects/ally.ts" />
+/// <reference path="objects/asteroid.ts" />
+/// <reference path="objects/space.ts" />
 
 
 
@@ -20,19 +20,19 @@ var assetLoader: createjs.LoadQueue;
 
 
 // Game Objects 
-var plane: objects.Plane;
-var island: objects.Island
-var clouds: objects.Cloud[] = [];
-var ocean: objects.Ocean;
+var allien: objects.Allien;
+var ally: objects.Ally;
+var asteroids: objects.Asteroid[] = [];
+var space: objects.Space;
 
 var manifest = [
-    { id: "cloud", src: "assets/images/cloud.png" },
-    { id: "island", src: "assets/images/island.png" },
-    { id: "ocean", src: "assets/images/ocean.gif" },
-    { id: "plane", src: "assets/images/plane.png" },
-    { id: "engine", src: "assets/audio/engine.ogg" },
-    { id: "yay", src: "assets/audio/yay.ogg" },
-    { id: "thunder", src: "assets/audio/thunder.ogg" }
+    { id: "asteroid", src: "assets/images/asteroidf.png" },
+    { id: "ally", src: "assets/images/ally.png" },
+    { id: "space", src: "assets/images/space2.png" },
+    { id: "allien", src: "assets/images/allienf.png" },
+    { id: "soundtrack", src: "assets/audio/Soundtrack.ogg" },
+    { id: "pickup", src: "assets/audio/Pickup.ogg" },
+    { id: "explosion", src: "assets/audio/Explosion.ogg" }
 ];
 
 
@@ -67,10 +67,10 @@ function distance(p1: createjs.Point, p2: createjs.Point): number {
 
 // CHECK COLLISION METHOD
 function checkCollision(collider: objects.GameObject) {
-    var planePosition: createjs.Point = new createjs.Point(plane.x, plane.y);
-    var cloudPosition: createjs.Point = new createjs.Point(collider.x, collider.y);
-    var theDistance = distance(planePosition, cloudPosition);
-    if (theDistance < ((plane.height * 0.5) + (collider.height * 0.5))) {
+    var AllienPosition: createjs.Point = new createjs.Point(allien.x, allien.y);
+    var asteroidPosition: createjs.Point = new createjs.Point(collider.x, collider.y);
+    var theDistance = distance(AllienPosition, asteroidPosition);
+    if (theDistance < ((allien.height * 0.5) + (collider.height * 0.5))) {
         if (collider.isColliding != true) {
             createjs.Sound.play(collider.sound);
         }
@@ -86,19 +86,19 @@ function checkCollision(collider: objects.GameObject) {
 
 function gameLoop() {
 
-    ocean.update();
+    space.update();
 
-    island.update();
+    ally.update();
 
-    plane.update();
+    allien.update();
 
-    for (var cloud = 2; cloud >= 0; cloud--) {
-        clouds[cloud].update();
+    for (var asteroid = 2; asteroid >= 0; asteroid--) {
+        asteroids[asteroid].update();
 
-        checkCollision(clouds[cloud]);
+        checkCollision(asteroids[asteroid]);
     }
 
-    checkCollision(island);
+    checkCollision(ally);
 
     stage.update(); // Refreshes our stage
 }
@@ -111,22 +111,22 @@ function gameLoop() {
 function main() {
 
     //Ocean object
-    ocean = new objects.Ocean();
-    stage.addChild(ocean);
+    space = new objects.Space();
+    stage.addChild(space);
 
     //Island object
-    island = new objects.Island();
-    stage.addChild(island);
+    ally = new objects.Ally();
+    stage.addChild(ally);
 
 
     //Plane object
-    plane = new objects.Plane();
-    stage.addChild(plane);
+    allien = new objects.Allien();
+    stage.addChild(allien);
 
     //Cloud object
-    for (var cloud = 2; cloud >= 0; cloud--) {
-        clouds[cloud] = new objects.Cloud();
-        stage.addChild(clouds[cloud]);
+    for (var asteroid = 2; asteroid >= 0; asteroid--) {
+        asteroids[asteroid] = new objects.Asteroid();
+        stage.addChild(asteroids[asteroid]);
     }
 
 
