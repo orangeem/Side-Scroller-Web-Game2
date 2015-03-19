@@ -11,7 +11,8 @@ module objects {
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;
 
-            this.y = 430;
+            //this.y = 430;
+            this.x = 35;
             this.regX = this.width * 0.5;
             this.regY = this.height * 0.5;
             createjs.Sound.play("soundtrack", {loop: -1});
@@ -19,7 +20,8 @@ module objects {
 
         // PUBLIC METHODS
         public update() {
-            this.x = stage.mouseX;
+           //this.x = stage.mouseX;
+            this.y = stage.mouseY;
         }
 
     }

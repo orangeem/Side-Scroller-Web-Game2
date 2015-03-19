@@ -66,6 +66,7 @@
     <Content Include="assets\images\ally.png" />
     <Content Include="assets\images\asteroidf.png" />
     <Content Include="assets\images\space2.png" />
+    <Content Include="assets\images\space2h.png" />
     <Content Include="index.html" />
     <Content Include="packages.config" />
     <Content Include="assets\audio\Explosion.ogg" />

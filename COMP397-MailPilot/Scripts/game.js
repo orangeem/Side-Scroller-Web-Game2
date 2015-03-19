@@ -20,7 +20,7 @@ var space;
 var manifest = [
     { id: "asteroid", src: "assets/images/asteroidf.png" },
     { id: "ally", src: "assets/images/ally.png" },
-    { id: "space", src: "assets/images/space2.png" },
+    { id: "space", src: "assets/images/space2h.png" },
     { id: "allien", src: "assets/images/allienf.png" },
     { id: "soundtrack", src: "assets/audio/Soundtrack.ogg" },
     { id: "pickup", src: "assets/audio/Pickup.ogg" },

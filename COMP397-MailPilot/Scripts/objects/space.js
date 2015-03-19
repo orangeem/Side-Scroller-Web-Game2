@@ -14,22 +14,31 @@ var objects;
             _super.call(this, assetLoader.getResult("space"));
             // PUBLIC INSTANCE VARIABLES
             this._dy = 5;
+            this._dx = 5;
             this.reset();
         }
         // PUBLIC METHODS ++++++++++++++++++++++++++++++++++++++++++
         Space.prototype.update = function () {
-            this.y += this._dy;
+            //this.y += this._dy;
+            //this.x += this._dx;
+            this.x -= this._dx;
             this._checkBounds();
         };
         // Reset position of island to the top
         Space.prototype.reset = function () {
-            this.y = -960;
+            // this.y = -960
+            // this.x = 0;
+            this.y = 0;
+            //this.x = -760;
             this.x = 0;
         };
         // PRIVATE METHODS +++++++++++++++++++++++++++++++++++++++++
         Space.prototype._checkBounds = function () {
             // check if island has left the bottom of the screen
-            if (this.y === 0) {
+            //if (this.y === 0) {
+            //  this.reset();
+            //}
+            if (this.x === -760) {
                 this.reset();
             }
         };
