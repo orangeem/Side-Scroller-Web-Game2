@@ -5,6 +5,7 @@
 /// <reference path="../objects/allien.ts" />
 /// <reference path="../objects/asteroid.ts" />
 /// <reference path="../objects/scoreboards.ts" />
+/// <reference path="../objects/button.ts" />
 /// <reference path="../objects/label.ts" />
 /// <reference path="../game.ts" />
 
