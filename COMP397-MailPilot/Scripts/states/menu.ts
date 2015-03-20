@@ -20,6 +20,7 @@ module states {
         public playButton: objects.Button;
         public instructionButton: objects.Button;
         public play: boolean = false;
+        public instruction: boolean = false;
 
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         constructor() {
@@ -65,6 +66,7 @@ module states {
         }
 
         public instructionsClicked() {
+            this.instruction = true;
             console.log("instruction button clicked");
         }
 
@@ -78,6 +80,13 @@ module states {
                 this.game.removeAllChildren();
                 stage.removeChild(this.game);
                 currentState = constants.PLAY_STATE;
+                stateChanged = true;
+            }
+
+            if (this.instruction) {
+                this.game.removeAllChildren();
+                stage.removeChild(this.game);
+                currentState = constants.INSTRUCTIONS_STATE;
                 stateChanged = true;
             }
 

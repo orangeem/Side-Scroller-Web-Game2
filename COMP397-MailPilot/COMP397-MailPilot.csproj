@@ -67,6 +67,7 @@
     <Content Include="assets\images\ally.png" />
     <Content Include="assets\images\asteroid11.png" />
     <Content Include="assets\images\asteroidf.png" />
+    <Content Include="assets\images\goBackBtn.png" />
     <Content Include="assets\images\instructionsBtn.png" />
     <Content Include="assets\images\PlayBtn.png" />
     <Content Include="assets\images\space2.png" />

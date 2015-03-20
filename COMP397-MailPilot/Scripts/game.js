@@ -16,6 +16,7 @@
 /// <reference path="states/gameplay.ts" />
 /// <reference path="states/menu.ts" />
 /// <reference path="states/gameover.ts" />
+/// <reference path="states/instructions.ts" />
 // Global game Variables
 var canvas;
 var stage;
@@ -31,6 +32,7 @@ var stateChanged = false;
 var gamePlay;
 var menu;
 var gameOver;
+var instructions;
 // Game Objects 
 /*var allien: objects.Allien;
 var ally: objects.Ally;
@@ -47,6 +49,7 @@ var manifest = [
     { id: "playButton", src: "assets/images/PlayBtn.png" },
     { id: "tryAgainButton", src: "assets/images/tryAgainBtn.png" },
     { id: "instructionButton", src: "assets/images/instructionsBtn.png" },
+    { id: "goBackButton", src: "assets/images/goBackBtn.png" },
     { id: "soundtrack", src: "assets/audio/Soundtrack.ogg" },
     { id: "pickup", src: "assets/audio/Pickup.ogg" },
     { id: "explosion", src: "assets/audio/Explosion.ogg" }
@@ -157,6 +160,11 @@ function changeState(state) {
             // instantiate game over screen
             gameOver = new states.GameOver();
             currentStateFunction = gameOver;
+            break;
+        case constants.INSTRUCTIONS_STATE:
+            //instantiate instructions screen
+            instructions = new states.Instructions();
+            currentStateFunction = instructions;
             break;
     }
 }
