@@ -3,20 +3,27 @@
 /// <reference path="typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="typings/soundjs/soundjs.d.ts" />
 /// <reference path="typings/preloadjs/preloadjs.d.ts" />
+/// <reference path="typings/stats/stats.d.ts" />
 /// <reference path="objects/gameobject.ts" />
 /// <reference path="objects/allien.ts" />
 /// <reference path="objects/ally.ts" />
 /// <reference path="objects/asteroid.ts" />
 /// <reference path="objects/space.ts" />
+/// <reference path="objects/scoreboards.ts" />
 // Global game Variables
 var canvas;
 var stage;
+var game;
 var assetLoader;
+var stats = new Stats();
+var currentScore = 0;
+var highScore = 0;
 // Game Objects 
 var allien;
 var ally;
 var asteroids = [];
 var space;
+var scoreboard;
 var manifest = [
     { id: "asteroid", src: "assets/images/asteroidf.png" },
     { id: "ally", src: "assets/images/ally.png" },
@@ -38,9 +45,18 @@ function init() {
     stage.enableMouseOver(20); // Enable mouse events
     createjs.Ticker.setFPS(60); // 60 frames per second
     createjs.Ticker.addEventListener("tick", gameLoop);
+    setupStats();
     main();
 }
 // UTILITY METHODS
+function setupStats() {
+    stats.setMode(0);
+    // align top-left
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '650px';
+    stats.domElement.style.top = '440px';
+    document.body.appendChild(stats.domElement);
+}
 // DISTANCE CHECKING METHOD
 function distance(p1, p2) {
     return Math.floor(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2)));
@@ -53,6 +69,13 @@ function checkCollision(collider) {
     if (theDistance < ((allien.height * 0.5) + (collider.height * 0.5))) {
         if (collider.isColliding != true) {
             createjs.Sound.play(collider.sound);
+            console.log(collider.name);
+            if (collider.name == "asteroid") {
+                scoreboard.lives--;
+            }
+            if (collider.name == "ally") {
+                scoreboard.score += 100;
+            }
         }
         collider.isColliding = true;
     }
@@ -61,6 +84,7 @@ function checkCollision(collider) {
     }
 }
 function gameLoop() {
+    stats.begin();
     space.update();
     ally.update();
     allien.update();
@@ -69,22 +93,37 @@ function gameLoop() {
         checkCollision(asteroids[asteroid]);
     }
     checkCollision(ally);
+    scoreboard.update();
+    if (this.scoreboard.lives < 1) {
+        this.scoreboard.active = false;
+        createjs.Sound.stop();
+        currentScore = this.scoreboard.score;
+        if (currentScore > highScore) {
+            highScore = currentScore;
+        }
+        stage.removeAllChildren();
+    }
     stage.update(); // Refreshes our stage
+    stats.end();
 }
 // Our Game Kicks off in here
 function main() {
+    game = new createjs.Container();
     //Ocean object
     space = new objects.Space();
-    stage.addChild(space);
+    game.addChild(space);
     //Island object
     ally = new objects.Ally();
-    stage.addChild(ally);
+    game.addChild(ally);
     //Plane object
     allien = new objects.Allien();
-    stage.addChild(allien);
+    game.addChild(allien);
     for (var asteroid = 2; asteroid >= 0; asteroid--) {
         asteroids[asteroid] = new objects.Asteroid();
-        stage.addChild(asteroids[asteroid]);
+        game.addChild(asteroids[asteroid]);
     }
+    //Instantiate Scoreboard
+    scoreboard = new objects.ScoreBoard(this.game);
+    stage.addChild(game);
 }
 //# sourceMappingURL=game.js.map
