@@ -4,28 +4,36 @@
 /// <reference path="typings/soundjs/soundjs.d.ts" />
 /// <reference path="typings/preloadjs/preloadjs.d.ts" />
 /// <reference path="typings/stats/stats.d.ts" />
+/// <reference path="constants.ts" />
 /// <reference path="objects/gameobject.ts" />
 /// <reference path="objects/allien.ts" />
 /// <reference path="objects/ally.ts" />
 /// <reference path="objects/asteroid.ts" />
 /// <reference path="objects/space.ts" />
 /// <reference path="objects/scoreboards.ts" />
+/// <reference path="states/gameplay.ts" />
 // Global game Variables
 var canvas;
 var stage;
-var game;
+//var game: createjs.Container;
 var assetLoader;
 var stats = new Stats();
 var currentScore = 0;
 var highScore = 0;
+// Game State Variables
+var currentState;
+var currentStateFunction;
+var stateChanged = false;
+var gamePlay;
 // Game Objects 
-var allien;
-var ally;
-var asteroids = [];
-var space;
-var scoreboard;
+/*var allien: objects.Allien;
+var ally: objects.Ally;
+var asteroids: objects.Asteroid[] = [];
+var space: objects.Space;
+var scoreboard: objects.ScoreBoard;
+*/
 var manifest = [
-    { id: "asteroid", src: "assets/images/asteroidf.png" },
+    { id: "asteroid", src: "assets/images/asteroid11.png" },
     { id: "ally", src: "assets/images/ally.png" },
     { id: "space", src: "assets/images/space2h.png" },
     { id: "allien", src: "assets/images/allienf.png" },
@@ -46,7 +54,9 @@ function init() {
     createjs.Ticker.setFPS(60); // 60 frames per second
     createjs.Ticker.addEventListener("tick", gameLoop);
     setupStats();
-    main();
+    currentState = constants.PLAY_STATE;
+    changeState(currentState);
+    //main();
 }
 // UTILITY METHODS
 function setupStats() {
@@ -58,40 +68,53 @@ function setupStats() {
     document.body.appendChild(stats.domElement);
 }
 // DISTANCE CHECKING METHOD
-function distance(p1, p2) {
+/*
+function distance(p1: createjs.Point, p2: createjs.Point): number {
     return Math.floor(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2)));
 }
+
 // CHECK COLLISION METHOD
-function checkCollision(collider) {
-    var AllienPosition = new createjs.Point(allien.x, allien.y);
-    var asteroidPosition = new createjs.Point(collider.x, collider.y);
+function checkCollision(collider: objects.GameObject) {
+    var AllienPosition: createjs.Point = new createjs.Point(allien.x, allien.y);
+    var asteroidPosition: createjs.Point = new createjs.Point(collider.x, collider.y);
     var theDistance = distance(AllienPosition, asteroidPosition);
     if (theDistance < ((allien.height * 0.5) + (collider.height * 0.5))) {
         if (collider.isColliding != true) {
             createjs.Sound.play(collider.sound);
             console.log(collider.name);
-            if (collider.name == "asteroid") {
+            if (collider.name == "asteroid")
+            {
                 scoreboard.lives--;
             }
-            if (collider.name == "ally") {
+            if (collider.name == "ally")
+            {
                 scoreboard.score += 100;
             }
         }
         collider.isColliding = true;
-    }
-    else {
+    } else {
         collider.isColliding = false;
     }
 }
+*/
 function gameLoop() {
     stats.begin();
-    space.update();
+    if (stateChanged) {
+        changeState(currentState);
+        stateChanged = false;
+    }
+    else {
+        currentStateFunction.update();
+    }
+    /*space.update();
     ally.update();
     allien.update();
+
     for (var asteroid = 2; asteroid >= 0; asteroid--) {
         asteroids[asteroid].update();
         checkCollision(asteroids[asteroid]);
     }
+
     checkCollision(ally);
     scoreboard.update();
     if (this.scoreboard.lives < 1) {
@@ -104,26 +127,20 @@ function gameLoop() {
         stage.removeAllChildren();
     }
     stage.update(); // Refreshes our stage
+    */
     stats.end();
 }
-// Our Game Kicks off in here
-function main() {
-    game = new createjs.Container();
-    //Ocean object
-    space = new objects.Space();
-    game.addChild(space);
-    //Island object
-    ally = new objects.Ally();
-    game.addChild(ally);
-    //Plane object
-    allien = new objects.Allien();
-    game.addChild(allien);
-    for (var asteroid = 2; asteroid >= 0; asteroid--) {
-        asteroids[asteroid] = new objects.Asteroid();
-        game.addChild(asteroids[asteroid]);
+//function changeState(state: number): void {
+function changeState(state) {
+    switch (state) {
+        case constants.PLAY_STATE:
+            // instantiate game play screen
+            gamePlay = new states.GamePlay();
+            currentStateFunction = gamePlay;
+            break;
+        case 2:
+            console.log("changestate");
+            break;
     }
-    //Instantiate Scoreboard
-    scoreboard = new objects.ScoreBoard(this.game);
-    stage.addChild(game);
 }
 //# sourceMappingURL=game.js.map

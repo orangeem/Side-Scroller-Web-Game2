@@ -3,7 +3,10 @@
 /// <reference path="typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="typings/soundjs/soundjs.d.ts" />
 /// <reference path="typings/preloadjs/preloadjs.d.ts" />
+
 /// <reference path="typings/stats/stats.d.ts" />
+
+/// <reference path="constants.ts" />
 
 /// <reference path="objects/gameobject.ts" />
 /// <reference path="objects/allien.ts" />
@@ -12,27 +15,38 @@
 /// <reference path="objects/space.ts" />
 /// <reference path="objects/scoreboards.ts" />
 
+/// <reference path="states/gameplay.ts" />
+
+
 
 
 
 // Global game Variables
 var canvas;
 var stage: createjs.Stage;
-var game: createjs.Container;
+//var game: createjs.Container;
 var assetLoader: createjs.LoadQueue;
 var stats: Stats = new Stats();
 var currentScore = 0;
 var highScore = 0;
 
+// Game State Variables
+var currentState: number;
+var currentStateFunction: any;
+var stateChanged: boolean = false;
+
+var gamePlay: states.GamePlay;
+
 // Game Objects 
-var allien: objects.Allien;
+/*var allien: objects.Allien;
 var ally: objects.Ally;
 var asteroids: objects.Asteroid[] = [];
 var space: objects.Space;
 var scoreboard: objects.ScoreBoard;
+*/
 
 var manifest = [
-    { id: "asteroid", src: "assets/images/asteroidf.png" },
+    { id: "asteroid", src: "assets/images/asteroid11.png" },
     { id: "ally", src: "assets/images/ally.png" },
     { id: "space", src: "assets/images/space2h.png" },
     { id: "allien", src: "assets/images/allienf.png" },
@@ -60,8 +74,11 @@ function init() {
     createjs.Ticker.setFPS(60); // 60 frames per second
     createjs.Ticker.addEventListener("tick", gameLoop);
     setupStats();
+    
+    currentState = constants.PLAY_STATE;
+    changeState(currentState);
 
-    main();
+    //main();
 }
 
 
@@ -79,6 +96,7 @@ function setupStats() {
 }
 
 // DISTANCE CHECKING METHOD
+/*
 function distance(p1: createjs.Point, p2: createjs.Point): number {
     return Math.floor(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2)));
 }
@@ -106,23 +124,27 @@ function checkCollision(collider: objects.GameObject) {
         collider.isColliding = false;
     }
 }
-
+*/
 
 
 
 
 function gameLoop() {
     stats.begin();
+    if (stateChanged) {
+        changeState(currentState);
+        stateChanged = false;
+    }
+    else {
+        currentStateFunction.update();
+    }
 
-    space.update();
-
+    /*space.update();
     ally.update();
-
     allien.update();
 
     for (var asteroid = 2; asteroid >= 0; asteroid--) {
         asteroids[asteroid].update();
-
         checkCollision(asteroids[asteroid]);
     }
 
@@ -138,38 +160,36 @@ function gameLoop() {
         stage.removeAllChildren();
     }
     stage.update(); // Refreshes our stage
+    */
     stats.end();
 }
 
+//function changeState(state: number): void {
+function changeState(state){
+    // Launch Various "screens"
+    switch (state) {
+       /* case constants.MENU_STATE:
+            // instantiate menu screen
+            menu = new states.Menu();
+            currentStateFunction = menu;
+            break;*/
 
+        case constants.PLAY_STATE:
+            // instantiate game play screen
+            gamePlay = new states.GamePlay();
+            currentStateFunction = gamePlay;
+            break;
 
+        case 2:
+            console.log("changestate");
+            break;
 
-
-// Our Game Kicks off in here
-function main() {
-    game = new createjs.Container();
-
-    //Ocean object
-    space = new objects.Space();
-    game.addChild(space);
-
-    //Island object
-    ally = new objects.Ally();
-    game.addChild(ally);
-
-
-    //Plane object
-    allien = new objects.Allien();
-    game.addChild(allien);
-
-    //Cloud object
-    for (var asteroid = 2; asteroid >= 0; asteroid--) {
-        asteroids[asteroid] = new objects.Asteroid();
-        game.addChild(asteroids[asteroid]);
+       /* case constants.GAME_OVER_STATE:
+            // instantiate game over screen
+            gameOver = new states.GameOver();
+            currentStateFunction = gameOver;
+            break;
+            */
     }
-
-    //Instantiate Scoreboard
-    scoreboard = new objects.ScoreBoard(this.game);
-    stage.addChild(game);
- 
 }
+

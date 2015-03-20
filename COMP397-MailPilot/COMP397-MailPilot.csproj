@@ -64,6 +64,7 @@
     <Content Include="assets\audio\yay.ogg" />
     <Content Include="assets\images\allienf.png" />
     <Content Include="assets\images\ally.png" />
+    <Content Include="assets\images\asteroid11.png" />
     <Content Include="assets\images\asteroidf.png" />
     <Content Include="assets\images\space2.png" />
     <Content Include="assets\images\space2h.png" />
@@ -99,13 +100,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\constants.ts" />
     <TypeScriptCompile Include="Scripts\game.ts" />
     <TypeScriptCompile Include="Scripts\objects\asteroid.ts" />
     <TypeScriptCompile Include="Scripts\objects\gameobject.ts" />
     <TypeScriptCompile Include="Scripts\objects\ally.ts" />
+    <TypeScriptCompile Include="Scripts\objects\label.ts" />
     <TypeScriptCompile Include="Scripts\objects\scoreboards.ts" />
     <TypeScriptCompile Include="Scripts\objects\space.ts" />
     <TypeScriptCompile Include="Scripts\objects\allien.ts" />
+    <TypeScriptCompile Include="Scripts\states\gameplay.ts" />
     <TypeScriptCompile Include="Scripts\typings\createjs-lib\createjs-lib.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\easeljs\easeljs.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\preloadjs\preloadjs.d.ts" />
