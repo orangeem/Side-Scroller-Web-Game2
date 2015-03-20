@@ -63,11 +63,15 @@
     <Content Include="assets\audio\thunder.ogg" />
     <Content Include="assets\audio\yay.ogg" />
     <Content Include="assets\images\allienf.png" />
+    <Content Include="assets\images\allienf2.png" />
     <Content Include="assets\images\ally.png" />
     <Content Include="assets\images\asteroid11.png" />
     <Content Include="assets\images\asteroidf.png" />
+    <Content Include="assets\images\instructionsBtn.png" />
+    <Content Include="assets\images\PlayBtn.png" />
     <Content Include="assets\images\space2.png" />
     <Content Include="assets\images\space2h.png" />
+    <Content Include="assets\images\tryAgainBtn.png" />
     <Content Include="index.html" />
     <Content Include="packages.config" />
     <Content Include="assets\audio\Explosion.ogg" />
@@ -111,6 +115,7 @@
     <TypeScriptCompile Include="Scripts\objects\space.ts" />
     <TypeScriptCompile Include="Scripts\objects\allien.ts" />
     <TypeScriptCompile Include="Scripts\states\gameplay.ts" />
+    <TypeScriptCompile Include="Scripts\states\menu.ts" />
     <TypeScriptCompile Include="Scripts\typings\createjs-lib\createjs-lib.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\easeljs\easeljs.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\preloadjs\preloadjs.d.ts" />

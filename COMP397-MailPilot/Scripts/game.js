@@ -11,7 +11,10 @@
 /// <reference path="objects/asteroid.ts" />
 /// <reference path="objects/space.ts" />
 /// <reference path="objects/scoreboards.ts" />
+/// <reference path="objects/button.ts" />
+/// <reference path="objects/label.ts" />
 /// <reference path="states/gameplay.ts" />
+/// <reference path="states/menu.ts" />
 // Global game Variables
 var canvas;
 var stage;
@@ -25,6 +28,7 @@ var currentState;
 var currentStateFunction;
 var stateChanged = false;
 var gamePlay;
+var menu;
 // Game Objects 
 /*var allien: objects.Allien;
 var ally: objects.Ally;
@@ -37,6 +41,10 @@ var manifest = [
     { id: "ally", src: "assets/images/ally.png" },
     { id: "space", src: "assets/images/space2h.png" },
     { id: "allien", src: "assets/images/allienf.png" },
+    { id: "allienBig", src: "assets/images/allienf2.png" },
+    { id: "playButton", src: "assets/images/PlayBtn.png" },
+    { id: "tryAgainButton", src: "assets/images/tryAgainBtn.png" },
+    { id: "instructionButton", src: "assets/images/instructionsBtn.png" },
     { id: "soundtrack", src: "assets/audio/Soundtrack.ogg" },
     { id: "pickup", src: "assets/audio/Pickup.ogg" },
     { id: "explosion", src: "assets/audio/Explosion.ogg" }
@@ -54,7 +62,7 @@ function init() {
     createjs.Ticker.setFPS(60); // 60 frames per second
     createjs.Ticker.addEventListener("tick", gameLoop);
     setupStats();
-    currentState = constants.PLAY_STATE;
+    currentState = constants.MENU_STATE;
     changeState(currentState);
     //main();
 }
@@ -133,13 +141,15 @@ function gameLoop() {
 //function changeState(state: number): void {
 function changeState(state) {
     switch (state) {
+        case constants.MENU_STATE:
+            //instantiate menu screen
+            menu = new states.Menu();
+            currentStateFunction = menu;
+            break;
         case constants.PLAY_STATE:
             // instantiate game play screen
             gamePlay = new states.GamePlay();
             currentStateFunction = gamePlay;
-            break;
-        case 2:
-            console.log("changestate");
             break;
     }
 }

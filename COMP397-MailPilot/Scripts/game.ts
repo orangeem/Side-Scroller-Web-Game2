@@ -19,10 +19,7 @@
 /// <reference path="objects/label.ts" />
 
 /// <reference path="states/gameplay.ts" />
-
-
-
-
+/// <reference path="states/menu.ts" />
 
 // Global game Variables
 var canvas;
@@ -39,6 +36,7 @@ var currentStateFunction: any;
 var stateChanged: boolean = false;
 
 var gamePlay: states.GamePlay;
+var menu: states.Menu;
 
 // Game Objects 
 /*var allien: objects.Allien;
@@ -53,6 +51,10 @@ var manifest = [
     { id: "ally", src: "assets/images/ally.png" },
     { id: "space", src: "assets/images/space2h.png" },
     { id: "allien", src: "assets/images/allienf.png" },
+    { id: "allienBig", src: "assets/images/allienf2.png" },
+    { id: "playButton", src: "assets/images/PlayBtn.png" },
+    { id: "tryAgainButton", src: "assets/images/tryAgainBtn.png" },
+    { id: "instructionButton", src: "assets/images/instructionsBtn.png" },
     { id: "soundtrack", src: "assets/audio/Soundtrack.ogg" },
     { id: "pickup", src: "assets/audio/Pickup.ogg" },
     { id: "explosion", src: "assets/audio/Explosion.ogg" }
@@ -78,7 +80,7 @@ function init() {
     createjs.Ticker.addEventListener("tick", gameLoop);
     setupStats();
     
-    currentState = constants.PLAY_STATE;
+    currentState = constants.MENU_STATE;
     changeState(currentState);
 
     //main();
@@ -171,11 +173,11 @@ function gameLoop() {
 function changeState(state){
     // Launch Various "screens"
     switch (state) {
-       /* case constants.MENU_STATE:
-            // instantiate menu screen
+       case constants.MENU_STATE:
+            //instantiate menu screen
             menu = new states.Menu();
             currentStateFunction = menu;
-            break;*/
+            break;
 
         case constants.PLAY_STATE:
             // instantiate game play screen
@@ -183,9 +185,6 @@ function changeState(state){
             currentStateFunction = gamePlay;
             break;
 
-        case 2:
-            console.log("changestate");
-            break;
 
        /* case constants.GAME_OVER_STATE:
             // instantiate game over screen
