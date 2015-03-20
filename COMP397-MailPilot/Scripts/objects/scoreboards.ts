@@ -1,4 +1,5 @@
-﻿module objects {
+﻿/// <reference path="../constants.ts" />
+module objects {
     // SCOREBOARD CLASS ++++++++++++++++++++++++++++++++++++++++
     export class ScoreBoard {
         public score: number;
@@ -10,13 +11,13 @@
         // CONSTRUCTOR +++++++++++++++++++++++++++++++++++++++++
         constructor(game: createjs.Container) {
             this.score = 0;
-            this.lives = 5;
+            this.lives = constants.ALLIEN_LIVES;
             this.active = true;
 
-            this._livesLabel = new createjs.Text("Lives: ", "40px Consolas", "#ffff00");
+            this._livesLabel = new createjs.Text("LIVES: ", "30px Copperplate Gothic Light", "#ffff00");
             game.addChild(this._livesLabel);
 
-            this._scoreLabel = new createjs.Text("Score: ", "40px Consolas", "#ffff00");
+            this._scoreLabel = new createjs.Text("SCORE: ", "30px Copperplate Gothic Light", "#ffff00");
             this._scoreLabel.x = 400;
             game.addChild(this._scoreLabel);
 

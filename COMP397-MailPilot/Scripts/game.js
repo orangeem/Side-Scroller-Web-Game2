@@ -15,6 +15,7 @@
 /// <reference path="objects/label.ts" />
 /// <reference path="states/gameplay.ts" />
 /// <reference path="states/menu.ts" />
+/// <reference path="states/gameover.ts" />
 // Global game Variables
 var canvas;
 var stage;
@@ -29,6 +30,7 @@ var currentStateFunction;
 var stateChanged = false;
 var gamePlay;
 var menu;
+var gameOver;
 // Game Objects 
 /*var allien: objects.Allien;
 var ally: objects.Ally;
@@ -150,6 +152,11 @@ function changeState(state) {
             // instantiate game play screen
             gamePlay = new states.GamePlay();
             currentStateFunction = gamePlay;
+            break;
+        case constants.GAME_OVER_STATE:
+            // instantiate game over screen
+            gameOver = new states.GameOver();
+            currentStateFunction = gameOver;
             break;
     }
 }

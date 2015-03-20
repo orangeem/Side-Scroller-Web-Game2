@@ -6,7 +6,7 @@
 
     // Game Constants
     //export var CLOUD_NUM: number = 3;
-    export var LABEL_FONT = "40px Consolas";
+    export var LABEL_FONT = "40px Copperplate Gothic Light";
     export var LABEL_COLOUR = "#FFFF00";
     export var ALLIEN_LIVES = 3;
 }  

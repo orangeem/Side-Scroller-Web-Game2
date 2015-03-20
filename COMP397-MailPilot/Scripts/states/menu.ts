@@ -18,6 +18,7 @@ module states {
         public space: objects.Space;
         public allienLabel: objects.Label;
         public playButton: objects.Button;
+        public instructionButton: objects.Button;
         public play: boolean = false;
 
         // CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -46,10 +47,14 @@ module states {
 
 
             //Play Button
-            this.playButton = new objects.Button(320, 420, "playButton");
+            this.playButton = new objects.Button(320, 410, "playButton");
             this.playButton.on("click", this.playClicked, this);
-
             this.game.addChild(this.playButton);
+
+            //Instruction Button
+            this.instructionButton = new objects.Button(320, 450, "instructionButton");
+            this.instructionButton.on("click", this.instructionsClicked, this);
+            this.game.addChild(this.instructionButton);
 
             // Add Game Container to Stage
             stage.addChild(this.game);
@@ -57,6 +62,10 @@ module states {
 
         public playClicked() {
             this.play = true;
+        }
+
+        public instructionsClicked() {
+            console.log("instruction button clicked");
         }
 
 
