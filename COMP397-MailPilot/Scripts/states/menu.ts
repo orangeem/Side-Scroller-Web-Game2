@@ -22,7 +22,7 @@ module states {
         public play: boolean = false;
         public instruction: boolean = false;
 
-        // CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // CONSTRUCTOR 
         constructor() {
             
 
@@ -34,7 +34,7 @@ module states {
             this.game.addChild(this.space);
 
             //Game Name Label
-            this.allienLabel = new objects.Label(320, 40, "ALLIEN SCAPE");
+            this.allienLabel = new objects.Label(320, 40, "ALIEN SCAPE");
             this.allienLabel.font = "60px Copperplate Gothic Light";
             this.allienLabel.regX = this.allienLabel.getMeasuredWidth() * 0.5;
             this.allienLabel.regY = this.allienLabel.getMeasuredLineHeight() * 0.5;
@@ -67,22 +67,21 @@ module states {
 
         public instructionsClicked() {
             this.instruction = true;
-            console.log("instruction button clicked");
         }
 
 
-        // PUBLIC METHODS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // PUBLIC METHODS
         public update() {
 
             this.space.update();
-
+            //if play button clicked -> change to PLAY state
             if (this.play) {
                 this.game.removeAllChildren();
                 stage.removeChild(this.game);
                 currentState = constants.PLAY_STATE;
                 stateChanged = true;
             }
-
+            //if instruction button clicked -> change state to INSTRUCTION state
             if (this.instruction) {
                 this.game.removeAllChildren();
                 stage.removeChild(this.game);

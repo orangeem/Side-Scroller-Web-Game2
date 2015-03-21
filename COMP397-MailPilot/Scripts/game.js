@@ -20,7 +20,6 @@
 // Global game Variables
 var canvas;
 var stage;
-//var game: createjs.Container;
 var assetLoader;
 var stats = new Stats();
 var currentScore = 0;
@@ -33,19 +32,12 @@ var gamePlay;
 var menu;
 var gameOver;
 var instructions;
-// Game Objects 
-/*var allien: objects.Allien;
-var ally: objects.Ally;
-var asteroids: objects.Asteroid[] = [];
-var space: objects.Space;
-var scoreboard: objects.ScoreBoard;
-*/
 var manifest = [
-    { id: "asteroid", src: "assets/images/asteroid11.png" },
+    { id: "asteroid", src: "assets/images/asteroid.png" },
     { id: "ally", src: "assets/images/ally.png" },
     { id: "space", src: "assets/images/space2h.png" },
-    { id: "allien", src: "assets/images/allienf.png" },
-    { id: "allienBig", src: "assets/images/allienf2.png" },
+    { id: "allien", src: "assets/images/allien.png" },
+    { id: "allienBig", src: "assets/images/allienBig.png" },
     { id: "playButton", src: "assets/images/PlayBtn.png" },
     { id: "tryAgainButton", src: "assets/images/tryAgainBtn.png" },
     { id: "instructionButton", src: "assets/images/instructionsBtn.png" },
@@ -54,6 +46,7 @@ var manifest = [
     { id: "pickup", src: "assets/audio/Pickup.ogg" },
     { id: "explosion", src: "assets/audio/Explosion.ogg" }
 ];
+//Preloading sounds and images
 function Preload() {
     assetLoader = new createjs.LoadQueue(); // create a new preloader
     assetLoader.installPlugin(createjs.Sound); // need plugin for sounds
@@ -69,7 +62,6 @@ function init() {
     setupStats();
     currentState = constants.MENU_STATE;
     changeState(currentState);
-    //main();
 }
 // UTILITY METHODS
 function setupStats() {
@@ -80,36 +72,6 @@ function setupStats() {
     stats.domElement.style.top = '440px';
     document.body.appendChild(stats.domElement);
 }
-// DISTANCE CHECKING METHOD
-/*
-function distance(p1: createjs.Point, p2: createjs.Point): number {
-    return Math.floor(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2)));
-}
-
-// CHECK COLLISION METHOD
-function checkCollision(collider: objects.GameObject) {
-    var AllienPosition: createjs.Point = new createjs.Point(allien.x, allien.y);
-    var asteroidPosition: createjs.Point = new createjs.Point(collider.x, collider.y);
-    var theDistance = distance(AllienPosition, asteroidPosition);
-    if (theDistance < ((allien.height * 0.5) + (collider.height * 0.5))) {
-        if (collider.isColliding != true) {
-            createjs.Sound.play(collider.sound);
-            console.log(collider.name);
-            if (collider.name == "asteroid")
-            {
-                scoreboard.lives--;
-            }
-            if (collider.name == "ally")
-            {
-                scoreboard.score += 100;
-            }
-        }
-        collider.isColliding = true;
-    } else {
-        collider.isColliding = false;
-    }
-}
-*/
 function gameLoop() {
     stats.begin();
     if (stateChanged) {
@@ -119,28 +81,6 @@ function gameLoop() {
     else {
         currentStateFunction.update();
     }
-    /*space.update();
-    ally.update();
-    allien.update();
-
-    for (var asteroid = 2; asteroid >= 0; asteroid--) {
-        asteroids[asteroid].update();
-        checkCollision(asteroids[asteroid]);
-    }
-
-    checkCollision(ally);
-    scoreboard.update();
-    if (this.scoreboard.lives < 1) {
-        this.scoreboard.active = false;
-        createjs.Sound.stop();
-        currentScore = this.scoreboard.score;
-        if (currentScore > highScore) {
-            highScore = currentScore;
-        }
-        stage.removeAllChildren();
-    }
-    stage.update(); // Refreshes our stage
-    */
     stats.end();
 }
 //function changeState(state: number): void {

@@ -11,7 +11,7 @@
 
 
 module states {
-
+    // GAME PLAY STATE CLASS
     export class GamePlay {
         // Game Objects 
         public game: createjs.Container;
@@ -33,7 +33,6 @@ module states {
             //Ally object
             this.ally = new objects.Ally();
             this.game.addChild(this.ally);
-
 
             //Allien object
             this.allien = new objects.Allien();
@@ -62,9 +61,9 @@ module states {
         // CHECK COLLISION METHOD
         public checkCollision(collider: objects.GameObject) {
             if (this.scoreboard.active) {
-                var planePosition: createjs.Point = new createjs.Point(this.allien.x, this.allien.y);
+                var alienPosition: createjs.Point = new createjs.Point(this.allien.x, this.allien.y);
                 var objectPosition: createjs.Point = new createjs.Point(collider.x, collider.y);
-                var theDistance = this.distance(planePosition, objectPosition);
+                var theDistance = this.distance(alienPosition, objectPosition);
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
@@ -101,6 +100,7 @@ module states {
 
             this.scoreboard.update();
 
+            //Check Alien's lives
             if (this.scoreboard.lives < 1) {
                 this.scoreboard.active = false;
                 createjs.Sound.stop();

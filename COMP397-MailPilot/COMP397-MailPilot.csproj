@@ -59,14 +59,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\audio\engine.ogg" />
-    <Content Include="assets\audio\thunder.ogg" />
-    <Content Include="assets\audio\yay.ogg" />
-    <Content Include="assets\images\allienf.png" />
-    <Content Include="assets\images\allienf2.png" />
+    <Content Include="assets\images\allien.png" />
+    <Content Include="assets\images\allienBig.png" />
     <Content Include="assets\images\ally.png" />
-    <Content Include="assets\images\asteroid11.png" />
-    <Content Include="assets\images\asteroidf.png" />
+    <Content Include="assets\images\asteroid.png" />
     <Content Include="assets\images\goBackBtn.png" />
     <Content Include="assets\images\instructionsBtn.png" />
     <Content Include="assets\images\PlayBtn.png" />
@@ -86,12 +82,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\images\1945.bmp" />
-    <Content Include="assets\images\cloud.png" />
-    <Content Include="assets\images\island.png" />
-    <Content Include="assets\images\ocean.gif" />
-    <Content Include="assets\images\plane.png" />
-    <Content Include="assets\images\sideplane.gif" />
     <Content Include="css\game.css" />
     <Content Include="Scripts\lib\easeljs-0.8.0.min.js" />
     <Content Include="Scripts\lib\Stats.js" />

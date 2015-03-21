@@ -14,21 +14,21 @@ module states {
     export class GameOver {
         // Game Objects 
         public game: createjs.Container;
-        public ocean: objects.Space;
+        public space: objects.Space;
         public gameOverLabel: objects.Label;
         public finalScoreLabel: objects.Label;
         public highScoreLabel: objects.Label;
         public tryAgainButton: objects.Button;
         public tryAgain: boolean = false;
 
-        // CONSTRUCTOR ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // CONSTRUCTOR 
         constructor() {
             // Instantiate Game Container
             this.game = new createjs.Container();
 
-            //Ocean object
-            this.ocean = new objects.Space();
-            this.game.addChild(this.ocean);
+            //Space object
+            this.space = new objects.Space();
+            this.game.addChild(this.space);
 
             //Game Over Label
             this.gameOverLabel = new objects.Label(320, 40, "GAME OVER");
@@ -59,11 +59,12 @@ module states {
             this.tryAgain = true;
         }
 
-        // PUBLIC METHODS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        // PUBLIC METHODS 
         public update() {
 
-            this.ocean.update();
+            this.space.update();
 
+            //If tryAgain button clicked -> change to PLAY state
             if (this.tryAgain) {
                 this.game.removeAllChildren();
                 stage.removeChild(this.game);

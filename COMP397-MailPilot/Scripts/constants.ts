@@ -6,7 +6,6 @@
     export var INSTRUCTIONS_STATE: number = 4;
 
     // Game Constants
-    //export var CLOUD_NUM: number = 3;
     export var LABEL_FONT = "40px Copperplate Gothic Light";
     export var SUBLABEL_FONT = "20px Copperplate Gothic Light";
     export var LABEL_COLOUR = "#FFFF00";
