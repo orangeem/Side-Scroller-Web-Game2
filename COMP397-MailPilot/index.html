@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
+
+<!--
++File: index.html
++Author's name: Johanna Ponce
++Last Modified by: Johanna Ponce
++Date last Modified: 03/20/15
++Program Description: Side scroller game
++-->
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,19 +22,31 @@
     <canvas id="canvas" width="640" height="480"></canvas>
 
     <!-- JavaScript -->
-    <!-- JavaScript -->
+    <script src="Scripts/lib/Stats.js"></script>
+
     <script src="Scripts/lib/easeljs-0.8.0.min.js"></script>
     <script src="Scripts/lib/tweenjs-0.6.0.min.js"></script>
     <script src="Scripts/lib/soundjs-0.6.0.min.js"></script>
     <script src="Scripts/lib/preloadjs-0.6.0.min.js"></script>
 
     <!-- Game Scripts -->
+    <script src="Scripts/constants.js"></script>
     <script src="Scripts/objects/gameobject.js"></script>
     <script src="Scripts/objects/allien.js"></script>
     <script src="Scripts/objects/ally.js"></script>
     <script src="Scripts/objects/asteroid.js"></script>
     <script src="Scripts/objects/space.js"></script>
+    <script src="Scripts/objects/scoreboards.js"></script>
+
+    <script src="Scripts/objects/label.js"></script>
+    <script src="Scripts/objects/button.js"></script>
 
     <script src="Scripts/game.js"></script>
+
+    <!-- Game states Scripts -->
+    <script src="Scripts/states/gameplay.js"></script>
+    <script src="Scripts/states/menu.js"></script>
+    <script src="Scripts/states/gameover.js"></script>
+    <script src="Scripts/states/instructions.js"></script>
 </body>
 </html>
