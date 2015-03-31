@@ -20,11 +20,12 @@ module states {
         public ally: objects.Ally;
         public asteroids: objects.Asteroid[] = [];
         public space: objects.Space;
+        public checkArray: number;
 
         constructor() {
             // Instantiate Game Container
             this.game = new createjs.Container();
-
+             
 
             //Space object
             this.space = new objects.Space();
@@ -69,9 +70,11 @@ module states {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "asteroid") {
                             this.scoreboard.lives--;
+                            this.asteroids[this.checkArray].reset();                            
                         }
                         if (collider.name == "ally") {
                             this.scoreboard.score += 100;
+                            this.ally.reset();
                         }
                     }
                     collider.isColliding = true;
@@ -91,7 +94,7 @@ module states {
 
             for (var asteroid = 2; asteroid >= 0; asteroid--) {
                 this.asteroids[asteroid].update();
-
+                this.checkArray = asteroid;
                 this.checkCollision(this.asteroids[asteroid]);
             }
 
