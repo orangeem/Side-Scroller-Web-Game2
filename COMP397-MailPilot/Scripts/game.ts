@@ -7,6 +7,8 @@
 /// <reference path="typings/stats/stats.d.ts" />
 
 /// <reference path="constants.ts" />
+/// <reference path="keys.ts" />
+/// <reference path="controls.ts" />
 
 /// <reference path="objects/gameobject.ts" />
 /// <reference path="objects/allien.ts" />
