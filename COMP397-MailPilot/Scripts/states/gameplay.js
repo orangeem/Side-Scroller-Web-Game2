@@ -49,9 +49,11 @@ var states;
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "asteroid") {
                             this.scoreboard.lives--;
+                            this.asteroids[this.checkArray].reset();
                         }
                         if (collider.name == "ally") {
                             this.scoreboard.score += 100;
+                            this.ally.reset();
                         }
                     }
                     collider.isColliding = true;
@@ -67,6 +69,7 @@ var states;
             this.allien.update();
             for (var asteroid = 2; asteroid >= 0; asteroid--) {
                 this.asteroids[asteroid].update();
+                this.checkArray = asteroid;
                 this.checkCollision(this.asteroids[asteroid]);
             }
             this.checkCollision(this.ally);
