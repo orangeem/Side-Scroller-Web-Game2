@@ -4,3 +4,5 @@
 /// <reference path="lib/preloadjs-0.6.0.min.js" />
 /// <reference path="lib/tweenjs-0.6.0.min.js" />
 /// <reference path="lib/stats.js" />
+/// <reference path="objects/controls.js" />
+/// <reference path="objects/keys.js" />
