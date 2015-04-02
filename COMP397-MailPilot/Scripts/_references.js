@@ -6,3 +6,5 @@
 /// <reference path="lib/stats.js" />
 /// <reference path="keys.js" />
 /// <reference path="controls.js" />
+/// <reference path="states/gameplaylevel2.js" />
+/// <reference path="states/gameplaylevel3.js" />

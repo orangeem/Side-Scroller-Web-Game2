@@ -93,6 +93,8 @@
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\controls.js" />
     <Content Include="Scripts\keys.js" />
+    <Content Include="Scripts\states\gameplaylevel2.js" />
+    <Content Include="Scripts\states\gameplaylevel3.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +115,8 @@
     <TypeScriptCompile Include="Scripts\objects\allien.ts" />
     <TypeScriptCompile Include="Scripts\states\gameover.ts" />
     <TypeScriptCompile Include="Scripts\states\gameplay.ts" />
+    <TypeScriptCompile Include="Scripts\states\GamePlayLeveltwo.ts" />
+    <TypeScriptCompile Include="Scripts\states\GamePlayLevelthree.ts" />
     <TypeScriptCompile Include="Scripts\states\instructions.ts" />
     <TypeScriptCompile Include="Scripts\states\menu.ts" />
     <TypeScriptCompile Include="Scripts\typings\createjs-lib\createjs-lib.d.ts" />
