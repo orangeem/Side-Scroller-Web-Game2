@@ -14,7 +14,7 @@ var states;
     var GamePlayLevelthree = (function () {
         function GamePlayLevelthree() {
             this.asteroids = [];
-            console.log("LEVEL 3333333333333333333333333");
+            console.log("LEVEL 33");
             // Instantiate Game Container
             this.game = new createjs.Container();
             //Space object

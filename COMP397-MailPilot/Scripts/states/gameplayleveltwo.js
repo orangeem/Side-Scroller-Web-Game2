@@ -14,7 +14,7 @@ var states;
     var GamePlayLeveltwo = (function () {
         function GamePlayLeveltwo() {
             this.asteroids = [];
-            console.log("LEVEL 222222222222222222222222");
+            console.log("LEVEL 2");
             // Instantiate Game Container
             this.game = new createjs.Container();
             //Space object
@@ -23,7 +23,7 @@ var states;
             this._level2Label = new createjs.Text("LEVEL2 ", "30px Copperplate Gothic Light", "#ffff00");
             this._level2Label.y = 200;
             this._level2Label.x = 400;
-            this.game.addChild(this._level2Label);
+            // this.game.addChild(this._level2Label);
             //Ally object
             this.ally = new objects.Ally();
             this.game.addChild(this.ally);
