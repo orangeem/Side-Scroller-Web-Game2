@@ -12,7 +12,7 @@
 
 module states {
     // GAME PLAY STATE CLASS
-    export class GamePlay {
+    export class GamePlayLeveltwo {
         // Game Objects 
         public game: createjs.Container;
         public scoreboard: objects.ScoreBoard;
@@ -21,8 +21,10 @@ module states {
         public asteroids: objects.Asteroid[] = [];
         public space: objects.Space;
         public checkArray: number;
+        private _level2Label: createjs.Text;
 
         constructor() {
+            console.log("LEVEL 2");
             // Instantiate Game Container
             this.game = new createjs.Container();
              
@@ -30,6 +32,11 @@ module states {
             //Space object
             this.space = new objects.Space();
             this.game.addChild(this.space);
+
+            this._level2Label = new createjs.Text("LEVEL2 ", "30px Copperplate Gothic Light", "#ffff00");
+            this._level2Label.y = 200;
+            this._level2Label.x = 400;
+           // this.game.addChild(this._level2Label);
 
             //Ally object
             this.ally = new objects.Ally();
@@ -48,6 +55,11 @@ module states {
 
             // Instantiate Scoreboard
             this.scoreboard = new objects.ScoreBoard(this.game);
+
+            //load previous score and lives
+            this.scoreboard.lives = currentLives;
+            this.scoreboard.score = currentScore;
+           
 
             // Add Game Container to Stage
             stage.addChild(this.game);
@@ -70,7 +82,7 @@ module states {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "asteroid") {
                             this.scoreboard.lives--;
-                            this.asteroids[this.checkArray].reset();                            
+                            this.asteroids[this.checkArray].reset();
                         }
                         if (collider.name == "ally") {
                             this.scoreboard.score += 100;
@@ -103,15 +115,13 @@ module states {
 
             this.scoreboard.update();
 
-            //check score
-
-            if (this.scoreboard.score >= 300)
-            {
+            //console.log(this.scoreboard.score);
+            if (this.scoreboard.score >= 600) {
                 this.game.removeAllChildren();
                 stage.removeChild(this.game);
                 currentScore = this.scoreboard.score;
                 currentLives = this.scoreboard.lives;
-                currentState = constants.PLAY_STATE_LEVEL_2;
+                currentState = constants.PLAY_STATE_LEVEL_3;
                 stateChanged = true
             }
 
@@ -136,4 +146,4 @@ module states {
     } // GamePlay Class
 
 
-} // States Module
+} // States Module 

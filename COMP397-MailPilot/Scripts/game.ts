@@ -23,6 +23,8 @@
 /// <reference path="states/gameplay.ts" />
 /// <reference path="states/menu.ts" />
 /// <reference path="states/gameover.ts" />
+/// <reference path="states/gameplayleveltwo.ts" />
+/// <reference path="states/gameplaylevelthree.ts" />
 /// <reference path="states/instructions.ts" />
 
 // Global game Variables
@@ -31,6 +33,7 @@ var stage: createjs.Stage;
 var assetLoader: createjs.LoadQueue;
 var stats: Stats = new Stats();
 var currentScore = 0;
+var currentLives = 0;
 var highScore = 0;
 
 // Game State Variables
@@ -39,6 +42,8 @@ var currentStateFunction: any;
 var stateChanged: boolean = false;
 
 var gamePlay: states.GamePlay;
+var gamePlayLeveltwo: states.GamePlayLeveltwo;
+var gamePlayLevelthree: states.GamePlayLevelthree;
 var menu: states.Menu;
 var gameOver: states.GameOver;
 var instructions: states.Instructions;
@@ -133,6 +138,18 @@ function changeState(state){
             //instantiate instructions screen
             instructions = new states.Instructions();
             currentStateFunction = instructions;
+            break;
+
+        case constants.PLAY_STATE_LEVEL_2:
+            //instantiate level 2
+            gamePlayLeveltwo = new states.GamePlayLeveltwo();
+            currentStateFunction = gamePlayLeveltwo;
+            break;
+
+        case constants.PLAY_STATE_LEVEL_3:
+            //instantiate level 3
+            gamePlayLevelthree = new states.GamePlayLevelthree();
+            currentStateFunction = gamePlayLevelthree;
             break;
             
     }

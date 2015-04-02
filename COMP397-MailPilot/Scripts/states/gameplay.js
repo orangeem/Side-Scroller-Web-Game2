@@ -74,6 +74,15 @@ var states;
             }
             this.checkCollision(this.ally);
             this.scoreboard.update();
+            //check score
+            if (this.scoreboard.score >= 300) {
+                this.game.removeAllChildren();
+                stage.removeChild(this.game);
+                currentScore = this.scoreboard.score;
+                currentLives = this.scoreboard.lives;
+                currentState = constants.PLAY_STATE_LEVEL_2;
+                stateChanged = true;
+            }
             //Check Alien's lives
             if (this.scoreboard.lives < 1) {
                 this.scoreboard.active = false;

@@ -12,7 +12,7 @@
 
 module states {
     // GAME PLAY STATE CLASS
-    export class GamePlay {
+    export class GamePlayLevelthree {
         // Game Objects 
         public game: createjs.Container;
         public scoreboard: objects.ScoreBoard;
@@ -23,6 +23,7 @@ module states {
         public checkArray: number;
 
         constructor() {
+            console.log("LEVEL 33");
             // Instantiate Game Container
             this.game = new createjs.Container();
              
@@ -49,6 +50,11 @@ module states {
             // Instantiate Scoreboard
             this.scoreboard = new objects.ScoreBoard(this.game);
 
+            //load previous score and lives
+            this.scoreboard.lives = currentLives;
+            this.scoreboard.score = currentScore;
+           
+
             // Add Game Container to Stage
             stage.addChild(this.game);
         } // Constructor
@@ -70,7 +76,7 @@ module states {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "asteroid") {
                             this.scoreboard.lives--;
-                            this.asteroids[this.checkArray].reset();                            
+                            this.asteroids[this.checkArray].reset();
                         }
                         if (collider.name == "ally") {
                             this.scoreboard.score += 100;
@@ -103,18 +109,6 @@ module states {
 
             this.scoreboard.update();
 
-            //check score
-
-            if (this.scoreboard.score >= 300)
-            {
-                this.game.removeAllChildren();
-                stage.removeChild(this.game);
-                currentScore = this.scoreboard.score;
-                currentLives = this.scoreboard.lives;
-                currentState = constants.PLAY_STATE_LEVEL_2;
-                stateChanged = true
-            }
-
             //Check Alien's lives
             if (this.scoreboard.lives < 1) {
                 this.scoreboard.active = false;
@@ -136,4 +130,4 @@ module states {
     } // GamePlay Class
 
 
-} // States Module
+} // States Module  
