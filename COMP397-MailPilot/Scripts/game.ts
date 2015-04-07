@@ -13,6 +13,7 @@
 /// <reference path="objects/gameobject.ts" />
 /// <reference path="objects/allien.ts" />
 /// <reference path="objects/ally.ts" />
+/// <reference path="objects/boss.ts" />
 /// <reference path="objects/asteroid.ts" />
 /// <reference path="objects/space.ts" />
 /// <reference path="objects/scoreboards.ts" />
@@ -40,6 +41,8 @@ var highScore = 0;
 var currentState: number;
 var currentStateFunction: any;
 var stateChanged: boolean = false;
+var canvasWidth: number;
+var canvasHeight: number;
 
 var gamePlay: states.GamePlay;
 var gamePlayLeveltwo: states.GamePlayLeveltwo;
@@ -54,6 +57,9 @@ var manifest = [
     { id: "ally", src: "assets/images/ally.png" },
     { id: "space", src: "assets/images/space2h.png" },
     { id: "allien", src: "assets/images/allien.png" },
+    { id: "boss", src: "assets/images/boss.png" },
+    { id: "planet", src: "assets/images/planet.png" },
+    { id: "bullet", src: "assets/images/red_bullet.png" },
     { id: "allienBig", src: "assets/images/allienBig.png" },
     { id: "playButton", src: "assets/images/PlayBtn.png" },
     { id: "tryAgainButton", src: "assets/images/tryAgainBtn.png" },
@@ -82,7 +88,8 @@ function init() {
     createjs.Ticker.setFPS(60); // 60 frames per second
     createjs.Ticker.addEventListener("tick", gameLoop);
     setupStats();
-    
+    canvasWidth = this.stage.canvas.width;
+    canvasHeight = this.stage.canvas.height;    
     currentState = constants.MENU_STATE;
     changeState(currentState);
 }

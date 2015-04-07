@@ -44,11 +44,12 @@ module objects {
                 }
             }
         }
-
+            
         assignControls() {
             // Binds key actions
             window.onkeydown = this.onControlDown;            
             window.onkeyup = this.onControlUp;
+            
         }
 
         onControlDown(e) {
@@ -82,7 +83,9 @@ module objects {
                     controls.lTally = 0;
                     break;
                 case keys.SPACEBAR:
-
+                    constants.BULLET_Y = stage.mouseY;
+                    constants.BULLET_X = stage.mouseX;
+                    //bullet = new objects.Bullet(stage, game);
                     break;
                 
             }

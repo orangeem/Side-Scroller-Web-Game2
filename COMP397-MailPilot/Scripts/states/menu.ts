@@ -1,6 +1,7 @@
 ﻿/// <reference path="../constants.ts" />
 /// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/ally.ts" />
+/// <reference path="../objects/boss.ts" />
 /// <reference path="../objects/space.ts" />
 /// <reference path="../objects/allien.ts" />
 /// <reference path="../objects/asteroid.ts" />
