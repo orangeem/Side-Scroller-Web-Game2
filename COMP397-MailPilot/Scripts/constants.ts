@@ -12,6 +12,7 @@
     export var SUBLABEL_FONT = "20px Copperplate Gothic Light";
     export var LABEL_COLOUR = "#FFFF00";
     export var ALLIEN_LIVES = 3;
+    export var ALLIEN_HP = 100;
     export var BULLET_FLAG: boolean = false;
     export var BULLET_Y: number;
     export var BULLET_X: number;

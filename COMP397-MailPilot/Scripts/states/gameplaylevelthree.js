@@ -16,7 +16,6 @@ var states;
     var GamePlayLevelthree = (function () {
         function GamePlayLevelthree() {
             this.planets = [];
-            console.log("LEVEL 33");
             // Instantiate Game Container
             this.game = new createjs.Container();
             //Space object
@@ -28,21 +27,22 @@ var states;
             //Allien object
             this.allien = new objects.Allien();
             this.game.addChild(this.allien);
+            //bullet object
             this.bullet = new objects.Bullet();
             this.game.addChild(this.bullet);
             for (var planet = 3; planet >= 0; planet--) {
                 this.planets[planet] = new objects.Planet();
                 this.game.addChild(this.planets[planet]);
             }
+            //bullet mouse event listener
             this.game.addEventListener("click", this.shotBullet2.bind(this), false);
             // Instantiate Scoreboard
             this.scoreboard = new objects.ScoreBoard(this.game);
             //load previous score and lives
-            //this.scoreboard.lives = currentLives;
-            //this.scoreboard.score = currentScore;
+            this.scoreboard.lives = currentLives;
+            this.scoreboard.score = currentScore;
             // Add Game Container to Stage
             stage.addChild(this.game);
-            //shot bullet
         } // Constructor
         //bullet mouse event
         GamePlayLevelthree.prototype.shotBullet2 = function () {
@@ -80,7 +80,6 @@ var states;
                     collider.isColliding = true;
                 }
                 else if (theBulletDistance < ((this.bullet.height * 0.5) + (collider.height * 0.5))) {
-                    console.log("here");
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "planet") {
@@ -104,7 +103,7 @@ var states;
             this.space.update();
             this.boss.update();
             this.allien.update();
-            //bullet update and collision update
+            //bullet update
             if (constants.BULLET_FLAG == true) {
                 this.bullet.update();
             }
@@ -129,7 +128,7 @@ var states;
                 stateChanged = true;
             }
             stage.update(); // Refreshes our stage
-        }; // Update Method
+        }; // Update Method           
         return GamePlayLevelthree;
     })();
     states.GamePlayLevelthree = GamePlayLevelthree; // GamePlay Class

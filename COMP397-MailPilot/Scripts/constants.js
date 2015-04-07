@@ -12,6 +12,7 @@ var constants;
     constants.SUBLABEL_FONT = "20px Copperplate Gothic Light";
     constants.LABEL_COLOUR = "#FFFF00";
     constants.ALLIEN_LIVES = 3;
+    constants.ALLIEN_HP = 100;
     constants.BULLET_FLAG = false;
     constants.BULLET_Y;
     constants.BULLET_X;

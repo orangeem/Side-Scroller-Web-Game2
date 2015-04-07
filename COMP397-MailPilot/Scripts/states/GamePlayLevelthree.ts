@@ -28,12 +28,10 @@ module states {
         
 
         constructor() {
-            console.log("LEVEL 33");
-            // Instantiate Game Container
             
+            // Instantiate Game Container
             this.game = new createjs.Container();
-             
-
+            
             //Space object
             this.space = new objects.Space();
             this.game.addChild(this.space);
@@ -46,7 +44,7 @@ module states {
             this.allien = new objects.Allien();
             this.game.addChild(this.allien);
 
-           
+            //bullet object
             this.bullet = new objects.Bullet();
             this.game.addChild(this.bullet);
 
@@ -57,6 +55,7 @@ module states {
                 this.game.addChild(this.planets[planet]);
             }
 
+            //bullet mouse event listener
             this.game.addEventListener("click", this.shotBullet2.bind(this),false);
             
             
@@ -64,22 +63,16 @@ module states {
             this.scoreboard = new objects.ScoreBoard(this.game);
 
             //load previous score and lives
-            //this.scoreboard.lives = currentLives;
-            //this.scoreboard.score = currentScore;
+            this.scoreboard.lives = currentLives;
+            this.scoreboard.score = currentScore;
            
 
             // Add Game Container to Stage
             stage.addChild(this.game);
 
-            //shot bullet
-            
-
         } // Constructor
 
-        
-            
-            
-        
+               
         //bullet mouse event
         public shotBullet2() {
 
@@ -124,7 +117,7 @@ module states {
                     }
                     collider.isColliding = true;
                 } else if (theBulletDistance < ((this.bullet.height * 0.5) + (collider.height * 0.5))) {
-                    console.log("here");
+            
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "planet") {
@@ -154,7 +147,7 @@ module states {
 
             this.allien.update();
 
-            //bullet update and collision update
+            //bullet update
             if (constants.BULLET_FLAG == true) {
                 this.bullet.update();
                 
@@ -187,11 +180,8 @@ module states {
 
             stage.update(); // Refreshes our stage
 
-        } // Update Method
-
-     
+        } // Update Method           
 
     } // GamePlay Class
-
 
 } // States Module  
