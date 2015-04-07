@@ -70,6 +70,7 @@ module states {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "asteroid") {
                             this.scoreboard.lives--;
+                            this.scoreboard.allienHp -= 30;
                             this.asteroids[this.checkArray].reset();                            
                         }
                         if (collider.name == "ally") {

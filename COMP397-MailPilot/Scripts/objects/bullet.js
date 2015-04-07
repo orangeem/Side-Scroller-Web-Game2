@@ -28,6 +28,7 @@ var objects;
                 constants.BULLET_FLAG = false;
             }
         };
+        // hide bullet for next shot
         Bullet.prototype.destroy = function () {
             this.x = -10;
             this.y = -10;
