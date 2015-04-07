@@ -78,6 +78,8 @@ var objects;
                     controls.lTally = 0;
                     break;
                 case keys.SPACEBAR:
+                    constants.BULLET_Y = stage.mouseY;
+                    constants.BULLET_X = stage.mouseX;
                     break;
             }
         };

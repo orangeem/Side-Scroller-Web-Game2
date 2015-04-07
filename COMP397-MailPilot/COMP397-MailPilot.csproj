@@ -63,9 +63,12 @@
     <Content Include="assets\images\allienBig.png" />
     <Content Include="assets\images\ally.png" />
     <Content Include="assets\images\asteroid.png" />
+    <Content Include="assets\images\boss.PNG" />
     <Content Include="assets\images\goBackBtn.png" />
     <Content Include="assets\images\instructionsBtn.png" />
+    <Content Include="assets\images\planet.png" />
     <Content Include="assets\images\PlayBtn.png" />
+    <Content Include="assets\images\red_bullet.png" />
     <Content Include="assets\images\space2.png" />
     <Content Include="assets\images\space2h.png" />
     <Content Include="assets\images\tryAgainBtn.png" />
@@ -74,8 +77,37 @@
     <Content Include="assets\audio\Explosion.ogg" />
     <Content Include="assets\audio\Pickup.ogg" />
     <Content Include="assets\audio\Soundtrack.ogg" />
+    <Content Include="Scripts\constants.js" />
+    <Content Include="Scripts\constants.min.js" />
     <Content Include="Scripts\controls.js.map" />
+    <Content Include="Scripts\game.js" />
     <Content Include="Scripts\keys.js.map" />
+    <Content Include="Scripts\objects\allien.js.map" />
+    <Content Include="Scripts\objects\ally.js.map" />
+    <Content Include="Scripts\objects\asteroid.js.map" />
+    <Content Include="Scripts\objects\boss.js.map" />
+    <Content Include="Scripts\objects\bullet.js.map" />
+    <Content Include="Scripts\objects\button.js.map" />
+    <Content Include="Scripts\objects\cloud.js.map" />
+    <Content Include="Scripts\objects\gameobject.js.map" />
+    <Content Include="Scripts\objects\island.js.map" />
+    <Content Include="Scripts\objects\label.js.map" />
+    <Content Include="Scripts\objects\ocean.js.map" />
+    <Content Include="Scripts\objects\plane.js.map" />
+    <Content Include="Scripts\objects\planet.js.map" />
+    <Content Include="Scripts\objects\scoreboards.js.map" />
+    <Content Include="Scripts\objects\space.js.map" />
+    <Content Include="Scripts\states\gameover.js.map" />
+    <Content Include="Scripts\states\gameplay.js.map" />
+    <Content Include="Scripts\states\gameplaylevel2.js.map" />
+    <Content Include="Scripts\states\gameplaylevel3.js.map" />
+    <Content Include="Scripts\states\gameplaylevelthree.js.map" />
+    <Content Include="Scripts\states\gameplayleveltwo.js.map" />
+    <Content Include="Scripts\states\instructions.js.map" />
+    <Content Include="Scripts\states\menu.js.map" />
+    <Content Include="Scripts\constants.js.map" />
+    <Content Include="Scripts\constants.min.js.map" />
+    <Content Include="Scripts\game.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -93,8 +125,27 @@
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\controls.js" />
     <Content Include="Scripts\keys.js" />
-    <Content Include="Scripts\states\gameplaylevel2.js" />
-    <Content Include="Scripts\states\gameplaylevel3.js" />
+    <Content Include="Scripts\objects\allien.js" />
+    <Content Include="Scripts\objects\ally.js" />
+    <Content Include="Scripts\objects\asteroid.js" />
+    <Content Include="Scripts\objects\boss.js" />
+    <Content Include="Scripts\objects\bullet.js" />
+    <Content Include="Scripts\objects\button.js" />
+    <Content Include="Scripts\objects\cloud.js" />
+    <Content Include="Scripts\objects\gameobject.js" />
+    <Content Include="Scripts\objects\island.js" />
+    <Content Include="Scripts\objects\label.js" />
+    <Content Include="Scripts\objects\ocean.js" />
+    <Content Include="Scripts\objects\plane.js" />
+    <Content Include="Scripts\objects\planet.js" />
+    <Content Include="Scripts\objects\scoreboards.js" />
+    <Content Include="Scripts\objects\space.js" />
+    <Content Include="Scripts\states\gameover.js" />
+    <Content Include="Scripts\states\gameplay.js" />
+    <Content Include="Scripts\states\gameplaylevelthree.js" />
+    <Content Include="Scripts\states\gameplayleveltwo.js" />
+    <Content Include="Scripts\states\instructions.js" />
+    <Content Include="Scripts\states\menu.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -105,11 +156,14 @@
     <TypeScriptCompile Include="Scripts\controls.ts" />
     <TypeScriptCompile Include="Scripts\game.ts" />
     <TypeScriptCompile Include="Scripts\keys.ts" />
+    <TypeScriptCompile Include="Scripts\objects\ally.ts" />
     <TypeScriptCompile Include="Scripts\objects\asteroid.ts" />
+    <TypeScriptCompile Include="Scripts\objects\boss.ts" />
+    <TypeScriptCompile Include="Scripts\objects\bullet.ts" />
     <TypeScriptCompile Include="Scripts\objects\button.ts" />
     <TypeScriptCompile Include="Scripts\objects\gameobject.ts" />
-    <TypeScriptCompile Include="Scripts\objects\ally.ts" />
     <TypeScriptCompile Include="Scripts\objects\label.ts" />
+    <TypeScriptCompile Include="Scripts\objects\planet.ts" />
     <TypeScriptCompile Include="Scripts\objects\scoreboards.ts" />
     <TypeScriptCompile Include="Scripts\objects\space.ts" />
     <TypeScriptCompile Include="Scripts\objects\allien.ts" />
@@ -148,7 +202,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>12288</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:12288/</IISUrl>
+          <IISUrl>http://localhost:12288</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

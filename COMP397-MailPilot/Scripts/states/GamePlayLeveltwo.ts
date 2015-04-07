@@ -1,9 +1,10 @@
 ﻿/// <reference path="../constants.ts" />
 /// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/ally.ts" />
+/// <reference path="../objects/boss.ts" />
 /// <reference path="../objects/space.ts" />
 /// <reference path="../objects/allien.ts" />
-/// <reference path="../objects/asteroid.ts" />
+/// <reference path="../objects/planet.ts" />
 /// <reference path="../objects/scoreboards.ts" />
 /// <reference path="../objects/button.ts" />
 /// <reference path="../objects/label.ts" />
@@ -17,14 +18,13 @@ module states {
         public game: createjs.Container;
         public scoreboard: objects.ScoreBoard;
         public allien: objects.Allien;
-        public ally: objects.Ally;
-        public asteroids: objects.Asteroid[] = [];
+        public boss: objects.Ally;
+        public planet: objects.Planet[] = [];
         public space: objects.Space;
         public checkArray: number;
-        private _level2Label: createjs.Text;
 
         constructor() {
-            console.log("LEVEL 2");
+            console.log("LEVEL 33");
             // Instantiate Game Container
             this.game = new createjs.Container();
              
@@ -33,23 +33,18 @@ module states {
             this.space = new objects.Space();
             this.game.addChild(this.space);
 
-            this._level2Label = new createjs.Text("LEVEL2 ", "30px Copperplate Gothic Light", "#ffff00");
-            this._level2Label.y = 200;
-            this._level2Label.x = 400;
-           // this.game.addChild(this._level2Label);
-
             //Ally object
-            this.ally = new objects.Ally();
-            this.game.addChild(this.ally);
+            this.boss = new objects.Ally();
+            this.game.addChild(this.boss);
 
             //Allien object
             this.allien = new objects.Allien();
             this.game.addChild(this.allien);
 
-            //Asteroid object
-            for (var asteroid = 2; asteroid >= 0; asteroid--) {
-                this.asteroids[asteroid] = new objects.Asteroid();
-                this.game.addChild(this.asteroids[asteroid]);
+            //Planet object
+            for (var planets = 3; planets >= 0; planets--) {
+                this.planet[planets] = new objects.Planet();
+                this.game.addChild(this.planet[planets]);
             }
 
 
@@ -77,16 +72,18 @@ module states {
                 var alienPosition: createjs.Point = new createjs.Point(this.allien.x, this.allien.y);
                 var objectPosition: createjs.Point = new createjs.Point(collider.x, collider.y);
                 var theDistance = this.distance(alienPosition, objectPosition);
+
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
+
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
-                        if (collider.name == "asteroid") {
+                        if (collider.name == "planet") {
                             this.scoreboard.lives--;
-                            this.asteroids[this.checkArray].reset();
+                            this.planet[this.checkArray].reset();
                         }
-                        if (collider.name == "ally") {
+                        if (collider.name == "boss") {
                             this.scoreboard.score += 100;
-                            this.ally.reset();
+
                         }
                     }
                     collider.isColliding = true;
@@ -100,30 +97,20 @@ module states {
 
             this.space.update();
 
-            this.ally.update();
+            this.boss.update();
 
             this.allien.update();
 
-            for (var asteroid = 2; asteroid >= 0; asteroid--) {
-                this.asteroids[asteroid].update();
-                this.checkArray = asteroid;
-                this.checkCollision(this.asteroids[asteroid]);
+            for (var planets = 3; planets >= 0; planets--) {
+                this.planet[planets].update();
+                this.checkArray = planets;
+                this.checkCollision(this.planet[planets]);
             }
 
-            this.checkCollision(this.ally);
+            this.checkCollision(this.boss);
 
 
             this.scoreboard.update();
-
-            //console.log(this.scoreboard.score);
-            if (this.scoreboard.score >= 600) {
-                this.game.removeAllChildren();
-                stage.removeChild(this.game);
-                currentScore = this.scoreboard.score;
-                currentLives = this.scoreboard.lives;
-                currentState = constants.PLAY_STATE_LEVEL_3;
-                stateChanged = true
-            }
 
             //Check Alien's lives
             if (this.scoreboard.lives < 1) {
@@ -146,4 +133,4 @@ module states {
     } // GamePlay Class
 
 
-} // States Module 
+} // States Module  
