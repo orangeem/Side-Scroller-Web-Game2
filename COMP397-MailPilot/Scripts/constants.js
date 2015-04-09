@@ -14,6 +14,7 @@ var constants;
     constants.ALLIEN_LIVES = 3;
     constants.ALLIEN_HP = 100;
     constants.BULLET_FLAG = false;
+    constants.isBossColliding = false;
     constants.BULLET_Y;
     constants.BULLET_X;
 })(constants || (constants = {}));

@@ -13,6 +13,7 @@
 /// <reference path="objects/boss.ts" />
 /// <reference path="objects/asteroid.ts" />
 /// <reference path="objects/space.ts" />
+/// <reference path="objects/space3.ts" />
 /// <reference path="objects/scoreboards.ts" />
 /// <reference path="objects/button.ts" />
 /// <reference path="objects/label.ts" />
@@ -46,6 +47,7 @@ var manifest = [
     { id: "asteroid", src: "assets/images/asteroid.png" },
     { id: "ally", src: "assets/images/ally.png" },
     { id: "space", src: "assets/images/space2h.png" },
+    { id: "space3", src: "assets/images/space3.png" },
     { id: "allien", src: "assets/images/allien.png" },
     { id: "boss", src: "assets/images/boss.png" },
     { id: "planet", src: "assets/images/planet.png" },
@@ -59,6 +61,21 @@ var manifest = [
     { id: "pickup", src: "assets/audio/Pickup.ogg" },
     { id: "explosion", src: "assets/audio/Explosion.ogg" }
 ];
+var bossData = {
+    "images": ["assets/images/bossAtlas.png"],
+    "frames": [
+        [153, 312, 180, 198],
+        [2, 297, 149, 213],
+        [132, 84, 103, 211],
+        [2, 84, 128, 211]
+    ],
+    "animations": {
+        "bossRun": {
+            frames: [0, 1, 2, 3],
+            speed: 0.5,
+        }
+    }
+};
 //Preloading sounds and images
 function Preload() {
     assetLoader = new createjs.LoadQueue(); // create a new preloader

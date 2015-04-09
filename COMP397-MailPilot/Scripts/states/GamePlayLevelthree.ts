@@ -2,7 +2,7 @@
 /// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/ally.ts" />
 /// <reference path="../objects/boss.ts" />
-/// <reference path="../objects/space.ts" />
+/// <reference path="../objects/space3.ts" />
 /// <reference path="../objects/allien.ts" />
 /// <reference path="../objects/planet.ts" />
 /// <reference path="../objects/scoreboards.ts" />
@@ -21,7 +21,7 @@ module states {
         public allien: objects.Allien;
         public boss: objects.Boss;
         public planets: objects.Planet[] = [];
-        public space: objects.Space;
+        public space: objects.Space3;
         public bullet: objects.Bullet;
         public checkArray: number;
         public check_x: number;
@@ -33,12 +33,12 @@ module states {
             this.game = new createjs.Container();
             
             //Space object
-            this.space = new objects.Space();
+            this.space = new objects.Space3();
             this.game.addChild(this.space);
 
-            //Ally object
-            this.boss = new objects.Boss();
-            this.game.addChild(this.boss);
+            //Boss object
+            this.boss = new objects.Boss(stage, this.game);
+           // this.game.addChild(this.boss);
 
             //Allien object
             this.allien = new objects.Allien();
@@ -95,6 +95,38 @@ module states {
         } //Distance Method
 
         // CHECK COLLISION METHOD
+        public checkBossCollision(collider: objects.Boss) {
+            if (this.scoreboard.active) {
+                var alienPosition: createjs.Point = new createjs.Point(this.allien.x, this.allien.y);
+                var bulletPosition: createjs.Point = new createjs.Point(this.bullet.x, this.bullet.y);
+                var objectPosition: createjs.Point = new createjs.Point(collider.image.x, collider.image.y);
+                var theDistance = this.distance(alienPosition, objectPosition);
+                var theBulletDistance = this.distance(bulletPosition, objectPosition);
+
+                if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
+                    if (collider.isColliding != true) {
+                        //createjs.Sound.play(collider.sound);                        
+                        this.scoreboard.lives--;
+                    }
+                    collider.isColliding = true;
+
+                } else if (theBulletDistance < ((this.bullet.height * 0.5) + (collider.height * 0.5))) {
+                    if (collider.isColliding != true) {
+                        //  createjs.Sound.play(collider.sound);
+                        this.scoreboard.score += 50;
+                        this.planets[this.checkArray].reset();
+                        this.bullet.destroy();
+
+
+                    }
+                    collider.isColliding = true;
+                } else {
+                    collider.isColliding = false;
+                }
+            }
+            
+        } // checkCollision Method
+
         public checkCollision(collider: objects.GameObject) {
             if (this.scoreboard.active) {
                 var alienPosition: createjs.Point = new createjs.Point(this.allien.x, this.allien.y);
@@ -102,22 +134,22 @@ module states {
                 var objectPosition: createjs.Point = new createjs.Point(collider.x, collider.y);
                 var theDistance = this.distance(alienPosition, objectPosition);
                 var theBulletDistance = this.distance(bulletPosition, objectPosition);
-                
+
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
-                    
+
                     if (collider.isColliding != true) {
-                        createjs.Sound.play(collider.sound);                        
+                        createjs.Sound.play(collider.sound);
                         if (collider.name == "planet") {
                             this.scoreboard.lives--;
-                            this.planets[this.checkArray].reset();                            
+                            this.planets[this.checkArray].reset();
                         }
                         if (collider.name == "boss") {
-                            this.scoreboard.score += 100;                            
+                            this.scoreboard.score += 100;
                         }
                     }
                     collider.isColliding = true;
                 } else if (theBulletDistance < ((this.bullet.height * 0.5) + (collider.height * 0.5))) {
-            
+
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "planet") {
@@ -159,7 +191,7 @@ module states {
                 this.checkCollision(this.planets[planet]);
             }
 
-            this.checkCollision(this.boss);
+            this.checkBossCollision(this.boss);
             
             this.scoreboard.update();
             

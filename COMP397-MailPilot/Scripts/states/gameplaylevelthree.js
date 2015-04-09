@@ -2,7 +2,7 @@
 /// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/ally.ts" />
 /// <reference path="../objects/boss.ts" />
-/// <reference path="../objects/space.ts" />
+/// <reference path="../objects/space3.ts" />
 /// <reference path="../objects/allien.ts" />
 /// <reference path="../objects/planet.ts" />
 /// <reference path="../objects/scoreboards.ts" />
@@ -19,11 +19,11 @@ var states;
             // Instantiate Game Container
             this.game = new createjs.Container();
             //Space object
-            this.space = new objects.Space();
+            this.space = new objects.Space3();
             this.game.addChild(this.space);
-            //Ally object
-            this.boss = new objects.Boss();
-            this.game.addChild(this.boss);
+            //Boss object
+            this.boss = new objects.Boss(stage, this.game);
+            // this.game.addChild(this.boss);
             //Allien object
             this.allien = new objects.Allien();
             this.game.addChild(this.allien);
@@ -59,6 +59,34 @@ var states;
             return Math.floor(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2)));
         }; //Distance Method
         // CHECK COLLISION METHOD
+        GamePlayLevelthree.prototype.checkBossCollision = function (collider) {
+            if (this.scoreboard.active) {
+                var alienPosition = new createjs.Point(this.allien.x, this.allien.y);
+                var bulletPosition = new createjs.Point(this.bullet.x, this.bullet.y);
+                var objectPosition = new createjs.Point(collider.image.x, collider.image.y);
+                var theDistance = this.distance(alienPosition, objectPosition);
+                var theBulletDistance = this.distance(bulletPosition, objectPosition);
+                if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
+                    if (collider.isColliding != true) {
+                        //createjs.Sound.play(collider.sound);                        
+                        this.scoreboard.lives--;
+                    }
+                    collider.isColliding = true;
+                }
+                else if (theBulletDistance < ((this.bullet.height * 0.5) + (collider.height * 0.5))) {
+                    if (collider.isColliding != true) {
+                        //  createjs.Sound.play(collider.sound);
+                        this.scoreboard.score += 50;
+                        this.planets[this.checkArray].reset();
+                        this.bullet.destroy();
+                    }
+                    collider.isColliding = true;
+                }
+                else {
+                    collider.isColliding = false;
+                }
+            }
+        }; // checkCollision Method
         GamePlayLevelthree.prototype.checkCollision = function (collider) {
             if (this.scoreboard.active) {
                 var alienPosition = new createjs.Point(this.allien.x, this.allien.y);
@@ -112,7 +140,7 @@ var states;
                 this.checkArray = planet;
                 this.checkCollision(this.planets[planet]);
             }
-            this.checkCollision(this.boss);
+            this.checkBossCollision(this.boss);
             this.scoreboard.update();
             //Check Alien's lives
             if (this.scoreboard.lives < 1) {
