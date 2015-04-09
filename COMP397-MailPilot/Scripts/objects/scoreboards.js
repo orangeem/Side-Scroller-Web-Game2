@@ -39,10 +39,9 @@ var objects;
             this._scoreLabel.text = "Score: " + this.score;
         };
         ScoreBoard.prototype.controlHP = function (hp) {
-            console.log("hp:" + this.allienHp);
             this.game.removeChild(this.allien_bar_hp);
             this.allien_bar_hp = new createjs.Shape();
-            this.allien_bar_hp.x = 300;
+            this.allien_bar_hp.x = 260;
             this.allien_bar_hp.graphics.beginFill("#ff0000").drawRect(0, 0, hp, 27);
             this.game.addChild(this.allien_bar_hp);
         };

@@ -1,65 +1,95 @@
-﻿module objects {
-    // ASTEROID CLASS
-    export class Boss extends objects.GameObject {
+﻿
+module objects {
+    var bossData = {
+        "images": ["assets/images/bossAtlas.png"],
+        "frames": [
+            [152, 1, 131, 212],
+            [282, 2, 107, 213],
+            [2, 2, 148, 214],
+            [388, 1, 184, 199]
+        ],
+        "animations": {
 
-        // CONSTRUCTOR
-        constructor() {
-            super("boss");
-            this.sound = "explosion";
+            "bossRun": {
+                frames: [0, 1, 2, 3],
+                speed: 0.1
+            }
+        }
+    };
+
+    export class Boss {
+        stage: createjs.Stage;
+        game: createjs.Container;
+        image: createjs.Sprite;
+        width: number;
+        height: number;
+        dy: number;
+        dx: number;
+        public isColliding: boolean = false;
+        bossAtlas: createjs.SpriteSheet;
+       
+        constructor(stage: createjs.Stage, game: createjs.Container) {
+            this.stage = stage;
+            this.game = game;
+            this.bossAtlas = new createjs.SpriteSheet(bossData);
+            this.image = new createjs.Sprite(this.bossAtlas,"bossRun");
+            this.width = this.image.getBounds().width;
+            this.height = this.image.getBounds().height;
+            this.image.regX = this.width / 2;
+            this.image.regY = this.height / 2;
             this.reset();
+            this.game.addChild(this.image);
+            this.game
         }
 
-        // PUBLIC METHODS 
-        public update() {
+        update() {
+            this.image.y -= this.dy;
+            this.image.x -= this.dx;
 
-            this.y -= this._dy;
-            this.x -= this._dx;
-           
             //boss moving cotrol
-            if (this.x < 0 && this.y < 0) {
+            if (this.image.x < 0 && this.image.y < 0) {
                 this.reset();
-            } else if (this.x > canvasWidth && this.y > canvasHeight) {
+            } else if (this.image.x > canvasWidth && this.image.y > canvasHeight) {
                 this.reset();
-            } else if (this.x < 0) {
+            } else if (this.image.x < 0) {
                 this.pointReset();
-                this._dx = this._dx * -1;
-            } else if (this.x > canvasWidth) {
-
+                this.dx = this.dx * -1;
+            } else if (this.image.x > canvasWidth) {
                 this.pointReset();
-                this._dx = this._dx * 1;
-            } else if (this.y < 0) {
+                this.dx = this.dx * 1;
+            } else if (this.image.y < 0) {
                 this.pointReset();
-                this._dy = this._dy * -1;
-            } else if (this.y > canvasHeight) {
+                this.dy = this.dy * -1;
+            } else if (this.image.y > canvasHeight) {
                 this.pointReset();
-                this._dy = this._dy * -1;
+                this.dy = this.dy * -1;
             }
 
-            this._checkBounds();
+         //   this._checkBounds();
+
         }
 
-        // Reset position of the asteroids to the begnning
-        public reset() {
-            this.y = Math.floor(Math.random() * 480);
-            this.x = 960;
-            this._dy = Math.floor(Math.random() * 4) - 2;
-            this._dx = Math.floor(Math.random() * 5) + 5;
+        reset() {
+            this.image.y = Math.floor(Math.random() * canvasHeight);
+            this.dx = Math.floor(Math.random() * 4 + 4);
+            this.dy = Math.floor(Math.random() * - 9) + Math.floor(Math.random() * 9);
+            this.image.x = Math.floor(Math.random() * canvasWidth);
         }
 
-        public pointReset() {
-
-            this._dy = Math.floor(Math.random() * 4) - 2;
-            this._dx = Math.floor(Math.random() * 5) + 5;
+        pointReset() {
+            this.dx = Math.floor(Math.random() * 4 + 4);
+            this.dy = Math.floor(Math.random() * -7) + Math.floor(Math.random() * 7);
         }
 
         // PRIVATE METHODS 
         private _checkBounds() {
-            // check if the asteroids have left the screen
-            if (this.x <= (0 - this.width)) {
+            // check if the boss have left the screen
+            if (this.image.x <= (0 - this.width)) {
                 this.reset();
             }
         }
-
+        
+               
     }
 
-}    
+} 

@@ -13,6 +13,7 @@
 /// <reference path="objects/boss.ts" />
 /// <reference path="objects/asteroid.ts" />
 /// <reference path="objects/space.ts" />
+/// <reference path="objects/space3.ts" />
 /// <reference path="objects/scoreboards.ts" />
 /// <reference path="objects/button.ts" />
 /// <reference path="objects/label.ts" />
@@ -46,10 +47,10 @@ var manifest = [
     { id: "asteroid", src: "assets/images/asteroid.png" },
     { id: "ally", src: "assets/images/ally.png" },
     { id: "space", src: "assets/images/space2h.png" },
+    { id: "space3", src: "assets/images/space3.png" },
     { id: "allien", src: "assets/images/allien.png" },
-    { id: "boss", src: "assets/images/boss.png" },
     { id: "planet", src: "assets/images/planet.png" },
-    { id: "bullet", src: "assets/images/red_bullet.png" },
+    { id: "bullet", src: "assets/images/bullet.png" },
     { id: "allienBig", src: "assets/images/allienBig.png" },
     { id: "playButton", src: "assets/images/PlayBtn.png" },
     { id: "tryAgainButton", src: "assets/images/tryAgainBtn.png" },
