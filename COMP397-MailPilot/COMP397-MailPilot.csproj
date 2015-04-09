@@ -64,11 +64,12 @@
     <Content Include="assets\images\ally.png" />
     <Content Include="assets\images\asteroid.png" />
     <Content Include="assets\images\bossAtlas.png" />
-    <Content Include="assets\images\boss.PNG" />
+    <Content Include="assets\images\bullet.PNG" />
     <Content Include="assets\images\goBackBtn.png" />
     <Content Include="assets\images\instructionsBtn.png" />
     <Content Include="assets\images\planet.png" />
     <Content Include="assets\images\PlayBtn.png" />
+    <Content Include="assets\images\redbirdAltas.png" />
     <Content Include="assets\images\red_bullet.png" />
     <Content Include="assets\images\space2.png" />
     <Content Include="assets\images\space2h.png" />
@@ -167,6 +168,7 @@
     <TypeScriptCompile Include="Scripts\objects\gameobject.ts" />
     <TypeScriptCompile Include="Scripts\objects\label.ts" />
     <TypeScriptCompile Include="Scripts\objects\planet.ts" />
+    <TypeScriptCompile Include="Scripts\objects\redbird.ts" />
     <TypeScriptCompile Include="Scripts\objects\scoreboards.ts" />
     <TypeScriptCompile Include="Scripts\objects\space.ts" />
     <TypeScriptCompile Include="Scripts\objects\allien.ts" />

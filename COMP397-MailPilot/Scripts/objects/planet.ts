@@ -1,4 +1,4 @@
-﻿module objects {
+﻿﻿module objects {
     // ASTEROID CLASS
     export class Planet extends objects.GameObject {
 
@@ -35,4 +35,4 @@
 
     }
 
-}   
+}    

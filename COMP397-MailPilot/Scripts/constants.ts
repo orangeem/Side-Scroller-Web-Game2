@@ -14,7 +14,6 @@
     export var ALLIEN_LIVES = 3;
     export var ALLIEN_HP = 100;
     export var BULLET_FLAG: boolean = false;
-    export var isBossColliding: boolean = false;
     export var BULLET_Y: number;
     export var BULLET_X: number;
 }  

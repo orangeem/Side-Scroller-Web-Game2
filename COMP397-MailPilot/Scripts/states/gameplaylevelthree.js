@@ -4,7 +4,7 @@
 /// <reference path="../objects/boss.ts" />
 /// <reference path="../objects/space3.ts" />
 /// <reference path="../objects/allien.ts" />
-/// <reference path="../objects/planet.ts" />
+/// <reference path="../objects/redbird.ts" />
 /// <reference path="../objects/scoreboards.ts" />
 /// <reference path="../objects/button.ts" />
 /// <reference path="../objects/label.ts" />
@@ -15,7 +15,7 @@ var states;
     // GAME PLAY STATE CLASS
     var GamePlayLevelthree = (function () {
         function GamePlayLevelthree() {
-            this.planets = [];
+            this.redbirds = [];
             // Instantiate Game Container
             this.game = new createjs.Container();
             //Space object
@@ -30,9 +30,8 @@ var states;
             //bullet object
             this.bullet = new objects.Bullet();
             this.game.addChild(this.bullet);
-            for (var planet = 3; planet >= 0; planet--) {
-                this.planets[planet] = new objects.Planet();
-                this.game.addChild(this.planets[planet]);
+            for (var bird = 3; bird >= 0; bird--) {
+                this.redbirds[bird] = new objects.Redbird(stage, this.game);
             }
             //bullet mouse event listener
             this.game.addEventListener("click", this.shotBullet2.bind(this), false);
@@ -77,7 +76,7 @@ var states;
                     if (collider.isColliding != true) {
                         //  createjs.Sound.play(collider.sound);
                         this.scoreboard.score += 50;
-                        this.planets[this.checkArray].reset();
+                        this.redbirds[this.checkArray].reset();
                         this.bullet.destroy();
                     }
                     collider.isColliding = true;
@@ -91,34 +90,23 @@ var states;
             if (this.scoreboard.active) {
                 var alienPosition = new createjs.Point(this.allien.x, this.allien.y);
                 var bulletPosition = new createjs.Point(this.bullet.x, this.bullet.y);
-                var objectPosition = new createjs.Point(collider.x, collider.y);
+                var objectPosition = new createjs.Point(collider.image.x, collider.image.y);
                 var theDistance = this.distance(alienPosition, objectPosition);
                 var theBulletDistance = this.distance(bulletPosition, objectPosition);
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
-                        createjs.Sound.play(collider.sound);
-                        if (collider.name == "planet") {
-                            this.scoreboard.lives--;
-                            this.planets[this.checkArray].reset();
-                        }
-                        if (collider.name == "boss") {
-                            this.scoreboard.score += 100;
-                        }
+                        //     createjs.Sound.play(collider.sound);
+                        this.scoreboard.lives--;
+                        this.redbirds[this.checkArray].reset();
                     }
                     collider.isColliding = true;
                 }
                 else if (theBulletDistance < ((this.bullet.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
-                        createjs.Sound.play(collider.sound);
-                        if (collider.name == "planet") {
-                            this.scoreboard.score += 50;
-                            this.planets[this.checkArray].reset();
-                            this.bullet.destroy();
-                        }
-                        if (collider.name == "boss") {
-                            this.scoreboard.score += 100;
-                            this.bullet.destroy();
-                        }
+                        // createjs.Sound.play(collider.sound);
+                        this.scoreboard.score += 50;
+                        this.redbirds[this.checkArray].reset();
+                        this.bullet.destroy();
                     }
                     collider.isColliding = true;
                 }
@@ -135,10 +123,10 @@ var states;
             if (constants.BULLET_FLAG == true) {
                 this.bullet.update();
             }
-            for (var planet = 3; planet >= 0; planet--) {
-                this.planets[planet].update();
-                this.checkArray = planet;
-                this.checkCollision(this.planets[planet]);
+            for (var bird = 3; bird >= 0; bird--) {
+                this.redbirds[bird].update();
+                this.checkArray = bird;
+                this.checkCollision(this.redbirds[bird]);
             }
             this.checkBossCollision(this.boss);
             this.scoreboard.update();
