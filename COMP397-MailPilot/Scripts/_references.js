@@ -29,3 +29,6 @@
 /// <reference path="states/menu.js" />
 /// <reference path="constants.js" />
 /// <reference path="game.js" />
+/// <reference path="objects/pill.js" />
+/// <reference path="objects/redbird.js" />
+/// <reference path="objects/space3.js" />

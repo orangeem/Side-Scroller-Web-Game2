@@ -4,6 +4,7 @@
 /// <reference path="../objects/boss.ts" />
 /// <reference path="../objects/space3.ts" />
 /// <reference path="../objects/allien.ts" />
+/// <reference path="../objects/pill.ts" />
 /// <reference path="../objects/redbird.ts" />
 /// <reference path="../objects/scoreboards.ts" />
 /// <reference path="../objects/button.ts" />
@@ -19,14 +20,13 @@ module states {
         public game: createjs.Container;
         public scoreboard: objects.ScoreBoard;
         public allien: objects.Allien;
+        public pill: objects.Pill;
         public boss: objects.Boss;
         public redbirds: objects.Redbird[] = [];
         public space: objects.Space3;
         public bullet: objects.Bullet;
         public checkArray: number;
-        public check_x: number;
         
-
         constructor() {
             
             // Instantiate Game Container
@@ -40,10 +40,14 @@ module states {
             this.boss = new objects.Boss(stage, this.game);
            // this.game.addChild(this.boss);
 
+            //Pill object
+            this.pill = new objects.Pill();
+            this.game.addChild(this.pill);
+
             //Allien object
             this.allien = new objects.Allien();
             this.game.addChild(this.allien);
-
+                        
             //bullet object
             this.bullet = new objects.Bullet();
             this.game.addChild(this.bullet);
@@ -62,8 +66,8 @@ module states {
             this.scoreboard = new objects.ScoreBoard(this.game);
 
             //load previous score and lives
-            this.scoreboard.lives = currentLives;
-            this.scoreboard.score = currentScore;
+     //       this.scoreboard.lives = currentLives;
+      //      this.scoreboard.score = currentScore;
  
             // Add Game Container to Stage
             stage.addChild(this.game);
@@ -79,7 +83,7 @@ module states {
                 console.log(this.allien.x);
                 constants.BULLET_X = this.allien.x;
                 constants.BULLET_Y = this.allien.y;
-                
+                createjs.Sound.play("bulletsound");
                 this.bullet.setPoint();
 
                 constants.BULLET_FLAG = true;
@@ -103,18 +107,22 @@ module states {
 
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
-                        //createjs.Sound.play(collider.sound);                        
-                        this.scoreboard.lives--;
+                        createjs.Sound.play("collision");                        
+                        if (this.scoreboard.allienHp < 20) {
+                            this.scoreboard.lives--;
+                            this.scoreboard.allienHp = 100;
+                        } else {
+                            this.scoreboard.allienHp -= 20;
+                        }
                     }
                     collider.isColliding = true;
 
                 } else if (theBulletDistance < ((this.bullet.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
-                        //  createjs.Sound.play(collider.sound);
-                        this.scoreboard.score += 50;
-                        this.redbirds[this.checkArray].reset();
+                        createjs.Sound.play("bossound");
+                        this.scoreboard.bossHp -= 25;
                         this.bullet.destroy();
-                    }
+                    } 
                     collider.isColliding = true;
                 } else {
                     collider.isColliding = false;
@@ -134,23 +142,24 @@ module states {
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
 
                     if (collider.isColliding != true) {
-                   //     createjs.Sound.play(collider.sound);
-                     
+                        createjs.Sound.play("collision");
+                        if (this.scoreboard.allienHp < 13) {
                             this.scoreboard.lives--;
+                            this.scoreboard.allienHp = 100;
                             this.redbirds[this.checkArray].reset();
-                       
+                        } else {
+                            this.scoreboard.allienHp -= 13;
+                            this.redbirds[this.checkArray].reset();
+                        }                       
                     }
                     collider.isColliding = true;
                 } else if (theBulletDistance < ((this.bullet.height * 0.5) + (collider.height * 0.5))) {
 
                     if (collider.isColliding != true) {
-                       // createjs.Sound.play(collider.sound);
-                        
-                            this.scoreboard.score += 50;
+                        createjs.Sound.play("bird");
+                            this.scoreboard.score += 30;
                             this.redbirds[this.checkArray].reset();
                             this.bullet.destroy();
-                        
-                        
                     }
                     collider.isColliding = true;
                 }
@@ -161,6 +170,34 @@ module states {
             }
         } // checkCollision Method
 
+        // CHECK COLLISION METHOD
+        public checkPillCollision(collider: objects.GameObject) {
+            if (this.scoreboard.active) {
+                var alienPosition: createjs.Point = new createjs.Point(this.allien.x, this.allien.y);
+                var objectPosition: createjs.Point = new createjs.Point(collider.x, collider.y);
+                var theDistance = this.distance(alienPosition, objectPosition);
+
+                if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
+
+                    if (collider.isColliding != true) {
+                        createjs.Sound.play("bite");                            
+                        if (collider.name == "pill") {
+                            if (this.scoreboard.allienHp >= 93) {
+                                this.scoreboard.allienHp = 100;                                
+                            } else {
+                                this.scoreboard.allienHp += 7;                                
+                            }
+                            this.pill.reset();
+                        }                        
+                    }
+                    collider.isColliding = true;
+                } else {
+                    collider.isColliding = false;
+                }
+            }
+        } // checkCollision Method
+
+
         public update() {
 
             this.space.update();
@@ -168,6 +205,8 @@ module states {
             this.boss.update();
 
             this.allien.update();
+
+            this.pill.update();
 
             //bullet update
             if (constants.BULLET_FLAG == true) {
@@ -182,14 +221,20 @@ module states {
             }
 
             this.checkBossCollision(this.boss);
+
+            this.checkPillCollision(this.pill);
+
             
             this.scoreboard.update();
             
 
             //Check Alien's lives
-            if (this.scoreboard.lives < 1) {
+            if (this.scoreboard.lives < 1 || this.scoreboard.bossHp < 25) {
                 this.scoreboard.active = false;
                 createjs.Sound.stop();
+                if (this.scoreboard.bossHp < 25) {
+                    this.scoreboard.score += 1000;
+                }
                 currentScore = this.scoreboard.score;
                 if (currentScore > highScore) {
                     highScore = currentScore;
@@ -198,7 +243,7 @@ module states {
                 stage.removeChild(this.game);
                 currentState = constants.GAME_OVER_STATE;
                 stateChanged = true;
-            }
+            } 
 
             stage.update(); // Refreshes our stage
 

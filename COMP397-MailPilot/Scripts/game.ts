@@ -15,8 +15,10 @@
 /// <reference path="objects/ally.ts" />
 /// <reference path="objects/boss.ts" />
 /// <reference path="objects/asteroid.ts" />
+/// <reference path="objects/pill.ts" />
 /// <reference path="objects/space.ts" />
 /// <reference path="objects/space3.ts" />
+/// <reference path="objects/bullet.ts" />
 /// <reference path="objects/scoreboards.ts" />
 
 /// <reference path="objects/button.ts" />
@@ -62,13 +64,20 @@ var manifest = [
     { id: "allien", src: "assets/images/allien.png" },
     { id: "planet", src: "assets/images/planet.png" },
     { id: "bullet", src: "assets/images/bullet.png" },
+    { id: "pill", src: "assets/images/pill.png" },
     { id: "allienBig", src: "assets/images/allienBig.png" },
     { id: "playButton", src: "assets/images/PlayBtn.png" },
     { id: "tryAgainButton", src: "assets/images/tryAgainBtn.png" },
     { id: "instructionButton", src: "assets/images/instructionsBtn.png" },
     { id: "goBackButton", src: "assets/images/goBackBtn.png" },
     { id: "soundtrack", src: "assets/audio/Soundtrack.ogg" },
+    { id: "soundtrack3", src: "assets/audio/stage3soundtrack.ogg" },
     { id: "pickup", src: "assets/audio/Pickup.ogg" },
+    { id: "bird", src: "assets/audio/uhoh.ogg" },
+    { id: "bossound", src: "assets/audio/boss.ogg" },
+    { id: "bulletsound", src: "assets/audio/bullet.ogg" },
+    { id: "collision", src: "assets/audio/twang.ogg" },
+    { id: "bite", src: "assets/audio/bite.ogg" },
     { id: "explosion", src: "assets/audio/Explosion.ogg" }
 ];
 

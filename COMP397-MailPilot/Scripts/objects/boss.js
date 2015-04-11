@@ -34,7 +34,7 @@ var objects;
             this.image.y -= this.dy;
             this.image.x -= this.dx;
             //boss moving cotrol
-            if (this.image.x < 0 && this.image.y < 0) {
+            if (this.image.x < 20 && this.image.y < canvasHeight - 20) {
                 this.reset();
             }
             else if (this.image.x > canvasWidth && this.image.y > canvasHeight) {
@@ -46,7 +46,7 @@ var objects;
             }
             else if (this.image.x > canvasWidth) {
                 this.pointReset();
-                this.dx = this.dx * 1;
+                this.dx = this.dx * -1;
             }
             else if (this.image.y < 0) {
                 this.pointReset();
@@ -60,13 +60,13 @@ var objects;
         };
         Boss.prototype.reset = function () {
             this.image.y = Math.floor(Math.random() * canvasHeight);
-            this.dx = Math.floor(Math.random() * 4 + 4);
-            this.dy = Math.floor(Math.random() * -9) + Math.floor(Math.random() * 9);
+            this.dx = Math.floor(Math.random() * 3 + 3);
+            this.dy = Math.floor(Math.random() * -6) + Math.floor(Math.random() * 6);
             this.image.x = Math.floor(Math.random() * canvasWidth);
         };
         Boss.prototype.pointReset = function () {
-            this.dx = Math.floor(Math.random() * 4 + 4);
-            this.dy = Math.floor(Math.random() * -7) + Math.floor(Math.random() * 7);
+            this.dx = Math.floor(Math.random() * 3 + 3);
+            this.dy = Math.floor(Math.random() * -6) + Math.floor(Math.random() * 6);
         };
         // PRIVATE METHODS 
         Boss.prototype._checkBounds = function () {

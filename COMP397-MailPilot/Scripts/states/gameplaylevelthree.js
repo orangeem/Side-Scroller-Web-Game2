@@ -4,6 +4,7 @@
 /// <reference path="../objects/boss.ts" />
 /// <reference path="../objects/space3.ts" />
 /// <reference path="../objects/allien.ts" />
+/// <reference path="../objects/pill.ts" />
 /// <reference path="../objects/redbird.ts" />
 /// <reference path="../objects/scoreboards.ts" />
 /// <reference path="../objects/button.ts" />
@@ -24,6 +25,9 @@ var states;
             //Boss object
             this.boss = new objects.Boss(stage, this.game);
             // this.game.addChild(this.boss);
+            //Pill object
+            this.pill = new objects.Pill();
+            this.game.addChild(this.pill);
             //Allien object
             this.allien = new objects.Allien();
             this.game.addChild(this.allien);
@@ -38,8 +42,8 @@ var states;
             // Instantiate Scoreboard
             this.scoreboard = new objects.ScoreBoard(this.game);
             //load previous score and lives
-            this.scoreboard.lives = currentLives;
-            this.scoreboard.score = currentScore;
+            //       this.scoreboard.lives = currentLives;
+            //      this.scoreboard.score = currentScore;
             // Add Game Container to Stage
             stage.addChild(this.game);
         } // Constructor
@@ -49,6 +53,7 @@ var states;
                 console.log(this.allien.x);
                 constants.BULLET_X = this.allien.x;
                 constants.BULLET_Y = this.allien.y;
+                createjs.Sound.play("bulletsound");
                 this.bullet.setPoint();
                 constants.BULLET_FLAG = true;
             }
@@ -67,16 +72,21 @@ var states;
                 var theBulletDistance = this.distance(bulletPosition, objectPosition);
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
-                        //createjs.Sound.play(collider.sound);                        
-                        this.scoreboard.lives--;
+                        createjs.Sound.play("collision");
+                        if (this.scoreboard.allienHp < 20) {
+                            this.scoreboard.lives--;
+                            this.scoreboard.allienHp = 100;
+                        }
+                        else {
+                            this.scoreboard.allienHp -= 20;
+                        }
                     }
                     collider.isColliding = true;
                 }
                 else if (theBulletDistance < ((this.bullet.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
-                        //  createjs.Sound.play(collider.sound);
-                        this.scoreboard.score += 50;
-                        this.redbirds[this.checkArray].reset();
+                        createjs.Sound.play("bossound");
+                        this.scoreboard.bossHp -= 25;
                         this.bullet.destroy();
                     }
                     collider.isColliding = true;
@@ -95,18 +105,51 @@ var states;
                 var theBulletDistance = this.distance(bulletPosition, objectPosition);
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
-                        //     createjs.Sound.play(collider.sound);
-                        this.scoreboard.lives--;
-                        this.redbirds[this.checkArray].reset();
+                        createjs.Sound.play("collision");
+                        if (this.scoreboard.allienHp < 13) {
+                            this.scoreboard.lives--;
+                            this.scoreboard.allienHp = 100;
+                            this.redbirds[this.checkArray].reset();
+                        }
+                        else {
+                            this.scoreboard.allienHp -= 13;
+                            this.redbirds[this.checkArray].reset();
+                        }
                     }
                     collider.isColliding = true;
                 }
                 else if (theBulletDistance < ((this.bullet.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
-                        // createjs.Sound.play(collider.sound);
-                        this.scoreboard.score += 50;
+                        createjs.Sound.play("bird");
+                        this.scoreboard.score += 30;
                         this.redbirds[this.checkArray].reset();
                         this.bullet.destroy();
+                    }
+                    collider.isColliding = true;
+                }
+                else {
+                    collider.isColliding = false;
+                }
+            }
+        }; // checkCollision Method
+        // CHECK COLLISION METHOD
+        GamePlayLevelthree.prototype.checkPillCollision = function (collider) {
+            if (this.scoreboard.active) {
+                var alienPosition = new createjs.Point(this.allien.x, this.allien.y);
+                var objectPosition = new createjs.Point(collider.x, collider.y);
+                var theDistance = this.distance(alienPosition, objectPosition);
+                if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
+                    if (collider.isColliding != true) {
+                        createjs.Sound.play("bite");
+                        if (collider.name == "pill") {
+                            if (this.scoreboard.allienHp >= 93) {
+                                this.scoreboard.allienHp = 100;
+                            }
+                            else {
+                                this.scoreboard.allienHp += 7;
+                            }
+                            this.pill.reset();
+                        }
                     }
                     collider.isColliding = true;
                 }
@@ -119,6 +162,7 @@ var states;
             this.space.update();
             this.boss.update();
             this.allien.update();
+            this.pill.update();
             //bullet update
             if (constants.BULLET_FLAG == true) {
                 this.bullet.update();
@@ -129,11 +173,15 @@ var states;
                 this.checkCollision(this.redbirds[bird]);
             }
             this.checkBossCollision(this.boss);
+            this.checkPillCollision(this.pill);
             this.scoreboard.update();
             //Check Alien's lives
-            if (this.scoreboard.lives < 1) {
+            if (this.scoreboard.lives < 1 || this.scoreboard.bossHp < 25) {
                 this.scoreboard.active = false;
                 createjs.Sound.stop();
+                if (this.scoreboard.bossHp < 25) {
+                    this.scoreboard.score += 1000;
+                }
                 currentScore = this.scoreboard.score;
                 if (currentScore > highScore) {
                     highScore = currentScore;
