@@ -18,7 +18,7 @@ module states {
         public game: createjs.Container;
         public scoreboard: objects.ScoreBoard;
         public allien: objects.Allien;
-        public boss: objects.Ally;
+        public ally: objects.Ally;
         public planet: objects.Planet[] = [];
         public space: objects.Space;
         public checkArray: number;
@@ -34,8 +34,8 @@ module states {
             this.game.addChild(this.space);
 
             //Ally object
-            this.boss = new objects.Ally();
-            this.game.addChild(this.boss);
+            this.ally = new objects.Ally();
+            this.game.addChild(this.ally);
 
             //Allien object
             this.allien = new objects.Allien();
@@ -97,7 +97,7 @@ module states {
 
             this.space.update();
 
-            this.boss.update();
+            this.ally.update();
 
             this.allien.update();
 
@@ -107,7 +107,7 @@ module states {
                 this.checkCollision(this.planet[planets]);
             }
 
-            this.checkCollision(this.boss);
+            this.checkCollision(this.ally);
 
 
             this.scoreboard.update();

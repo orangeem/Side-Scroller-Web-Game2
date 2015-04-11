@@ -47,7 +47,7 @@ module objects {
             this.image.x -= this.dx;
 
             //boss moving cotrol
-            if (this.image.x < 0 && this.image.y < 0) {
+            if (this.image.x < 20 && this.image.y < canvasHeight-20 ) {
                 this.reset();
             } else if (this.image.x > canvasWidth && this.image.y > canvasHeight) {
                 this.reset();
@@ -56,14 +56,14 @@ module objects {
                 this.dx = this.dx * -1;
             } else if (this.image.x > canvasWidth) {
                 this.pointReset();
-                this.dx = this.dx * 1;
+                this.dx = this.dx * -1;
             } else if (this.image.y < 0) {
                 this.pointReset();
                 this.dy = this.dy * -1;
             } else if (this.image.y > canvasHeight) {
                 this.pointReset();
                 this.dy = this.dy * -1;
-            }
+            } 
 
          //   this._checkBounds();
 
@@ -71,14 +71,14 @@ module objects {
 
         reset() {
             this.image.y = Math.floor(Math.random() * canvasHeight);
-            this.dx = Math.floor(Math.random() * 4 + 4);
-            this.dy = Math.floor(Math.random() * - 9) + Math.floor(Math.random() * 9);
+            this.dx = Math.floor(Math.random() * 3 + 3);
+            this.dy = Math.floor(Math.random() * - 6) + Math.floor(Math.random() * 6);
             this.image.x = Math.floor(Math.random() * canvasWidth);
         }
 
         pointReset() {
-            this.dx = Math.floor(Math.random() * 4 + 4);
-            this.dy = Math.floor(Math.random() * -7) + Math.floor(Math.random() * 7);
+            this.dx = Math.floor(Math.random() * 3 + 3);
+            this.dy = Math.floor(Math.random() * -6) + Math.floor(Math.random() * 6);
         }
 
         // PRIVATE METHODS 

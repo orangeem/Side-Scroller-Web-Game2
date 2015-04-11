@@ -22,8 +22,8 @@ var states;
             this.space = new objects.Space();
             this.game.addChild(this.space);
             //Ally object
-            this.boss = new objects.Ally();
-            this.game.addChild(this.boss);
+            this.ally = new objects.Ally();
+            this.game.addChild(this.ally);
             //Allien object
             this.allien = new objects.Allien();
             this.game.addChild(this.allien);
@@ -69,14 +69,14 @@ var states;
         }; // checkCollision Method
         GamePlayLeveltwo.prototype.update = function () {
             this.space.update();
-            this.boss.update();
+            this.ally.update();
             this.allien.update();
             for (var planets = 3; planets >= 0; planets--) {
                 this.planet[planets].update();
                 this.checkArray = planets;
                 this.checkCollision(this.planet[planets]);
             }
-            this.checkCollision(this.boss);
+            this.checkCollision(this.ally);
             this.scoreboard.update();
             //Check Alien's lives
             if (this.scoreboard.lives < 1) {

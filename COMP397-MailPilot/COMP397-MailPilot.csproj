@@ -66,6 +66,7 @@
     <Content Include="assets\images\bossAtlas.png" />
     <Content Include="assets\images\bullet.PNG" />
     <Content Include="assets\images\goBackBtn.png" />
+    <Content Include="assets\images\pill.png" />
     <Content Include="assets\images\instructionsBtn.png" />
     <Content Include="assets\images\planet.png" />
     <Content Include="assets\images\PlayBtn.png" />
@@ -97,10 +98,13 @@
     <Content Include="Scripts\objects\island.js.map" />
     <Content Include="Scripts\objects\label.js.map" />
     <Content Include="Scripts\objects\ocean.js.map" />
+    <Content Include="Scripts\objects\pill.js" />
     <Content Include="Scripts\objects\plane.js.map" />
     <Content Include="Scripts\objects\planet.js.map" />
+    <Content Include="Scripts\objects\redbird.js" />
     <Content Include="Scripts\objects\scoreboards.js.map" />
     <Content Include="Scripts\objects\space.js.map" />
+    <Content Include="Scripts\objects\space3.js" />
     <Content Include="Scripts\states\gameover.js.map" />
     <Content Include="Scripts\states\gameplay.js.map" />
     <Content Include="Scripts\states\gameplaylevel2.js.map" />
@@ -112,6 +116,15 @@
     <Content Include="Scripts\constants.js.map" />
     <Content Include="Scripts\constants.min.js.map" />
     <Content Include="Scripts\game.js.map" />
+    <Content Include="assets\audio\stage3soundtrack.ogg" />
+    <Content Include="assets\audio\boss.ogg" />
+    <Content Include="assets\audio\uhoh.ogg" />
+    <Content Include="assets\audio\bullet.ogg" />
+    <Content Include="assets\audio\twang.ogg" />
+    <Content Include="assets\audio\bite.ogg" />
+    <Content Include="Scripts\objects\pill.js.map" />
+    <Content Include="Scripts\objects\redbird.js.map" />
+    <Content Include="Scripts\objects\space3.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -167,6 +180,7 @@
     <TypeScriptCompile Include="Scripts\objects\button.ts" />
     <TypeScriptCompile Include="Scripts\objects\gameobject.ts" />
     <TypeScriptCompile Include="Scripts\objects\label.ts" />
+    <TypeScriptCompile Include="Scripts\objects\pill.ts" />
     <TypeScriptCompile Include="Scripts\objects\planet.ts" />
     <TypeScriptCompile Include="Scripts\objects\redbird.ts" />
     <TypeScriptCompile Include="Scripts\objects\scoreboards.ts" />

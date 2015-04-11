@@ -18,7 +18,12 @@ var objects;
             this.y = 240;
             this.regX = this.width * 0.5;
             this.regY = this.height * 0.5;
-            createjs.Sound.play("soundtrack", { loop: -1 });
+            if (currentState == constants.PLAY_STATE_LEVEL_3) {
+                createjs.Sound.play("soundtrack3", { loop: -1 });
+            }
+            else {
+                createjs.Sound.play("soundtrack", { loop: -1 });
+            }
             // Set up movement and controls
             this.assignControls();
         }
@@ -31,11 +36,9 @@ var objects;
             }
             else {
                 if (controls.down == true && this.y < 450) {
-                    console.log("down");
                     this.y += 3;
                 }
                 else if (controls.up == true && this.y > 30) {
-                    console.log("up");
                     this.y -= 3;
                 }
                 else if (controls.left == true && this.x > 30) {
