@@ -191,6 +191,7 @@
     <TypeScriptCompile Include="Scripts\objects\scoreboards.ts" />
     <TypeScriptCompile Include="Scripts\objects\space.ts" />
     <TypeScriptCompile Include="Scripts\objects\allien.ts" />
+    <TypeScriptCompile Include="Scripts\objects\space2.ts" />
     <TypeScriptCompile Include="Scripts\objects\space3.ts" />
     <TypeScriptCompile Include="Scripts\states\gameover.ts" />
     <TypeScriptCompile Include="Scripts\states\gameplay.ts" />

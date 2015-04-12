@@ -6,6 +6,7 @@
 /// <reference path="../objects/allien.ts" />
 /// <reference path="../objects/planet.ts" />
 /// <reference path="../objects/angryplanet.ts" />
+/// <reference path="../objects/space2.ts" />
 /// <reference path="../objects/astronaut.ts" />
 /// <reference path="../objects/scoreboards.ts" />
 /// <reference path="../objects/button.ts" />
@@ -21,8 +22,8 @@ var states;
             // Instantiate Game Container
             this.game = new createjs.Container();
             //Space object
-            this.space = new objects.Space();
-            this.game.addChild(this.space);
+            this.space2 = new objects.Space2();
+            this.game.addChild(this.space2);
             //Ally object
             this.astronaut = new objects.Astronaut();
             this.game.addChild(this.astronaut);
@@ -74,7 +75,7 @@ var states;
             }
         }; // checkCollision Method
         GamePlayLeveltwo.prototype.update = function () {
-            this.space.update();
+            this.space2.update();
             this.astronaut.update();
             this.allien.update();
             for (var planets = 3; planets >= 0; planets--) {

@@ -1,6 +1,7 @@
 ﻿
 
 
+
 ﻿/// <reference path="../constants.ts" />
 /// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/ally.ts" />
@@ -10,6 +11,7 @@
 /// <reference path="../objects/allien.ts" />
 /// <reference path="../objects/planet.ts" />
 /// <reference path="../objects/angryplanet.ts" />
+/// <reference path="../objects/space2.ts" />
 /// <reference path="../objects/astronaut.ts" />
 
 /// <reference path="../objects/scoreboards.ts" />
@@ -28,7 +30,7 @@ module states {
         public astronaut: objects.Astronaut;
         public angryplanet: objects.angryPlanet[] = [];
         // public planet: objects.Planet[] = [];
-        public space: objects.Space;
+        public space2: objects.Space2;
         public checkArray: number;
 
         constructor() {
@@ -38,8 +40,8 @@ module states {
              
 
             //Space object
-            this.space = new objects.Space();
-            this.game.addChild(this.space);
+            this.space2 = new objects.Space2();
+            this.game.addChild(this.space2);
 
             //Ally object
             this.astronaut = new objects.Astronaut();
@@ -108,7 +110,7 @@ module states {
 
         public update() {
 
-            this.space.update();
+            this.space2.update();
 
             this.astronaut.update();
 
