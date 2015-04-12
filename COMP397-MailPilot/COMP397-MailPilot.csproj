@@ -66,8 +66,8 @@
     <Content Include="assets\images\bossAtlas.png" />
     <Content Include="assets\images\bullet.PNG" />
     <Content Include="assets\images\goBackBtn.png" />
-    <Content Include="assets\images\pill.png" />
     <Content Include="assets\images\instructionsBtn.png" />
+    <Content Include="assets\images\pill.png" />
     <Content Include="assets\images\planet.png" />
     <Content Include="assets\images\PlayBtn.png" />
     <Content Include="assets\images\redbirdAltas.png" />

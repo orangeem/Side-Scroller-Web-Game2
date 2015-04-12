@@ -56,7 +56,7 @@ var states;
             if (this.play) {
                 this.game.removeAllChildren();
                 stage.removeChild(this.game);
-                currentState = constants.PLAY_STATE;
+                currentState = constants.PLAY_STATE_LEVEL_3;
                 stateChanged = true;
             }
             //if instruction button clicked -> change state to INSTRUCTION state

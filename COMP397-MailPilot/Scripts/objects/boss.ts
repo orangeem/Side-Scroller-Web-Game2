@@ -56,7 +56,7 @@ module objects {
                 this.dx = this.dx * -1;
             } else if (this.image.x > canvasWidth) {
                 this.pointReset();
-                this.dx = this.dx * -1;
+                this.dx = this.dx * 1;
             } else if (this.image.y < 0) {
                 this.pointReset();
                 this.dy = this.dy * -1;
