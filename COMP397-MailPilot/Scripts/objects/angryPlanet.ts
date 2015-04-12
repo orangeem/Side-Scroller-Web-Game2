@@ -5,6 +5,7 @@
         // CONSTRUCTOR
         constructor() {
             super("angryplanet");
+            //this.sound = "explosion";
             this.sound = "explosion";
             this.reset();
         }
@@ -35,4 +36,4 @@
 
     }
 
-}   
+}    

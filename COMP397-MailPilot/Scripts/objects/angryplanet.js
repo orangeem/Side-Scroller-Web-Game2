@@ -12,6 +12,7 @@ var objects;
         // CONSTRUCTOR
         function angryPlanet() {
             _super.call(this, "angryplanet");
+            //this.sound = "explosion";
             this.sound = "explosion";
             this.reset();
         }
