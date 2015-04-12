@@ -179,6 +179,7 @@
     <TypeScriptCompile Include="Scripts\objects\ally.ts" />
     <TypeScriptCompile Include="Scripts\objects\angryPlanet.ts" />
     <TypeScriptCompile Include="Scripts\objects\asteroid.ts" />
+    <TypeScriptCompile Include="Scripts\objects\astronaut.ts" />
     <TypeScriptCompile Include="Scripts\objects\boss.ts" />
     <TypeScriptCompile Include="Scripts\objects\bullet.ts" />
     <TypeScriptCompile Include="Scripts\objects\button.ts" />

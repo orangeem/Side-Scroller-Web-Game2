@@ -1,5 +1,6 @@
 ﻿
 
+
 ﻿/// <reference path="../constants.ts" />
 /// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/ally.ts" />
@@ -9,6 +10,8 @@
 /// <reference path="../objects/allien.ts" />
 /// <reference path="../objects/planet.ts" />
 /// <reference path="../objects/angryplanet.ts" />
+/// <reference path="../objects/astronaut.ts" />
+
 /// <reference path="../objects/scoreboards.ts" />
 /// <reference path="../objects/button.ts" />
 /// <reference path="../objects/label.ts" />
@@ -22,7 +25,7 @@ module states {
         public game: createjs.Container;
         public scoreboard: objects.ScoreBoard;
         public allien: objects.Allien;
-        public ally: objects.Ally;
+        public astronaut: objects.Astronaut;
         public angryplanet: objects.angryPlanet[] = [];
         // public planet: objects.Planet[] = [];
         public space: objects.Space;
@@ -39,8 +42,8 @@ module states {
             this.game.addChild(this.space);
 
             //Ally object
-            this.ally = new objects.Ally();
-            this.game.addChild(this.ally);
+            this.astronaut = new objects.Astronaut();
+            this.game.addChild(this.astronaut);
 
             //Allien object
             this.allien = new objects.Allien();
@@ -91,9 +94,10 @@ module states {
                             this.scoreboard.lives--;
                             this.angryplanet[this.checkArray].reset();
                         }
-                        //if (collider.name == "boss") {
-                        //  this.scoreboard.score += 100;
-                        // }
+                        if (collider.name == "astronaut") {
+                            this.scoreboard.score += 100;
+                            this.astronaut.reset();
+                         }
                     }
                     collider.isColliding = true;
                 } else {
@@ -106,7 +110,7 @@ module states {
 
             this.space.update();
 
-            this.ally.update();
+            this.astronaut.update();
 
             this.allien.update();
 
@@ -116,7 +120,7 @@ module states {
                 this.checkCollision(this.angryplanet[planets]);
             }
 
-            this.checkCollision(this.ally);
+            this.checkCollision(this.astronaut);
 
 
             this.scoreboard.update();

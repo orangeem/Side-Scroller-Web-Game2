@@ -6,6 +6,7 @@
 /// <reference path="../objects/allien.ts" />
 /// <reference path="../objects/planet.ts" />
 /// <reference path="../objects/angryplanet.ts" />
+/// <reference path="../objects/astronaut.ts" />
 /// <reference path="../objects/scoreboards.ts" />
 /// <reference path="../objects/button.ts" />
 /// <reference path="../objects/label.ts" />
@@ -23,8 +24,8 @@ var states;
             this.space = new objects.Space();
             this.game.addChild(this.space);
             //Ally object
-            this.ally = new objects.Ally();
-            this.game.addChild(this.ally);
+            this.astronaut = new objects.Astronaut();
+            this.game.addChild(this.astronaut);
             //Allien object
             this.allien = new objects.Allien();
             this.game.addChild(this.allien);
@@ -60,6 +61,10 @@ var states;
                             this.scoreboard.lives--;
                             this.angryplanet[this.checkArray].reset();
                         }
+                        if (collider.name == "astronaut") {
+                            this.scoreboard.score += 100;
+                            this.astronaut.reset();
+                        }
                     }
                     collider.isColliding = true;
                 }
@@ -70,14 +75,14 @@ var states;
         }; // checkCollision Method
         GamePlayLeveltwo.prototype.update = function () {
             this.space.update();
-            this.ally.update();
+            this.astronaut.update();
             this.allien.update();
             for (var planets = 3; planets >= 0; planets--) {
                 this.angryplanet[planets].update();
                 this.checkArray = planets;
                 this.checkCollision(this.angryplanet[planets]);
             }
-            this.checkCollision(this.ally);
+            this.checkCollision(this.astronaut);
             this.scoreboard.update();
             //Check Alien's lives
             if (this.scoreboard.lives < 1) {
