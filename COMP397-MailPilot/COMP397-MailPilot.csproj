@@ -64,7 +64,7 @@
     <Content Include="assets\images\ally.png" />
     <Content Include="assets\images\asteroid.png" />
     <Content Include="assets\images\bossAtlas.png" />
-    <Content Include="assets\images\bullet.PNG" />
+    <Content Include="assets\images\bullet.png" />
     <Content Include="assets\images\goBackBtn.png" />
     <Content Include="assets\images\instructionsBtn.png" />
     <Content Include="assets\images\pill.png" />
