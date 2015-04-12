@@ -5,6 +5,7 @@
 /// <reference path="../objects/space.ts" />
 /// <reference path="../objects/allien.ts" />
 /// <reference path="../objects/planet.ts" />
+/// <reference path="../objects/angryplanet.ts" />
 /// <reference path="../objects/scoreboards.ts" />
 /// <reference path="../objects/button.ts" />
 /// <reference path="../objects/label.ts" />
@@ -14,8 +15,8 @@ var states;
     // GAME PLAY STATE CLASS
     var GamePlayLeveltwo = (function () {
         function GamePlayLeveltwo() {
-            this.planet = [];
-            console.log("LEVEL 33");
+            this.angryplanet = [];
+            console.log("LEVEL 2");
             // Instantiate Game Container
             this.game = new createjs.Container();
             //Space object
@@ -28,14 +29,17 @@ var states;
             this.allien = new objects.Allien();
             this.game.addChild(this.allien);
             for (var planets = 3; planets >= 0; planets--) {
-                this.planet[planets] = new objects.Planet();
-                this.game.addChild(this.planet[planets]);
+                this.angryplanet[planets] = new objects.angryPlanet();
+                this.game.addChild(this.angryplanet[planets]);
             }
             // Instantiate Scoreboard
             this.scoreboard = new objects.ScoreBoard(this.game);
             //load previous score and lives
-            this.scoreboard.lives = currentLives;
-            this.scoreboard.score = currentScore;
+            // this.scoreboard.lives = currentLives;
+            //this.scoreboard.score = currentScore;
+            //----TO CHANGE!!!!!
+            this.scoreboard.lives = 3;
+            this.scoreboard.score = 300;
             // Add Game Container to Stage
             stage.addChild(this.game);
         } // Constructor
@@ -52,12 +56,9 @@ var states;
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
-                        if (collider.name == "planet") {
+                        if (collider.name == "angryplanet") {
                             this.scoreboard.lives--;
-                            this.planet[this.checkArray].reset();
-                        }
-                        if (collider.name == "boss") {
-                            this.scoreboard.score += 100;
+                            this.angryplanet[this.checkArray].reset();
                         }
                     }
                     collider.isColliding = true;
@@ -72,9 +73,9 @@ var states;
             this.ally.update();
             this.allien.update();
             for (var planets = 3; planets >= 0; planets--) {
-                this.planet[planets].update();
+                this.angryplanet[planets].update();
                 this.checkArray = planets;
-                this.checkCollision(this.planet[planets]);
+                this.checkCollision(this.angryplanet[planets]);
             }
             this.checkCollision(this.ally);
             this.scoreboard.update();

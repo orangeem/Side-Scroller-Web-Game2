@@ -62,7 +62,9 @@
     <Content Include="assets\images\allien.png" />
     <Content Include="assets\images\allienBig.png" />
     <Content Include="assets\images\ally.png" />
+    <Content Include="assets\images\angryplanet.png" />
     <Content Include="assets\images\asteroid.png" />
+    <Content Include="assets\images\astronaut.png" />
     <Content Include="assets\images\bossAtlas.png" />
     <Content Include="assets\images\bullet.png" />
     <Content Include="assets\images\goBackBtn.png" />
@@ -75,6 +77,7 @@
     <Content Include="assets\images\space2.png" />
     <Content Include="assets\images\space2h.png" />
     <Content Include="assets\images\space3.png" />
+    <Content Include="assets\images\spaceLevel2.jpg" />
     <Content Include="assets\images\Svillage.png" />
     <Content Include="assets\images\tryAgainBtn.png" />
     <Content Include="index.html" />
@@ -174,6 +177,7 @@
     <TypeScriptCompile Include="Scripts\game.ts" />
     <TypeScriptCompile Include="Scripts\keys.ts" />
     <TypeScriptCompile Include="Scripts\objects\ally.ts" />
+    <TypeScriptCompile Include="Scripts\objects\angryPlanet.ts" />
     <TypeScriptCompile Include="Scripts\objects\asteroid.ts" />
     <TypeScriptCompile Include="Scripts\objects\boss.ts" />
     <TypeScriptCompile Include="Scripts\objects\bullet.ts" />
