@@ -12,7 +12,6 @@
 /// <reference path="../objects/bullet.ts" />
 /// <reference path="../game.ts" />
 
-
 module states {
     // GAME PLAY STATE CLASS
     export class GamePlayLevelthree {
@@ -66,8 +65,8 @@ module states {
             this.scoreboard = new objects.ScoreBoard(this.game);
 
             //load previous score and lives
-     //       this.scoreboard.lives = currentLives;
-      //      this.scoreboard.score = currentScore;
+            this.scoreboard.lives = currentLives;
+            this.scoreboard.score = currentScore;
  
             // Add Game Container to Stage
             stage.addChild(this.game);
