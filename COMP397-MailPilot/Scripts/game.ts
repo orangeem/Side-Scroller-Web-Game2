@@ -63,7 +63,7 @@ var manifest = [
     { id: "space3", src: "assets/images/space3.png" },
     { id: "allien", src: "assets/images/allien.png" },
     { id: "planet", src: "assets/images/planet.png" },
-    { id: "bullet", src: "assets/images/bulebullet.png" },
+    { id: "bullet", src: "assets/images/bullet.png" },
     { id: "pill", src: "assets/images/pill.png" },
     { id: "allienBig", src: "assets/images/allienBig.png" },
     { id: "playButton", src: "assets/images/PlayBtn.png" },
