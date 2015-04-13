@@ -77,8 +77,10 @@ module objects {
         }
 
         pointReset() {
-            this.dx = Math.floor(Math.random() * 3 + 3);
-            this.dy = Math.floor(Math.random() * -6) + Math.floor(Math.random() * 6);
+            //this.dx = Math.floor(Math.random() * 3 + 3);
+            //this.dy = Math.floor(Math.random() * -6) + Math.floor(Math.random() * 6);
+            this.dx = 32 + (Math.random() * (canvasWidth - 74));
+            this.dy = 32 + (Math.random() * (canvasHeight - 100));
         }
 
         // PRIVATE METHODS 

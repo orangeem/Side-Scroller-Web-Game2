@@ -33,6 +33,7 @@
 /// <reference path="states/gameplayleveltwo.ts" />
 /// <reference path="states/gameplaylevelthree.ts" />
 /// <reference path="states/instructions.ts" />
+/// <reference path="states/won.ts" />
 
 // Global game Variables
 var canvas;
@@ -56,6 +57,7 @@ var gamePlayLevelthree: states.GamePlayLevelthree;
 var menu: states.Menu;
 var gameOver: states.GameOver;
 var instructions: states.Instructions;
+var wingame: states.Won;
 
 
 
@@ -183,6 +185,11 @@ function changeState(state){
             currentStateFunction = gamePlayLevelthree;
             break;
             
+        case constants.WINNING_STATE:
+            //instantiate Winning State
+            wingame = new states.Won();
+            currentStateFunction = wingame;
+            break;
     }
 }
 

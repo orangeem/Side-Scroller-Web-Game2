@@ -79,8 +79,13 @@ var states;
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "angryplanet") {
-                            this.scoreboard.lives--;
+                            this.scoreboard.allienHp -= 33.33;
                             this.angryplanet[this.checkArray].reset();
+                            if (this.scoreboard.allienHp <= 10) {
+                                this.scoreboard.lives--;
+                                this.scoreboard.allienHp = 100;
+                                this.angryplanet[this.checkArray].reset();
+                            }
                         }
                         if (collider.name == "astronaut") {
                             this.scoreboard.score += 100;
@@ -134,6 +139,7 @@ var states;
             //check score
             if (this.scoreboard.score >= 600) {
                 this.game.removeAllChildren();
+                createjs.Sound.stop();
                 stage.removeChild(this.game);
                 currentScore = this.scoreboard.score;
                 currentLives = this.scoreboard.lives;

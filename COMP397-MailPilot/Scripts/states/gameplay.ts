@@ -73,9 +73,15 @@ module states {
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "asteroid") {
-                            this.scoreboard.lives--;
-                            this.scoreboard.allienHp -= 30;
-                            this.asteroids[this.checkArray].reset();                            
+
+                            this.scoreboard.allienHp -= 33.33;
+                            this.asteroids[this.checkArray].reset();
+
+                            if (this.scoreboard.allienHp < 1) {
+                                this.scoreboard.lives--;
+                                this.scoreboard.allienHp = 100;
+                                this.asteroids[this.checkArray].reset();
+                            }                           
                         }
                         if (collider.name == "ally") {
                             this.scoreboard.score += 100;
@@ -113,14 +119,14 @@ module states {
             if (this.scoreboard.score >= 300)
             {
                 this.game.removeAllChildren();
+                createjs.Sound.stop();
                 stage.removeChild(this.game);
                 currentScore = this.scoreboard.score;
                 currentLives = this.scoreboard.lives;
                 currentState = constants.PLAY_STATE_LEVEL_2;
-                stateChanged = true
+                stateChanged = true;
 
                 this.fadeOut(this.game, 10000);
-
                 console.log("Out of fade!");
             }
 
@@ -135,8 +141,17 @@ module states {
                 
                 
                 this.fadeOut(this.game, 10000);
-                
                 console.log("Out of fade!");
+
+                /* 
+                this.game.removeAllChildren();
+                stage.removeChild(this.game);
+                currentState = constants.GAME_OVER_STATE;
+                stateChanged = true;
+                */
+
+
+
                 /**
                 var duration = 3000;
                 for (var i = 0; i <= 1; i += 0.01) {
@@ -147,12 +162,7 @@ module states {
                
                 //this.game.alpha = 0.3;
                 //alpha(opacity=' + (Opa * 100)
-               /* 
-                this.game.removeAllChildren();
-                stage.removeChild(this.game);
-                currentState = constants.GAME_OVER_STATE;
-                stateChanged = true;
-                */
+     
             }
 
             stage.update(); // Refreshes our stage

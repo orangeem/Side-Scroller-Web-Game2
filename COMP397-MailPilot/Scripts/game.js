@@ -27,6 +27,7 @@
 /// <reference path="states/gameplayleveltwo.ts" />
 /// <reference path="states/gameplaylevelthree.ts" />
 /// <reference path="states/instructions.ts" />
+/// <reference path="states/won.ts" />
 // Global game Variables
 var canvas;
 var stage;
@@ -47,6 +48,7 @@ var gamePlayLevelthree;
 var menu;
 var gameOver;
 var instructions;
+var wingame;
 var manifest = [
     { id: "asteroid", src: "assets/images/asteroid.png" },
     { id: "ally", src: "assets/images/ally.png" },
@@ -152,6 +154,11 @@ function changeState(state) {
             //instantiate level 3
             gamePlayLevelthree = new states.GamePlayLevelthree();
             currentStateFunction = gamePlayLevelthree;
+            break;
+        case constants.WINNING_STATE:
+            //instantiate Winning State
+            wingame = new states.Won();
+            currentStateFunction = wingame;
             break;
     }
 }

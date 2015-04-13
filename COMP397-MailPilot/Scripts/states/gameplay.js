@@ -51,9 +51,13 @@ var states;
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "asteroid") {
-                            this.scoreboard.lives--;
-                            this.scoreboard.allienHp -= 30;
+                            this.scoreboard.allienHp -= 33.33;
                             this.asteroids[this.checkArray].reset();
+                            if (this.scoreboard.allienHp < 1) {
+                                this.scoreboard.lives--;
+                                this.scoreboard.allienHp = 100;
+                                this.asteroids[this.checkArray].reset();
+                            }
                         }
                         if (collider.name == "ally") {
                             this.scoreboard.score += 100;
@@ -81,6 +85,7 @@ var states;
             //check score
             if (this.scoreboard.score >= 300) {
                 this.game.removeAllChildren();
+                createjs.Sound.stop();
                 stage.removeChild(this.game);
                 currentScore = this.scoreboard.score;
                 currentLives = this.scoreboard.lives;
