@@ -73,6 +73,9 @@ var manifest = [
     { id: "bulletsound", src: "assets/audio/bullet.ogg" },
     { id: "collision", src: "assets/audio/twang.ogg" },
     { id: "bite", src: "assets/audio/bite.ogg" },
+    { id: "LaserShoot", src: "assets/audio/LaserShoot.ogg" },
+    { id: "Explosion66", src: "assets/audio/Explosion66.ogg" },
+    { id: "scream", src: "assets/audio/scream.ogg" },
     { id: "explosion", src: "assets/audio/Explosion.ogg" }
 ];
 //Preloading sounds and images

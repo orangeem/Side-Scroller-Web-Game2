@@ -57,7 +57,7 @@ var states;
                 console.log(this.allien.x);
                 constants.BULLET_X = this.allien.x;
                 constants.BULLET_Y = this.allien.y;
-                createjs.Sound.play("bulletsound");
+                createjs.Sound.play("LaserShoot");
                 this.redbullet.setPoint();
                 constants.BULLET_FLAG = true;
             }
@@ -85,6 +85,7 @@ var states;
                             this.scoreboard.score += 100;
                             this.astronaut.reset();
                         }
+                        createjs.Sound.play("Explosion");
                     }
                     collider.isColliding = true;
                 }
@@ -95,13 +96,14 @@ var states;
                                 this.scoreboard.score += 50;
                                 this.angryplanet[this.checkArray].reset();
                                 console.log("colliding bullet - angryplanet");
+                                createjs.Sound.play("Explosion66");
                             }
                             if (collider.name == "astronaut") {
                                 this.scoreboard.score -= 50;
                                 this.astronaut.reset();
                                 console.log("colliding bullet - astronaut");
+                                createjs.Sound.play("scream");
                             }
-                            createjs.Sound.play("bird");
                             this.redbullet.destroy();
                         }
                         collider.isCollidingBullet = true;
