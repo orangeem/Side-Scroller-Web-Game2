@@ -16,6 +16,8 @@
 /// <reference path="objects/space.ts" />
 /// <reference path="objects/space3.ts" />
 /// <reference path="objects/bullet.ts" />
+/// <reference path="objects/redbullet.ts" />
+/// <reference path="objects/space2.ts" />
 /// <reference path="objects/scoreboards.ts" />
 /// <reference path="objects/button.ts" />
 /// <reference path="objects/label.ts" />
@@ -55,6 +57,10 @@ var manifest = [
     { id: "bullet", src: "assets/images/bullet.png" },
     { id: "pill", src: "assets/images/pill.png" },
     { id: "allienBig", src: "assets/images/allienBig.png" },
+    { id: "spaceLevel2", src: "assets/images/spaceLevel2.jpg" },
+    { id: "astronaut", src: "assets/images/astronaut.png" },
+    { id: "angryplanet", src: "assets/images/angryplanet.png" },
+    { id: "redbullet", src: "assets/images/red_bullet.png" },
     { id: "playButton", src: "assets/images/PlayBtn.png" },
     { id: "tryAgainButton", src: "assets/images/tryAgainBtn.png" },
     { id: "instructionButton", src: "assets/images/instructionsBtn.png" },
@@ -67,6 +73,9 @@ var manifest = [
     { id: "bulletsound", src: "assets/audio/bullet.ogg" },
     { id: "collision", src: "assets/audio/twang.ogg" },
     { id: "bite", src: "assets/audio/bite.ogg" },
+    { id: "LaserShoot", src: "assets/audio/LaserShoot.ogg" },
+    { id: "Explosion66", src: "assets/audio/Explosion66.ogg" },
+    { id: "scream", src: "assets/audio/scream.ogg" },
     { id: "explosion", src: "assets/audio/Explosion.ogg" }
 ];
 //Preloading sounds and images

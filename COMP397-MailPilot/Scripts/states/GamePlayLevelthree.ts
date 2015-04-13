@@ -227,6 +227,7 @@ module states {
             this.scoreboard.update();
             
 
+
             //Check Alien's lives
             if (this.scoreboard.lives < 1 || this.scoreboard.bossHp < 25) {
                 this.scoreboard.active = false;

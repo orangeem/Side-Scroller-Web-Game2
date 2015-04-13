@@ -1,10 +1,17 @@
-﻿﻿/// <reference path="../constants.ts" />
+﻿
+﻿/// <reference path="../constants.ts" />
 /// <reference path="../objects/gameobject.ts" />
 /// <reference path="../objects/ally.ts" />
 /// <reference path="../objects/boss.ts" />
 /// <reference path="../objects/space.ts" />
+
 /// <reference path="../objects/allien.ts" />
 /// <reference path="../objects/planet.ts" />
+/// <reference path="../objects/angryplanet.ts" />
+/// <reference path="../objects/space2.ts" />
+/// <reference path="../objects/astronaut.ts" />
+/// <reference path="../objects/redbullet.ts" />
+
 /// <reference path="../objects/scoreboards.ts" />
 /// <reference path="../objects/button.ts" />
 /// <reference path="../objects/label.ts" />
@@ -18,33 +25,40 @@ module states {
         public game: createjs.Container;
         public scoreboard: objects.ScoreBoard;
         public allien: objects.Allien;
-        public ally: objects.Ally;
-        public planet: objects.Planet[] = [];
-        public space: objects.Space;
+        public astronaut: objects.Astronaut;
+        public angryplanet: objects.angryPlanet[] = [];
+        public space2: objects.Space2;
+        public redbullet: objects.redBullet;
         public checkArray: number;
 
         constructor() {
-            console.log("LEVEL 33");
+            console.log("LEVEL 2");
             // Instantiate Game Container
             this.game = new createjs.Container();
              
-
             //Space object
-            this.space = new objects.Space();
-            this.game.addChild(this.space);
+            this.space2 = new objects.Space2();
+            this.game.addChild(this.space2);
 
             //Ally object
-            this.ally = new objects.Ally();
-            this.game.addChild(this.ally);
+            this.astronaut = new objects.Astronaut();
+            this.game.addChild(this.astronaut);
 
             //Allien object
             this.allien = new objects.Allien();
             this.game.addChild(this.allien);
 
+            //bullet object
+            this.redbullet = new objects.redBullet();
+            this.game.addChild(this.redbullet);
+
+            //bullet mouse event listener
+            this.game.addEventListener("click", this.shotBullet2.bind(this), false);
+
             //Planet object
             for (var planets = 3; planets >= 0; planets--) {
-                this.planet[planets] = new objects.Planet();
-                this.game.addChild(this.planet[planets]);
+                this.angryplanet[planets] = new objects.angryPlanet();
+                this.game.addChild(this.angryplanet[planets]);
             }
 
 
@@ -54,12 +68,32 @@ module states {
             //load previous score and lives
             this.scoreboard.lives = currentLives;
             this.scoreboard.score = currentScore;
+
+            //----TO DELETE!!!!!
+
+            //this.scoreboard.lives = 3;
+            //this.scoreboard.score = 300;
            
 
             // Add Game Container to Stage
             stage.addChild(this.game);
         } // Constructor
 
+        //bullet mouse event
+        public shotBullet2() {
+
+            if (constants.BULLET_FLAG == false) {
+
+                console.log(this.allien.x);
+                constants.BULLET_X = this.allien.x;
+                constants.BULLET_Y = this.allien.y;
+                createjs.Sound.play("LaserShoot");
+                this.redbullet.setPoint();
+
+                constants.BULLET_FLAG = true;
+
+            }
+        }
 
         // DISTANCE CHECKING METHOD
         public distance(p1: createjs.Point, p2: createjs.Point): number {
@@ -70,47 +104,91 @@ module states {
         public checkCollision(collider: objects.GameObject) {
             if (this.scoreboard.active) {
                 var alienPosition: createjs.Point = new createjs.Point(this.allien.x, this.allien.y);
+                var bulletPosition: createjs.Point = new createjs.Point(this.redbullet.x, this.redbullet.y);
                 var objectPosition: createjs.Point = new createjs.Point(collider.x, collider.y);
                 var theDistance = this.distance(alienPosition, objectPosition);
+                var theBulletDistance = this.distance(bulletPosition, objectPosition);
 
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
 
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
-                        if (collider.name == "planet") {
+                        if (collider.name == "angryplanet") {
                             this.scoreboard.lives--;
-                            this.planet[this.checkArray].reset();
+                            this.angryplanet[this.checkArray].reset();
                         }
-                        if (collider.name == "boss") {
+                        if (collider.name == "astronaut") {
                             this.scoreboard.score += 100;
-
+                            this.astronaut.reset();
                         }
+                        createjs.Sound.play("Explosion");
                     }
                     collider.isColliding = true;
-                } else {
+                }
+                else if (theBulletDistance < ((this.redbullet.height * 0.5) + (collider.height * 0.5))) {
+                    if(this.redbullet.x > 0){
+                    if (collider.isCollidingBullet != true) {
+                        if (collider.name == "angryplanet") {
+                            this.scoreboard.score += 50;
+                            this.angryplanet[this.checkArray].reset();
+                            console.log("colliding bullet - angryplanet");
+                            createjs.Sound.play("Explosion66");
+                        }
+                        if (collider.name == "astronaut") {
+                            this.scoreboard.score -= 50;
+                            this.astronaut.reset();
+                            console.log("colliding bullet - astronaut");
+                            createjs.Sound.play("scream");
+                        }
+                        
+
+                        this.redbullet.destroy();
+                    }
+                    collider.isCollidingBullet = true;
+                }
+                }
+                else {
                     collider.isColliding = false;
+                    collider.isCollidingBullet = false;
                 }
             }
         } // checkCollision Method
 
         public update() {
 
-            this.space.update();
+            this.space2.update();
 
-            this.ally.update();
+            this.astronaut.update();
 
             this.allien.update();
 
+            //bullet update
+            if (constants.BULLET_FLAG == true) {
+                this.redbullet.update();
+
+            } 
+
             for (var planets = 3; planets >= 0; planets--) {
-                this.planet[planets].update();
+                this.angryplanet[planets].update();
                 this.checkArray = planets;
-                this.checkCollision(this.planet[planets]);
+                this.checkCollision(this.angryplanet[planets]);
             }
 
-            this.checkCollision(this.ally);
+            this.checkCollision(this.astronaut);
 
 
             this.scoreboard.update();
+
+            //check score
+
+            if (this.scoreboard.score >= 600) {
+                this.game.removeAllChildren();
+                stage.removeChild(this.game);
+                currentScore = this.scoreboard.score;
+                currentLives = this.scoreboard.lives;
+                currentState = constants.PLAY_STATE_LEVEL_3;
+                stateChanged = true
+            }
 
             //Check Alien's lives
             if (this.scoreboard.lives < 1) {

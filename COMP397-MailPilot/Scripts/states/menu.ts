@@ -7,6 +7,7 @@
 /// <reference path="../objects/asteroid.ts" />
 /// <reference path="../objects/button.ts" />
 /// <reference path="../objects/label.ts" />
+/// <reference path="../objects/angryplanet.ts" />
 
 /// <reference path="../objects/scoreboards.ts" />
 
@@ -80,6 +81,7 @@ module states {
                 this.game.removeAllChildren();
                 stage.removeChild(this.game);
                 currentState = constants.PLAY_STATE;
+                //currentState = constants.PLAY_STATE_LEVEL_2;
                 stateChanged = true;
             }
             //if instruction button clicked -> change state to INSTRUCTION state

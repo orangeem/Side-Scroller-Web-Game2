@@ -5,6 +5,10 @@
 /// <reference path="../objects/space.ts" />
 /// <reference path="../objects/allien.ts" />
 /// <reference path="../objects/planet.ts" />
+/// <reference path="../objects/angryplanet.ts" />
+/// <reference path="../objects/space2.ts" />
+/// <reference path="../objects/astronaut.ts" />
+/// <reference path="../objects/redbullet.ts" />
 /// <reference path="../objects/scoreboards.ts" />
 /// <reference path="../objects/button.ts" />
 /// <reference path="../objects/label.ts" />
@@ -14,31 +18,50 @@ var states;
     // GAME PLAY STATE CLASS
     var GamePlayLeveltwo = (function () {
         function GamePlayLeveltwo() {
-            this.planet = [];
-            console.log("LEVEL 33");
+            this.angryplanet = [];
+            console.log("LEVEL 2");
             // Instantiate Game Container
             this.game = new createjs.Container();
             //Space object
-            this.space = new objects.Space();
-            this.game.addChild(this.space);
+            this.space2 = new objects.Space2();
+            this.game.addChild(this.space2);
             //Ally object
-            this.ally = new objects.Ally();
-            this.game.addChild(this.ally);
+            this.astronaut = new objects.Astronaut();
+            this.game.addChild(this.astronaut);
             //Allien object
             this.allien = new objects.Allien();
             this.game.addChild(this.allien);
+            //bullet object
+            this.redbullet = new objects.redBullet();
+            this.game.addChild(this.redbullet);
+            //bullet mouse event listener
+            this.game.addEventListener("click", this.shotBullet2.bind(this), false);
             for (var planets = 3; planets >= 0; planets--) {
-                this.planet[planets] = new objects.Planet();
-                this.game.addChild(this.planet[planets]);
+                this.angryplanet[planets] = new objects.angryPlanet();
+                this.game.addChild(this.angryplanet[planets]);
             }
             // Instantiate Scoreboard
             this.scoreboard = new objects.ScoreBoard(this.game);
             //load previous score and lives
             this.scoreboard.lives = currentLives;
             this.scoreboard.score = currentScore;
+            //----TO DELETE!!!!!
+            //this.scoreboard.lives = 3;
+            //this.scoreboard.score = 300;
             // Add Game Container to Stage
             stage.addChild(this.game);
         } // Constructor
+        //bullet mouse event
+        GamePlayLeveltwo.prototype.shotBullet2 = function () {
+            if (constants.BULLET_FLAG == false) {
+                console.log(this.allien.x);
+                constants.BULLET_X = this.allien.x;
+                constants.BULLET_Y = this.allien.y;
+                createjs.Sound.play("LaserShoot");
+                this.redbullet.setPoint();
+                constants.BULLET_FLAG = true;
+            }
+        };
         // DISTANCE CHECKING METHOD
         GamePlayLeveltwo.prototype.distance = function (p1, p2) {
             return Math.floor(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2)));
@@ -47,37 +70,75 @@ var states;
         GamePlayLeveltwo.prototype.checkCollision = function (collider) {
             if (this.scoreboard.active) {
                 var alienPosition = new createjs.Point(this.allien.x, this.allien.y);
+                var bulletPosition = new createjs.Point(this.redbullet.x, this.redbullet.y);
                 var objectPosition = new createjs.Point(collider.x, collider.y);
                 var theDistance = this.distance(alienPosition, objectPosition);
+                var theBulletDistance = this.distance(bulletPosition, objectPosition);
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
-                        if (collider.name == "planet") {
+                        if (collider.name == "angryplanet") {
                             this.scoreboard.lives--;
-                            this.planet[this.checkArray].reset();
+                            this.angryplanet[this.checkArray].reset();
                         }
-                        if (collider.name == "boss") {
+                        if (collider.name == "astronaut") {
                             this.scoreboard.score += 100;
+                            this.astronaut.reset();
                         }
+                        createjs.Sound.play("Explosion");
                     }
                     collider.isColliding = true;
                 }
+                else if (theBulletDistance < ((this.redbullet.height * 0.5) + (collider.height * 0.5))) {
+                    if (this.redbullet.x > 0) {
+                        if (collider.isCollidingBullet != true) {
+                            if (collider.name == "angryplanet") {
+                                this.scoreboard.score += 50;
+                                this.angryplanet[this.checkArray].reset();
+                                console.log("colliding bullet - angryplanet");
+                                createjs.Sound.play("Explosion66");
+                            }
+                            if (collider.name == "astronaut") {
+                                this.scoreboard.score -= 50;
+                                this.astronaut.reset();
+                                console.log("colliding bullet - astronaut");
+                                createjs.Sound.play("scream");
+                            }
+                            this.redbullet.destroy();
+                        }
+                        collider.isCollidingBullet = true;
+                    }
+                }
                 else {
                     collider.isColliding = false;
+                    collider.isCollidingBullet = false;
                 }
             }
         }; // checkCollision Method
         GamePlayLeveltwo.prototype.update = function () {
-            this.space.update();
-            this.ally.update();
+            this.space2.update();
+            this.astronaut.update();
             this.allien.update();
-            for (var planets = 3; planets >= 0; planets--) {
-                this.planet[planets].update();
-                this.checkArray = planets;
-                this.checkCollision(this.planet[planets]);
+            //bullet update
+            if (constants.BULLET_FLAG == true) {
+                this.redbullet.update();
             }
-            this.checkCollision(this.ally);
+            for (var planets = 3; planets >= 0; planets--) {
+                this.angryplanet[planets].update();
+                this.checkArray = planets;
+                this.checkCollision(this.angryplanet[planets]);
+            }
+            this.checkCollision(this.astronaut);
             this.scoreboard.update();
+            //check score
+            if (this.scoreboard.score >= 600) {
+                this.game.removeAllChildren();
+                stage.removeChild(this.game);
+                currentScore = this.scoreboard.score;
+                currentLives = this.scoreboard.lives;
+                currentState = constants.PLAY_STATE_LEVEL_3;
+                stateChanged = true;
+            }
             //Check Alien's lives
             if (this.scoreboard.lives < 1) {
                 this.scoreboard.active = false;
