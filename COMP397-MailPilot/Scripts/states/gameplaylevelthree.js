@@ -42,8 +42,8 @@ var states;
             // Instantiate Scoreboard
             this.scoreboard = new objects.ScoreBoard(this.game);
             //load previous score and lives
-            //       this.scoreboard.lives = currentLives;
-            //     this.scoreboard.score = currentScore;
+            this.scoreboard.lives = currentLives;
+            this.scoreboard.score = currentScore;
             // Add Game Container to Stage
             stage.addChild(this.game);
         } // Constructor

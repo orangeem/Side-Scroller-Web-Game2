@@ -65,8 +65,8 @@ module states {
             this.scoreboard = new objects.ScoreBoard(this.game);
 
             //load previous score and lives
-     //       this.scoreboard.lives = currentLives;
-       //     this.scoreboard.score = currentScore;
+            this.scoreboard.lives = currentLives;
+            this.scoreboard.score = currentScore;
  
             // Add Game Container to Stage
             stage.addChild(this.game);
@@ -226,6 +226,7 @@ module states {
             
             this.scoreboard.update();
             
+
 
             //Check Alien's lives
             if (this.scoreboard.lives < 1 || this.scoreboard.bossHp < 25) {

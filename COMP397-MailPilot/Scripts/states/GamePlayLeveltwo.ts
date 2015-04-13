@@ -66,13 +66,13 @@ module states {
             this.scoreboard = new objects.ScoreBoard(this.game);
 
             //load previous score and lives
-            // this.scoreboard.lives = currentLives;
-            //this.scoreboard.score = currentScore;
+            this.scoreboard.lives = currentLives;
+            this.scoreboard.score = currentScore;
 
-            //----TO CHANGE!!!!!
+            //----TO DELETE!!!!!
 
-            this.scoreboard.lives = 3;
-            this.scoreboard.score = 300;
+            //this.scoreboard.lives = 3;
+            //this.scoreboard.score = 300;
            
 
             // Add Game Container to Stage
@@ -178,6 +178,17 @@ module states {
 
 
             this.scoreboard.update();
+
+            //check score
+
+            if (this.scoreboard.score >= 600) {
+                this.game.removeAllChildren();
+                stage.removeChild(this.game);
+                currentScore = this.scoreboard.score;
+                currentLives = this.scoreboard.lives;
+                currentState = constants.PLAY_STATE_LEVEL_3;
+                stateChanged = true
+            }
 
             //Check Alien's lives
             if (this.scoreboard.lives < 1) {
