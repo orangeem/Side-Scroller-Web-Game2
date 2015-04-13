@@ -8,6 +8,7 @@
 /// <reference path="../objects/angryplanet.ts" />
 /// <reference path="../objects/space2.ts" />
 /// <reference path="../objects/astronaut.ts" />
+/// <reference path="../objects/redbullet.ts" />
 /// <reference path="../objects/scoreboards.ts" />
 /// <reference path="../objects/button.ts" />
 /// <reference path="../objects/label.ts" />
@@ -30,6 +31,11 @@ var states;
             //Allien object
             this.allien = new objects.Allien();
             this.game.addChild(this.allien);
+            //bullet object
+            this.redbullet = new objects.redBullet();
+            this.game.addChild(this.redbullet);
+            //bullet mouse event listener
+            this.game.addEventListener("click", this.shotBullet2.bind(this), false);
             for (var planets = 3; planets >= 0; planets--) {
                 this.angryplanet[planets] = new objects.angryPlanet();
                 this.game.addChild(this.angryplanet[planets]);
@@ -45,6 +51,17 @@ var states;
             // Add Game Container to Stage
             stage.addChild(this.game);
         } // Constructor
+        //bullet mouse event
+        GamePlayLeveltwo.prototype.shotBullet2 = function () {
+            if (constants.BULLET_FLAG == false) {
+                console.log(this.allien.x);
+                constants.BULLET_X = this.allien.x;
+                constants.BULLET_Y = this.allien.y;
+                createjs.Sound.play("bulletsound");
+                this.redbullet.setPoint();
+                constants.BULLET_FLAG = true;
+            }
+        };
         // DISTANCE CHECKING METHOD
         GamePlayLeveltwo.prototype.distance = function (p1, p2) {
             return Math.floor(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2)));
@@ -53,8 +70,10 @@ var states;
         GamePlayLeveltwo.prototype.checkCollision = function (collider) {
             if (this.scoreboard.active) {
                 var alienPosition = new createjs.Point(this.allien.x, this.allien.y);
+                var bulletPosition = new createjs.Point(this.redbullet.x, this.redbullet.y);
                 var objectPosition = new createjs.Point(collider.x, collider.y);
                 var theDistance = this.distance(alienPosition, objectPosition);
+                var theBulletDistance = this.distance(bulletPosition, objectPosition);
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
@@ -69,8 +88,28 @@ var states;
                     }
                     collider.isColliding = true;
                 }
+                else if (theBulletDistance < ((this.redbullet.height * 0.5) + (collider.height * 0.5))) {
+                    if (this.redbullet.x > 0) {
+                        if (collider.isCollidingBullet != true) {
+                            if (collider.name == "angryplanet") {
+                                this.scoreboard.score += 50;
+                                this.angryplanet[this.checkArray].reset();
+                                console.log("colliding bullet - angryplanet");
+                            }
+                            if (collider.name == "astronaut") {
+                                this.scoreboard.score -= 50;
+                                this.astronaut.reset();
+                                console.log("colliding bullet - astronaut");
+                            }
+                            createjs.Sound.play("bird");
+                            this.redbullet.destroy();
+                        }
+                        collider.isCollidingBullet = true;
+                    }
+                }
                 else {
                     collider.isColliding = false;
+                    collider.isCollidingBullet = false;
                 }
             }
         }; // checkCollision Method
@@ -78,6 +117,10 @@ var states;
             this.space2.update();
             this.astronaut.update();
             this.allien.update();
+            //bullet update
+            if (constants.BULLET_FLAG == true) {
+                this.redbullet.update();
+            }
             for (var planets = 3; planets >= 0; planets--) {
                 this.angryplanet[planets].update();
                 this.checkArray = planets;

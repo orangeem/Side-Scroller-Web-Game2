@@ -188,6 +188,7 @@
     <TypeScriptCompile Include="Scripts\objects\pill.ts" />
     <TypeScriptCompile Include="Scripts\objects\planet.ts" />
     <TypeScriptCompile Include="Scripts\objects\redbird.ts" />
+    <TypeScriptCompile Include="Scripts\objects\redbullet.ts" />
     <TypeScriptCompile Include="Scripts\objects\scoreboards.ts" />
     <TypeScriptCompile Include="Scripts\objects\space.ts" />
     <TypeScriptCompile Include="Scripts\objects\allien.ts" />

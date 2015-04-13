@@ -5,6 +5,7 @@
         public width: number;
         public height: number;
         public isColliding: boolean = false;
+        public isCollidingBullet: boolean = false;
         public sound: string;
         public name: string;
         protected _dy: number;

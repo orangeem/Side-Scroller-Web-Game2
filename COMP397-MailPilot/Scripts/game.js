@@ -16,6 +16,7 @@
 /// <reference path="objects/space.ts" />
 /// <reference path="objects/space3.ts" />
 /// <reference path="objects/bullet.ts" />
+/// <reference path="objects/redbullet.ts" />
 /// <reference path="objects/space2.ts" />
 /// <reference path="objects/scoreboards.ts" />
 /// <reference path="objects/button.ts" />
@@ -59,6 +60,7 @@ var manifest = [
     { id: "spaceLevel2", src: "assets/images/spaceLevel2.jpg" },
     { id: "astronaut", src: "assets/images/astronaut.png" },
     { id: "angryplanet", src: "assets/images/angryplanet.png" },
+    { id: "redbullet", src: "assets/images/red_bullet.png" },
     { id: "playButton", src: "assets/images/PlayBtn.png" },
     { id: "tryAgainButton", src: "assets/images/tryAgainBtn.png" },
     { id: "instructionButton", src: "assets/images/instructionsBtn.png" },

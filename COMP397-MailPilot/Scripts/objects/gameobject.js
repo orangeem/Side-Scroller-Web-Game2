@@ -13,6 +13,7 @@ var objects;
         function GameObject(assetString) {
             _super.call(this, assetLoader.getResult(assetString));
             this.isColliding = false;
+            this.isCollidingBullet = false;
             this.name = assetString;
             this.width = this.getBounds().width;
             this.height = this.getBounds().height;
