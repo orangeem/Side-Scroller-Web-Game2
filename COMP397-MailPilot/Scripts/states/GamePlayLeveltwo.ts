@@ -77,6 +77,7 @@ module states {
 
             // Add Game Container to Stage
             stage.addChild(this.game);
+            this.fadeIn(this.game, 5000);
         } // Constructor
 
         //bullet mouse event
@@ -207,6 +208,18 @@ module states {
             stage.update(); // Refreshes our stage
 
         } // Update Method
+
+        public fadeIn(elem, time) {
+            var startOpacity = elem.alpha || 0;
+            elem.alpha = startOpacity;
+
+            (function go() {
+                elem.alpha += startOpacity / (time / 100);
+
+                if (elem.alpha > 0)
+                    setTimeout(go, 100);
+            })();
+        }
 
     } // GamePlay Class
 

@@ -61,6 +61,7 @@ var manifest = [
     { id: "astronaut", src: "assets/images/astronaut.png" },
     { id: "angryplanet", src: "assets/images/angryplanet.png" },
     { id: "redbullet", src: "assets/images/red_bullet.png" },
+    { id: "blcksquare", src: "assets/images/blcksquare.jpg" },
     { id: "playButton", src: "assets/images/PlayBtn.png" },
     { id: "tryAgainButton", src: "assets/images/tryAgainBtn.png" },
     { id: "instructionButton", src: "assets/images/instructionsBtn.png" },
@@ -88,6 +89,8 @@ function Preload() {
 function init() {
     canvas = document.getElementById("canvas");
     stage = new createjs.Stage(canvas);
+    var blacksquare = new createjs.Bitmap(assetLoader.getResult("blcksquare"));
+    stage.addChild(blacksquare);
     stage.enableMouseOver(20); // Enable mouse events
     createjs.Ticker.setFPS(60); // 60 frames per second
     createjs.Ticker.addEventListener("tick", gameLoop);

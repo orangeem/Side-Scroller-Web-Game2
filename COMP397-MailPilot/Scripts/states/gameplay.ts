@@ -21,11 +21,14 @@ module states {
         public asteroids: objects.Asteroid[] = [];
         public space: objects.Space;
         public checkArray: number;
+        public blacksquare: createjs.Bitmap;
 
         constructor() {
             // Instantiate Game Container
             this.game = new createjs.Container();
              
+            this.blacksquare = new createjs.Bitmap(assetLoader.getResult("blcksquare"));
+            //this.game.addChild(this.blacksquare);
 
             //Space object
             this.space = new objects.Space();
@@ -50,6 +53,7 @@ module states {
             this.scoreboard = new objects.ScoreBoard(this.game);
 
             // Add Game Container to Stage
+            //stage.addChild(this.blacksquare);
             stage.addChild(this.game);
         } // Constructor
 
@@ -114,6 +118,10 @@ module states {
                 currentLives = this.scoreboard.lives;
                 currentState = constants.PLAY_STATE_LEVEL_2;
                 stateChanged = true
+
+                this.fadeOut(this.game, 10000);
+
+                console.log("Out of fade!");
             }
 
             //Check Alien's lives
@@ -124,15 +132,53 @@ module states {
                 if (currentScore > highScore) {
                     highScore = currentScore;
                 }
+                
+                
+                this.fadeOut(this.game, 10000);
+                
+                console.log("Out of fade!");
+                /**
+                var duration = 3000;
+                for (var i = 0; i <= 1; i += 0.01) {
+                    //setTimeout(SetOpa(i), i * duration);
+                    setTimeout(() => { this.SetOpa(i); }, 3000)
+                    //setTimeout(c
+                }*/
+               
+                //this.game.alpha = 0.3;
+                //alpha(opacity=' + (Opa * 100)
+               /* 
                 this.game.removeAllChildren();
                 stage.removeChild(this.game);
                 currentState = constants.GAME_OVER_STATE;
                 stateChanged = true;
+                */
             }
 
             stage.update(); // Refreshes our stage
 
         } // Update Method
+
+        public SetOpa(Opa)
+        {
+            this.game.alpha = Opa;
+            console.log(Opa);
+          //alpha(opacity=' + (Opa * 100)
+        }
+
+        public fadeOut(elem, time) {
+        var startOpacity = elem.alpha || 1;
+        elem.alpha = startOpacity;
+
+        (function go() {
+            console.log("Inside of fade!");
+            elem.alpha -= startOpacity / (time / 100);
+
+            if(elem.alpha > 0)
+                setTimeout(go, 100);
+        })();
+    }
+       
 
     } // GamePlay Class
 

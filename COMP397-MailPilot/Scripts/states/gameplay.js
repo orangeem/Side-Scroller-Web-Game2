@@ -16,6 +16,8 @@ var states;
             this.asteroids = [];
             // Instantiate Game Container
             this.game = new createjs.Container();
+            this.blacksquare = new createjs.Bitmap(assetLoader.getResult("blcksquare"));
+            //this.game.addChild(this.blacksquare);
             //Space object
             this.space = new objects.Space();
             this.game.addChild(this.space);
@@ -32,6 +34,7 @@ var states;
             // Instantiate Scoreboard
             this.scoreboard = new objects.ScoreBoard(this.game);
             // Add Game Container to Stage
+            //stage.addChild(this.blacksquare);
             stage.addChild(this.game);
         } // Constructor
         // DISTANCE CHECKING METHOD
@@ -83,6 +86,8 @@ var states;
                 currentLives = this.scoreboard.lives;
                 currentState = constants.PLAY_STATE_LEVEL_2;
                 stateChanged = true;
+                this.fadeOut(this.game, 10000);
+                console.log("Out of fade!");
             }
             //Check Alien's lives
             if (this.scoreboard.lives < 1) {
@@ -92,13 +97,26 @@ var states;
                 if (currentScore > highScore) {
                     highScore = currentScore;
                 }
-                this.game.removeAllChildren();
-                stage.removeChild(this.game);
-                currentState = constants.GAME_OVER_STATE;
-                stateChanged = true;
+                this.fadeOut(this.game, 10000);
+                console.log("Out of fade!");
             }
             stage.update(); // Refreshes our stage
         }; // Update Method
+        GamePlay.prototype.SetOpa = function (Opa) {
+            this.game.alpha = Opa;
+            console.log(Opa);
+            //alpha(opacity=' + (Opa * 100)
+        };
+        GamePlay.prototype.fadeOut = function (elem, time) {
+            var startOpacity = elem.alpha || 1;
+            elem.alpha = startOpacity;
+            (function go() {
+                console.log("Inside of fade!");
+                elem.alpha -= startOpacity / (time / 100);
+                if (elem.alpha > 0)
+                    setTimeout(go, 100);
+            })();
+        };
         return GamePlay;
     })();
     states.GamePlay = GamePlay; // GamePlay Class

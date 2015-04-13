@@ -65,6 +65,7 @@
     <Content Include="assets\images\angryplanet.png" />
     <Content Include="assets\images\asteroid.png" />
     <Content Include="assets\images\astronaut.png" />
+    <Content Include="assets\images\blcksquare.jpg" />
     <Content Include="assets\images\bossAtlas.png" />
     <Content Include="assets\images\bullet.png" />
     <Content Include="assets\images\goBackBtn.png" />

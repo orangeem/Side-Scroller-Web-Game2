@@ -50,6 +50,7 @@ var states;
             //this.scoreboard.score = 300;
             // Add Game Container to Stage
             stage.addChild(this.game);
+            this.fadeIn(this.game, 5000);
         } // Constructor
         //bullet mouse event
         GamePlayLeveltwo.prototype.shotBullet2 = function () {
@@ -154,6 +155,15 @@ var states;
             }
             stage.update(); // Refreshes our stage
         }; // Update Method
+        GamePlayLeveltwo.prototype.fadeIn = function (elem, time) {
+            var startOpacity = elem.alpha || 0;
+            elem.alpha = startOpacity;
+            (function go() {
+                elem.alpha += startOpacity / (time / 100);
+                if (elem.alpha > 0)
+                    setTimeout(go, 100);
+            })();
+        };
         return GamePlayLeveltwo;
     })();
     states.GamePlayLeveltwo = GamePlayLeveltwo; // GamePlay Class
