@@ -35,6 +35,7 @@ var assetLoader;
 var stats = new Stats();
 var currentScore = 0;
 var currentLives = 0;
+var currentHP = 0;
 var highScore = 0;
 // Game State Variables
 var currentState;

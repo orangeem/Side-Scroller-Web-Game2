@@ -89,6 +89,7 @@ var states;
                 stage.removeChild(this.game);
                 currentScore = this.scoreboard.score;
                 currentLives = this.scoreboard.lives;
+                currentHP = this.scoreboard.allienHp;
                 currentState = constants.PLAY_STATE_LEVEL_2;
                 stateChanged = true;
                 this.fadeOut(this.game, 10000);

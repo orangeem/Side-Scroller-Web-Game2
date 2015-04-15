@@ -1,5 +1,6 @@
 ﻿
 module objects {
+    //sprite sheet
     var bossData = {
         "images": ["assets/images/bossAtlas.png"],
         "frames": [
@@ -45,24 +46,29 @@ module objects {
         update() {
             this.image.y -= this.dy;
             this.image.x -= this.dx;
-
+            console.log("befor dx : "+this.dx +", dy : "+this.dy);
             //boss moving cotrol
-            if (this.image.x < 20 && this.image.y < canvasHeight-20 ) {
-                this.reset();
+            if (this.image.x < 20 && this.image.y < (canvasHeight-20) ) {
+               
+                this.pointReset();
+                this.dy = this.dy * -1;
+                this.dx = this.dx * -1;       
+                
             } else if (this.image.x > canvasWidth && this.image.y > canvasHeight) {
                 this.reset();
-            } else if (this.image.x < 0) {
-                this.pointReset();
+                
+            } else if (this.image.x < 0) {                
                 this.dx = this.dx * -1;
-            } else if (this.image.x > canvasWidth) {
-                this.pointReset();
-                this.dx = this.dx * 1;
-            } else if (this.image.y < 0) {
-                this.pointReset();
+                
+            } else if (this.image.x > canvasWidth) {                
+                this.dx = this.dx * -1;
+                
+            } else if (this.image.y < 0) {                
                 this.dy = this.dy * -1;
-            } else if (this.image.y > canvasHeight) {
-                this.pointReset();
+                
+            } else if (this.image.y > canvasHeight) {                
                 this.dy = this.dy * -1;
+                
             } 
 
          //   this._checkBounds();
@@ -72,15 +78,15 @@ module objects {
         reset() {
             this.image.y = Math.floor(Math.random() * canvasHeight);
             this.dx = Math.floor(Math.random() * 3 + 3);
-            this.dy = Math.floor(Math.random() * - 6) + Math.floor(Math.random() * 6);
-            this.image.x = Math.floor(Math.random() * canvasWidth);
+            this.dy = Math.floor(Math.random() * + 5) + Math.floor(Math.random() * 5);
+            this.image.x = Math.floor((Math.random() * canvasWidth/2)+(canvasWidth/2));
+            console.log("x : "+this.image.x +", y : "+this.image.y+", dx : "+this.dx+", dy : "+this.dy);
         }
 
+        //reset for boss coordinates
         pointReset() {
-            //this.dx = Math.floor(Math.random() * 3 + 3);
-            //this.dy = Math.floor(Math.random() * -6) + Math.floor(Math.random() * 6);
-            this.dx = 32 + (Math.random() * (canvasWidth - 74));
-            this.dy = 32 + (Math.random() * (canvasHeight - 100));
+            this.dx = Math.floor(Math.random() * 3 + 3);
+            this.dy = Math.floor(Math.random() * +5) + Math.floor(Math.random() * 5);
         }
 
         // PRIVATE METHODS 

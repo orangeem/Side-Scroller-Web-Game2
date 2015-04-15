@@ -44,6 +44,7 @@ var states;
             //load previous score and lives
             this.scoreboard.lives = currentLives;
             this.scoreboard.score = currentScore;
+            this.scoreboard.allienHp = currentHP;
             // Add Game Container to Stage
             stage.addChild(this.game);
         } // Constructor
@@ -169,7 +170,7 @@ var states;
             this.checkPillCollision(this.pill);
             this.scoreboard.update();
             //Check Alien's lives
-            if (this.scoreboard.lives < 1 || this.scoreboard.bossHp < 25) {
+            if (this.scoreboard.lives < 1) {
                 this.scoreboard.active = false;
                 createjs.Sound.stop();
                 if (this.scoreboard.bossHp < 25) {
@@ -181,8 +182,22 @@ var states;
                 }
                 this.game.removeAllChildren();
                 stage.removeChild(this.game);
+                currentState = constants.GAME_OVER_STATE;
+                stateChanged = true;
+            }
+            else if (this.scoreboard.bossHp < 1) {
+                this.scoreboard.active = false;
+                createjs.Sound.stop();
+                if (this.scoreboard.bossHp < 0) {
+                    this.scoreboard.score += 1000;
+                }
+                currentScore = this.scoreboard.score;
+                if (currentScore > highScore) {
+                    highScore = currentScore;
+                }
+                this.game.removeAllChildren();
+                stage.removeChild(this.game);
                 currentState = constants.WINNING_STATE;
-                //currentState = constants.GAME_OVER_STATE;
                 stateChanged = true;
             }
             stage.update(); // Refreshes our stage

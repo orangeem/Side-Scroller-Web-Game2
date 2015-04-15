@@ -45,6 +45,7 @@ var states;
             //load previous score and lives
             this.scoreboard.lives = currentLives;
             this.scoreboard.score = currentScore;
+            this.scoreboard.allienHp = currentHP;
             //----TO DELETE!!!!!
             //this.scoreboard.lives = 3;
             //this.scoreboard.score = 300;

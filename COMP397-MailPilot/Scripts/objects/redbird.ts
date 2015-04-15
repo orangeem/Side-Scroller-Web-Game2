@@ -1,5 +1,6 @@
 ﻿
 module objects {
+    //sprite sheet
     var redbirdData = {
         "images": ["assets/images/redbirdAltas.png"],
         "frames": [

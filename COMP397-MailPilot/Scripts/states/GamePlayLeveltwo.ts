@@ -68,6 +68,7 @@ module states {
             //load previous score and lives
             this.scoreboard.lives = currentLives;
             this.scoreboard.score = currentScore;
+            this.scoreboard.allienHp = currentHP;
 
             //----TO DELETE!!!!!
 

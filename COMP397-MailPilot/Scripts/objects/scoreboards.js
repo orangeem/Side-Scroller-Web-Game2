@@ -12,8 +12,7 @@ var objects;
                 this.lives = constants.ALLIEN_LIVES;
                 this.allienHp = 100;
             }
-            else if (currentState == constants.PLAY_STATE_LEVEL_2 || currentState == constants.PLAY_STATE_LEVEL_3) {
-                this.allienHp = constants.ALLIEN_HP;
+            else if (currentState == constants.PLAY_STATE_LEVEL_3) {
                 this.bossHp = 300;
             }
             this.active = true;
