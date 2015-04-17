@@ -50,7 +50,10 @@ module states {
                 "on the space picking them up, but be careful",
                 "not to crash with the enemies!!!",
 
-                "Good Luck!"
+                "Good Luck!",
+                "Use arrow key for movement and",
+                "mouse left click for shooting"
+               // "Use arrow key for movement and \n\t\t\t\t\t\t\t\t\t\t\t\tmouse left click for shooting"
             ];
 
             // Display each line of instructions
@@ -64,7 +67,7 @@ module states {
             }
 
             //go Back Button
-            this.goBackButton = new objects.Button(320, 380, "goBackButton");
+            this.goBackButton = new objects.Button(320, 420, "goBackButton");
             this.goBackButton.on("click", this.goBackClicked, this);
             this.game.addChild(this.goBackButton);
 

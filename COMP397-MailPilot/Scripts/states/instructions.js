@@ -35,7 +35,9 @@ var states;
                 "your mission is to save the friends that are",
                 "on the space picking them up, but be careful",
                 "not to crash with the enemies!!!",
-                "Good Luck!"
+                "Good Luck!",
+                "Use arrow key for movement and",
+                "mouse left click for shooting"
             ];
             for (var line = 0; line < this.instructionsArray.length; line++) {
                 this.gameInstructions[line] = new createjs.Text(this.instructionsArray[line], this.instructionsFont, constants.LABEL_COLOUR);
@@ -44,7 +46,7 @@ var states;
                 this.game.addChild(this.gameInstructions[line]);
             }
             //go Back Button
-            this.goBackButton = new objects.Button(320, 380, "goBackButton");
+            this.goBackButton = new objects.Button(320, 420, "goBackButton");
             this.goBackButton.on("click", this.goBackClicked, this);
             this.game.addChild(this.goBackButton);
             // Add Game Container to Stage
