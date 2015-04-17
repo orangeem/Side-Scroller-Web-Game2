@@ -1,6 +1,6 @@
 ﻿
 module objects {
-    //sprite sheet
+    //for sprite sheet
     var bossData = {
         "images": ["assets/images/bossAtlas.png"],
         "frames": [
@@ -95,8 +95,7 @@ module objects {
             if (this.image.x <= (0 - this.width)) {
                 this.reset();
             }
-        }
-        
+        }        
                
     }
 

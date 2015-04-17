@@ -96,7 +96,7 @@ module states {
             return Math.floor(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2)));
         } //Distance Method
 
-        // CHECK COLLISION METHOD
+        // CHECK COLLISION METHOD between boss and alien
         public checkBossCollision(collider: objects.Boss) {
             if (this.scoreboard.active) {
                 var alienPosition: createjs.Point = new createjs.Point(this.allien.x, this.allien.y);
@@ -130,6 +130,7 @@ module states {
             
         } // checkCollision Method
 
+        // CHECK COLLISION METHOD between redbirds and alien
         public checkCollision(collider: objects.Redbird) {
             if (this.scoreboard.active) {
                 var alienPosition: createjs.Point = new createjs.Point(this.allien.x, this.allien.y);
@@ -167,7 +168,7 @@ module states {
             }
         } // checkCollision Method
 
-        // CHECK COLLISION METHOD
+        // CHECK COLLISION METHOD between pills and alien
         public checkPillCollision(collider: objects.GameObject) {
             if (this.scoreboard.active) {
                 var alienPosition: createjs.Point = new createjs.Point(this.allien.x, this.allien.y);
@@ -225,7 +226,7 @@ module states {
             
 
 
-            //Check Alien's lives
+            //Check Alien's lives and boss hp
             if (this.scoreboard.lives < 1) {
                 this.scoreboard.active = false;
                 createjs.Sound.stop();
@@ -243,7 +244,7 @@ module states {
             } else if (this.scoreboard.bossHp < 1){
                 this.scoreboard.active = false;
                 createjs.Sound.stop();
-                if (this.scoreboard.bossHp < 0) {
+                if (this.scoreboard.bossHp < 1) {
                     this.scoreboard.score += 1000;
                 }
                 currentScore = this.scoreboard.score;

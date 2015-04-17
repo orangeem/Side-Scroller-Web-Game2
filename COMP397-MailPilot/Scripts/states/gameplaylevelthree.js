@@ -63,7 +63,7 @@ var states;
         GamePlayLevelthree.prototype.distance = function (p1, p2) {
             return Math.floor(Math.sqrt(Math.pow((p2.x - p1.x), 2) + Math.pow((p2.y - p1.y), 2)));
         }; //Distance Method
-        // CHECK COLLISION METHOD
+        // CHECK COLLISION METHOD between boss and alien
         GamePlayLevelthree.prototype.checkBossCollision = function (collider) {
             if (this.scoreboard.active) {
                 var alienPosition = new createjs.Point(this.allien.x, this.allien.y);
@@ -95,6 +95,7 @@ var states;
                 }
             }
         }; // checkCollision Method
+        // CHECK COLLISION METHOD between redbirds and alien
         GamePlayLevelthree.prototype.checkCollision = function (collider) {
             if (this.scoreboard.active) {
                 var alienPosition = new createjs.Point(this.allien.x, this.allien.y);
@@ -128,7 +129,7 @@ var states;
                 }
             }
         }; // checkCollision Method
-        // CHECK COLLISION METHOD
+        // CHECK COLLISION METHOD between pills and alien
         GamePlayLevelthree.prototype.checkPillCollision = function (collider) {
             if (this.scoreboard.active) {
                 var alienPosition = new createjs.Point(this.allien.x, this.allien.y);
@@ -169,7 +170,7 @@ var states;
             this.checkBossCollision(this.boss);
             this.checkPillCollision(this.pill);
             this.scoreboard.update();
-            //Check Alien's lives
+            //Check Alien's lives and boss hp
             if (this.scoreboard.lives < 1) {
                 this.scoreboard.active = false;
                 createjs.Sound.stop();
@@ -188,7 +189,7 @@ var states;
             else if (this.scoreboard.bossHp < 1) {
                 this.scoreboard.active = false;
                 createjs.Sound.stop();
-                if (this.scoreboard.bossHp < 0) {
+                if (this.scoreboard.bossHp < 1) {
                     this.scoreboard.score += 1000;
                 }
                 currentScore = this.scoreboard.score;

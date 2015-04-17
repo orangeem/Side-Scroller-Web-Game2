@@ -46,9 +46,9 @@ module states {
             this.instructionsArray = [
          
                 "You are the alien driving the spaceship,",
-                "your mission is to save the aliens that are",
+                "your mission is to save the friends that are",
                 "on the space picking them up, but be careful",
-                "not to crash with the giant asteroids!!!",
+                "not to crash with the enemies!!!",
 
                 "Good Luck!"
             ];

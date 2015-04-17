@@ -15,7 +15,7 @@
 /// <reference path="../game.ts" />
 var states;
 (function (states) {
-    // GAME PLAY STATE CLASS
+    // GAME PLAY LEVEL TWO STATE CLASS
     var GamePlayLeveltwo = (function () {
         function GamePlayLeveltwo() {
             this.angryplanet = [];
@@ -138,7 +138,7 @@ var states;
             this.checkCollision(this.astronaut);
             this.scoreboard.update();
             //check score
-            if (this.scoreboard.score >= 600) {
+            if (this.scoreboard.score >= 1000) {
                 this.game.removeAllChildren();
                 createjs.Sound.stop();
                 stage.removeChild(this.game);
