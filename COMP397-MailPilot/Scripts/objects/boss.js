@@ -1,6 +1,6 @@
 var objects;
 (function (objects) {
-    //sprite sheet
+    //for sprite sheet
     var bossData = {
         "images": ["assets/images/bossAtlas.png"],
         "frames": [

@@ -1,6 +1,6 @@
 var objects;
 (function (objects) {
-    //sprite sheet
+    //for sprite sheet
     var redbirdData = {
         "images": ["assets/images/redbirdAltas.png"],
         "frames": [

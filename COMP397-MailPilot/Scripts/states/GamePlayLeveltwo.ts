@@ -179,6 +179,7 @@ module states {
 
             } 
 
+            //mutiple planets
             for (var planets = 3; planets >= 0; planets--) {
                 this.angryplanet[planets].update();
                 this.checkArray = planets;
@@ -192,7 +193,7 @@ module states {
 
             //check score
 
-            if (this.scoreboard.score >= 600) {
+            if (this.scoreboard.score >= 1000) {
                 this.game.removeAllChildren();
                 createjs.Sound.stop();
                 stage.removeChild(this.game);
