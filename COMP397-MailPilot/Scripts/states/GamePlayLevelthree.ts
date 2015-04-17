@@ -67,6 +67,7 @@ module states {
             //load previous score and lives
             this.scoreboard.lives = currentLives;
             this.scoreboard.score = currentScore;
+            this.scoreboard.allienHp = currentHP;
  
             // Add Game Container to Stage
             stage.addChild(this.game);
@@ -107,19 +108,18 @@ module states {
                 if (theDistance < ((this.allien.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
                         createjs.Sound.play("collision");                        
+                        this.scoreboard.allienHp -= 20;
                         if (this.scoreboard.allienHp < 20) {
                             this.scoreboard.lives--;
                             this.scoreboard.allienHp = 100;
-                        } else {
-                            this.scoreboard.allienHp -= 20;
-                        }
+                        } 
                     }
                     collider.isColliding = true;
 
                 } else if (theBulletDistance < ((this.bullet.height * 0.5) + (collider.height * 0.5))) {
                     if (collider.isColliding != true) {
                         createjs.Sound.play("bossound");
-                        this.scoreboard.bossHp -= 25;
+                        this.scoreboard.bossHp -= 25;                        
                         this.bullet.destroy();
                     } 
                     collider.isColliding = true;
@@ -142,13 +142,11 @@ module states {
 
                     if (collider.isColliding != true) {
                         createjs.Sound.play("collision");
+                        this.scoreboard.allienHp -= 13;
+                        this.redbirds[this.checkArray].reset();
                         if (this.scoreboard.allienHp < 13) {
                             this.scoreboard.lives--;
-                            this.scoreboard.allienHp = 100;
-                            this.redbirds[this.checkArray].reset();
-                        } else {
-                            this.scoreboard.allienHp -= 13;
-                            this.redbirds[this.checkArray].reset();
+                            this.scoreboard.allienHp = 100;                            
                         }                       
                     }
                     collider.isColliding = true;
@@ -181,11 +179,10 @@ module states {
                     if (collider.isColliding != true) {
                         createjs.Sound.play("bite");                            
                         if (collider.name == "pill") {
-                            if (this.scoreboard.allienHp >= 93) {
+                            this.scoreboard.allienHp += 7;
+                            if (this.scoreboard.allienHp > 93) {
                                 this.scoreboard.allienHp = 100;                                
-                            } else {
-                                this.scoreboard.allienHp += 7;                                
-                            }
+                            } 
                             this.pill.reset();
                         }                        
                     }
@@ -229,7 +226,7 @@ module states {
 
 
             //Check Alien's lives
-            if (this.scoreboard.lives < 1 || this.scoreboard.bossHp < 25) {
+            if (this.scoreboard.lives < 1) {
                 this.scoreboard.active = false;
                 createjs.Sound.stop();
                 if (this.scoreboard.bossHp < 25) {
@@ -243,7 +240,21 @@ module states {
                 stage.removeChild(this.game);
                 currentState = constants.GAME_OVER_STATE;
                 stateChanged = true;
-            } 
+            } else if (this.scoreboard.bossHp < 1){
+                this.scoreboard.active = false;
+                createjs.Sound.stop();
+                if (this.scoreboard.bossHp < 0) {
+                    this.scoreboard.score += 1000;
+                }
+                currentScore = this.scoreboard.score;
+                if (currentScore > highScore) {
+                    highScore = currentScore;
+                }
+                this.game.removeAllChildren();
+                stage.removeChild(this.game);
+                currentState = constants.WINNING_STATE;
+                stateChanged = true;
+            }
 
             stage.update(); // Refreshes our stage
 

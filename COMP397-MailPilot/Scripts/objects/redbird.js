@@ -1,5 +1,6 @@
 var objects;
 (function (objects) {
+    //sprite sheet
     var redbirdData = {
         "images": ["assets/images/redbirdAltas.png"],
         "frames": [

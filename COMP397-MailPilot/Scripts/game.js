@@ -27,6 +27,7 @@
 /// <reference path="states/gameplayleveltwo.ts" />
 /// <reference path="states/gameplaylevelthree.ts" />
 /// <reference path="states/instructions.ts" />
+/// <reference path="states/won.ts" />
 // Global game Variables
 var canvas;
 var stage;
@@ -34,6 +35,7 @@ var assetLoader;
 var stats = new Stats();
 var currentScore = 0;
 var currentLives = 0;
+var currentHP = 0;
 var highScore = 0;
 // Game State Variables
 var currentState;
@@ -47,6 +49,7 @@ var gamePlayLevelthree;
 var menu;
 var gameOver;
 var instructions;
+var wingame;
 var manifest = [
     { id: "asteroid", src: "assets/images/asteroid.png" },
     { id: "ally", src: "assets/images/ally.png" },
@@ -61,6 +64,7 @@ var manifest = [
     { id: "astronaut", src: "assets/images/astronaut.png" },
     { id: "angryplanet", src: "assets/images/angryplanet.png" },
     { id: "redbullet", src: "assets/images/red_bullet.png" },
+    { id: "blcksquare", src: "assets/images/blcksquare.jpg" },
     { id: "playButton", src: "assets/images/PlayBtn.png" },
     { id: "tryAgainButton", src: "assets/images/tryAgainBtn.png" },
     { id: "instructionButton", src: "assets/images/instructionsBtn.png" },
@@ -88,6 +92,8 @@ function Preload() {
 function init() {
     canvas = document.getElementById("canvas");
     stage = new createjs.Stage(canvas);
+    var blacksquare = new createjs.Bitmap(assetLoader.getResult("blcksquare"));
+    stage.addChild(blacksquare);
     stage.enableMouseOver(20); // Enable mouse events
     createjs.Ticker.setFPS(60); // 60 frames per second
     createjs.Ticker.addEventListener("tick", gameLoop);
@@ -149,6 +155,11 @@ function changeState(state) {
             //instantiate level 3
             gamePlayLevelthree = new states.GamePlayLevelthree();
             currentStateFunction = gamePlayLevelthree;
+            break;
+        case constants.WINNING_STATE:
+            //instantiate Winning State
+            wingame = new states.Won();
+            currentStateFunction = wingame;
             break;
     }
 }

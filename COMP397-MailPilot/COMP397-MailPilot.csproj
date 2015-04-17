@@ -65,6 +65,7 @@
     <Content Include="assets\images\angryplanet.png" />
     <Content Include="assets\images\asteroid.png" />
     <Content Include="assets\images\astronaut.png" />
+    <Content Include="assets\images\blcksquare.jpg" />
     <Content Include="assets\images\bossAtlas.png" />
     <Content Include="assets\images\bullet.png" />
     <Content Include="assets\images\goBackBtn.png" />
@@ -92,7 +93,9 @@
     <Content Include="Scripts\keys.js.map" />
     <Content Include="Scripts\objects\allien.js.map" />
     <Content Include="Scripts\objects\ally.js.map" />
+    <Content Include="Scripts\objects\angryplanet.js" />
     <Content Include="Scripts\objects\asteroid.js.map" />
+    <Content Include="Scripts\objects\astronaut.js" />
     <Content Include="Scripts\objects\boss.js.map" />
     <Content Include="Scripts\objects\bullet.js.map" />
     <Content Include="Scripts\objects\button.js.map" />
@@ -105,8 +108,10 @@
     <Content Include="Scripts\objects\plane.js.map" />
     <Content Include="Scripts\objects\planet.js.map" />
     <Content Include="Scripts\objects\redbird.js" />
+    <Content Include="Scripts\objects\redbullet.js" />
     <Content Include="Scripts\objects\scoreboards.js.map" />
     <Content Include="Scripts\objects\space.js.map" />
+    <Content Include="Scripts\objects\space2.js" />
     <Content Include="Scripts\objects\space3.js" />
     <Content Include="Scripts\states\gameover.js.map" />
     <Content Include="Scripts\states\gameplay.js.map" />
@@ -131,6 +136,11 @@
     <Content Include="assets\audio\Explosion66.ogg" />
     <Content Include="assets\audio\LaserShoot.ogg" />
     <Content Include="assets\audio\scream.ogg" />
+    <Content Include="Scripts\objects\angryplanet.js.map" />
+    <Content Include="Scripts\objects\astronaut.js.map" />
+    <Content Include="Scripts\objects\redbullet.js.map" />
+    <Content Include="Scripts\objects\space2.js.map" />
+    <Content Include="Scripts\states\won.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -169,6 +179,7 @@
     <Content Include="Scripts\states\gameplayleveltwo.js" />
     <Content Include="Scripts\states\instructions.js" />
     <Content Include="Scripts\states\menu.js" />
+    <Content Include="Scripts\states\won.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +214,7 @@
     <TypeScriptCompile Include="Scripts\states\GamePlayLevelthree.ts" />
     <TypeScriptCompile Include="Scripts\states\instructions.ts" />
     <TypeScriptCompile Include="Scripts\states\menu.ts" />
+    <TypeScriptCompile Include="Scripts\states\won.ts" />
     <TypeScriptCompile Include="Scripts\typings\createjs-lib\createjs-lib.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\easeljs\easeljs.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\preloadjs\preloadjs.d.ts" />

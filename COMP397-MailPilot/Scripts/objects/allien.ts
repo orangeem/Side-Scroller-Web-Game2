@@ -34,16 +34,19 @@ module objects {
             if (constants.MENU_STATE) {
                 this.y = stage.mouseY;
                 this.x = stage.mouseX;
-            } else {
-
+            } else {            
                 if (controls.down == true && this.y < 450) {
                     this.y += 3;
+                    stage.mouseY = this.y;
                 } else if (controls.up == true && this.y > 30) {
                     this.y -= 3;
+                    stage.mouseY = this.y;
                 } else if (controls.left == true && this.x > 30) {
                     this.x -= 3;
+                    stage.mouseX = this.x;
                 } else if (controls.right == true && this.x < 610) {
                     this.x += 3;
+                    stage.mouseX = this.x;
                 }
             }
         }
@@ -62,23 +65,15 @@ module objects {
                 case keys.LEFT:
                 case keys.A:
                     controls.left = true;
-                    controls.lTally++;
-                    controls.rTally = 0;
                     break;
                 case keys.RIGHT:
                 case keys.D:
                     controls.right = true;
-                    controls.rTally++;
-                    controls.lTally = 0;
                     break;
-
                 case keys.UP:
                 case keys.W:
-                    controls.up = true;
-                    controls.rTally++;
-                    controls.lTally = 0;
+                    controls.up = true;                    
                     break;
-
                 case keys.DOWN:
                 case keys.S:
                     controls.down = true;

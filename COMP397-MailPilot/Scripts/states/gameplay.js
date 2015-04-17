@@ -16,6 +16,8 @@ var states;
             this.asteroids = [];
             // Instantiate Game Container
             this.game = new createjs.Container();
+            this.blacksquare = new createjs.Bitmap(assetLoader.getResult("blcksquare"));
+            //this.game.addChild(this.blacksquare);
             //Space object
             this.space = new objects.Space();
             this.game.addChild(this.space);
@@ -31,7 +33,8 @@ var states;
             }
             // Instantiate Scoreboard
             this.scoreboard = new objects.ScoreBoard(this.game);
-            // Add Game Container to Stage
+            // Add blacksquare to Stage
+            //stage.addChild(this.blacksquare);
             stage.addChild(this.game);
         } // Constructor
         // DISTANCE CHECKING METHOD
@@ -48,9 +51,13 @@ var states;
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "asteroid") {
-                            this.scoreboard.lives--;
-                            this.scoreboard.allienHp -= 30;
+                            this.scoreboard.allienHp -= 33.33;
                             this.asteroids[this.checkArray].reset();
+                            if (this.scoreboard.allienHp < 1) {
+                                this.scoreboard.lives--;
+                                this.scoreboard.allienHp = 100;
+                                this.asteroids[this.checkArray].reset();
+                            }
                         }
                         if (collider.name == "ally") {
                             this.scoreboard.score += 100;
@@ -64,6 +71,7 @@ var states;
                 }
             }
         }; // checkCollision Method
+        //UPDATE OBJECTS FUNCTION
         GamePlay.prototype.update = function () {
             this.space.update();
             this.ally.update();
@@ -76,11 +84,14 @@ var states;
             this.checkCollision(this.ally);
             this.scoreboard.update();
             //check score
-            if (this.scoreboard.score >= 300) {
+            if (this.scoreboard.score >= 500) {
+                //Move to next level if score >= 500
                 this.game.removeAllChildren();
+                createjs.Sound.stop();
                 stage.removeChild(this.game);
                 currentScore = this.scoreboard.score;
                 currentLives = this.scoreboard.lives;
+                currentHP = this.scoreboard.allienHp;
                 currentState = constants.PLAY_STATE_LEVEL_2;
                 stateChanged = true;
             }
@@ -92,6 +103,8 @@ var states;
                 if (currentScore > highScore) {
                     highScore = currentScore;
                 }
+                //this.fadeOut(this.game, 10000);
+                //console.log("Out of fade!");
                 this.game.removeAllChildren();
                 stage.removeChild(this.game);
                 currentState = constants.GAME_OVER_STATE;
@@ -99,6 +112,21 @@ var states;
             }
             stage.update(); // Refreshes our stage
         }; // Update Method
+        GamePlay.prototype.SetOpa = function (Opa) {
+            this.game.alpha = Opa;
+            console.log(Opa);
+            //alpha(opacity=' + (Opa * 100)
+        };
+        GamePlay.prototype.fadeOut = function (elem, time) {
+            var startOpacity = elem.alpha || 1;
+            elem.alpha = startOpacity;
+            (function go() {
+                console.log("Inside of fade!");
+                elem.alpha -= startOpacity / (time / 100);
+                if (elem.alpha > 0)
+                    setTimeout(go, 100);
+            })();
+        };
         return GamePlay;
     })();
     states.GamePlay = GamePlay; // GamePlay Class

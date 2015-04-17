@@ -21,11 +21,14 @@ module states {
         public asteroids: objects.Asteroid[] = [];
         public space: objects.Space;
         public checkArray: number;
+        public blacksquare: createjs.Bitmap;
 
         constructor() {
             // Instantiate Game Container
             this.game = new createjs.Container();
              
+            this.blacksquare = new createjs.Bitmap(assetLoader.getResult("blcksquare"));
+            //this.game.addChild(this.blacksquare);
 
             //Space object
             this.space = new objects.Space();
@@ -49,7 +52,8 @@ module states {
             // Instantiate Scoreboard
             this.scoreboard = new objects.ScoreBoard(this.game);
 
-            // Add Game Container to Stage
+            // Add blacksquare to Stage
+            //stage.addChild(this.blacksquare);
             stage.addChild(this.game);
         } // Constructor
 
@@ -69,9 +73,15 @@ module states {
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "asteroid") {
-                            this.scoreboard.lives--;
-                            this.scoreboard.allienHp -= 30;
-                            this.asteroids[this.checkArray].reset();                            
+
+                            this.scoreboard.allienHp -= 33.33;
+                            this.asteroids[this.checkArray].reset();
+
+                            if (this.scoreboard.allienHp < 1) {
+                                this.scoreboard.lives--;
+                                this.scoreboard.allienHp = 100;
+                                this.asteroids[this.checkArray].reset();
+                            }                           
                         }
                         if (collider.name == "ally") {
                             this.scoreboard.score += 100;
@@ -85,6 +95,7 @@ module states {
             }
         } // checkCollision Method
 
+        //UPDATE OBJECTS FUNCTION
         public update() {
 
             this.space.update();
@@ -105,15 +116,20 @@ module states {
             this.scoreboard.update();
 
             //check score
-
-            if (this.scoreboard.score >= 300)
-            {
+            if (this.scoreboard.score >= 500)
+            {   
+                //Move to next level if score >= 500
                 this.game.removeAllChildren();
+                createjs.Sound.stop();
                 stage.removeChild(this.game);
                 currentScore = this.scoreboard.score;
                 currentLives = this.scoreboard.lives;
+                currentHP = this.scoreboard.allienHp;
                 currentState = constants.PLAY_STATE_LEVEL_2;
-                stateChanged = true
+                stateChanged = true;
+
+                //this.fadeOut(this.game, 10000);
+                //console.log("Out of fade!");
             }
 
             //Check Alien's lives
@@ -124,15 +140,57 @@ module states {
                 if (currentScore > highScore) {
                     highScore = currentScore;
                 }
+                
+                
+                //this.fadeOut(this.game, 10000);
+                //console.log("Out of fade!");
+
+                 
                 this.game.removeAllChildren();
                 stage.removeChild(this.game);
                 currentState = constants.GAME_OVER_STATE;
                 stateChanged = true;
+                
+
+
+
+                /**
+                var duration = 3000;
+                for (var i = 0; i <= 1; i += 0.01) {
+                    //setTimeout(SetOpa(i), i * duration);
+                    setTimeout(() => { this.SetOpa(i); }, 3000)
+                    //setTimeout(c
+                }*/
+               
+                //this.game.alpha = 0.3;
+                //alpha(opacity=' + (Opa * 100)
+     
             }
 
             stage.update(); // Refreshes our stage
 
         } // Update Method
+
+        public SetOpa(Opa)
+        {
+            this.game.alpha = Opa;
+            console.log(Opa);
+          //alpha(opacity=' + (Opa * 100)
+        }
+
+        public fadeOut(elem, time) {
+        var startOpacity = elem.alpha || 1;
+        elem.alpha = startOpacity;
+
+        (function go() {
+            console.log("Inside of fade!");
+            elem.alpha -= startOpacity / (time / 100);
+
+            if(elem.alpha > 0)
+                setTimeout(go, 100);
+        })();
+    }
+       
 
     } // GamePlay Class
 

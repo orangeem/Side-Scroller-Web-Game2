@@ -7,6 +7,7 @@ var constants;
     constants.PLAY_STATE_LEVEL_3 = 6;
     constants.GAME_OVER_STATE = 2;
     constants.INSTRUCTIONS_STATE = 4;
+    constants.WINNING_STATE = 7;
     // Game Constants
     constants.LABEL_FONT = "40px Copperplate Gothic Light";
     constants.SUBLABEL_FONT = "20px Copperplate Gothic Light";

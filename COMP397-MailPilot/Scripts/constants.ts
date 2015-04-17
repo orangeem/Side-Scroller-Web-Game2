@@ -6,6 +6,7 @@
     export var PLAY_STATE_LEVEL_3: number = 6;
     export var GAME_OVER_STATE: number = 2;
     export var INSTRUCTIONS_STATE: number = 4;
+    export var WINNING_STATE: number = 7;
 
     // Game Constants
     export var LABEL_FONT = "40px Copperplate Gothic Light";

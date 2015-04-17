@@ -19,7 +19,7 @@
 
 
 module states {
-    // GAME PLAY STATE CLASS
+    // GAME PLAY LEVEL TWO STATE CLASS
     export class GamePlayLeveltwo {
         // Game Objects 
         public game: createjs.Container;
@@ -68,6 +68,7 @@ module states {
             //load previous score and lives
             this.scoreboard.lives = currentLives;
             this.scoreboard.score = currentScore;
+            this.scoreboard.allienHp = currentHP;
 
             //----TO DELETE!!!!!
 
@@ -77,6 +78,7 @@ module states {
 
             // Add Game Container to Stage
             stage.addChild(this.game);
+            this.fadeIn(this.game, 5000);
         } // Constructor
 
         //bullet mouse event
@@ -114,8 +116,17 @@ module states {
                     if (collider.isColliding != true) {
                         createjs.Sound.play(collider.sound);
                         if (collider.name == "angryplanet") {
-                            this.scoreboard.lives--;
+
+                            this.scoreboard.allienHp -= 33.33;
                             this.angryplanet[this.checkArray].reset();
+
+                            if (this.scoreboard.allienHp <= 10) {
+                                this.scoreboard.lives--;
+                                this.scoreboard.allienHp = 100;
+                                this.angryplanet[this.checkArray].reset();
+                            }  
+                                
+                            
                         }
                         if (collider.name == "astronaut") {
                             this.scoreboard.score += 100;
@@ -183,6 +194,7 @@ module states {
 
             if (this.scoreboard.score >= 600) {
                 this.game.removeAllChildren();
+                createjs.Sound.stop();
                 stage.removeChild(this.game);
                 currentScore = this.scoreboard.score;
                 currentLives = this.scoreboard.lives;
@@ -207,6 +219,18 @@ module states {
             stage.update(); // Refreshes our stage
 
         } // Update Method
+
+        public fadeIn(elem, time) {
+            var startOpacity = elem.alpha || 0;
+            elem.alpha = startOpacity;
+
+            (function go() {
+                elem.alpha += startOpacity / (time / 100);
+
+                if (elem.alpha > 0)
+                    setTimeout(go, 100);
+            })();
+        }
 
     } // GamePlay Class
 

@@ -10,8 +10,8 @@
 /// <reference path="../objects/scoreboards.ts" />
 
 module states {
-    // GAME OVER STATE CLASS
-    export class GameOver {
+    // WIN STATE CLASS
+    export class Won {
         // Game Objects 
         public game: createjs.Container;
         public space: objects.Space;
@@ -29,9 +29,9 @@ module states {
             //Space object
             this.space = new objects.Space();
             this.game.addChild(this.space);
-            
+
             //Game Over Label
-            this.gameOverLabel = new objects.Label(320, 40, "GAME OVER");
+            this.gameOverLabel = new objects.Label(320, 40, "YAY YOU WON!");
             this.gameOverLabel.font = "60px Copperplate Gothic Light";
             this.gameOverLabel.regX = this.gameOverLabel.getMeasuredWidth() * 0.5;
             this.gameOverLabel.regY = this.gameOverLabel.getMeasuredLineHeight() * 0.5;
@@ -79,4 +79,4 @@ module states {
     } // Game Over Class
 
 
-} // States Module
+} // States Module 
