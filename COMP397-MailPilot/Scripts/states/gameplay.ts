@@ -52,7 +52,7 @@ module states {
             // Instantiate Scoreboard
             this.scoreboard = new objects.ScoreBoard(this.game);
 
-            // Add Game Container to Stage
+            // Add blacksquare to Stage
             //stage.addChild(this.blacksquare);
             stage.addChild(this.game);
         } // Constructor
@@ -95,6 +95,7 @@ module states {
             }
         } // checkCollision Method
 
+        //UPDATE OBJECTS FUNCTION
         public update() {
 
             this.space.update();
@@ -115,9 +116,9 @@ module states {
             this.scoreboard.update();
 
             //check score
-
-            if (this.scoreboard.score >= 300)
-            {
+            if (this.scoreboard.score >= 500)
+            {   
+                //Move to next level if score >= 500
                 this.game.removeAllChildren();
                 createjs.Sound.stop();
                 stage.removeChild(this.game);
@@ -127,8 +128,8 @@ module states {
                 currentState = constants.PLAY_STATE_LEVEL_2;
                 stateChanged = true;
 
-                this.fadeOut(this.game, 10000);
-                console.log("Out of fade!");
+                //this.fadeOut(this.game, 10000);
+                //console.log("Out of fade!");
             }
 
             //Check Alien's lives
@@ -141,15 +142,15 @@ module states {
                 }
                 
                 
-                this.fadeOut(this.game, 10000);
-                console.log("Out of fade!");
+                //this.fadeOut(this.game, 10000);
+                //console.log("Out of fade!");
 
-                /* 
+                 
                 this.game.removeAllChildren();
                 stage.removeChild(this.game);
                 currentState = constants.GAME_OVER_STATE;
                 stateChanged = true;
-                */
+                
 
 
 

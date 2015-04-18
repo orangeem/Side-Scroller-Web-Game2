@@ -19,7 +19,7 @@
 
 
 module states {
-    // GAME PLAY STATE CLASS
+    // GAME PLAY LEVEL TWO STATE CLASS
     export class GamePlayLeveltwo {
         // Game Objects 
         public game: createjs.Container;
